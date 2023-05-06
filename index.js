@@ -13,9 +13,14 @@ app.listen(port);
 
 app.get('/', (req,res)=> {
     try {
-res.render('index.ejs')
+res.render('index')
     }
     catch {
         res.statusCode(400)
     }
+})
+
+
+app.get('/WebDevBlog', (req,res)=> {
+    res.render('blog')
 })
