@@ -305,16 +305,19 @@ a {
 /* project section colors */
 
 .css {
-	color: #01bcd6;
+	color: #4486F5;
 }
 
 .javascript {
 	color: #f6b500;
 }
 
-.bootstrap {color: #32004f;}
+.bootstrap {color: #5D3C7F;}
 
 .nodejs {color: #418b3e;}
+.gcloud {
+	color: #B3C964;
+}
 .proj-row {
 	width: 100%;
 	height: 80%;
@@ -390,7 +393,10 @@ ol {
 	height: auto;
 	width: 40px;
 }
-
+.wide-skill-image {
+	height: auto;
+	width: 60px;
+}
 .proj-button {
 	text-decoration: none;
 	padding: 0.4em 1.5em;
@@ -634,7 +640,26 @@ ol {
 	animation: animatedgradient 3s linear alternate infinite;
 	background-size: 300% 300%;
 }
-
+#ejs-logo:after {
+	content: "";
+	position: absolute;
+	top: calc(-1 * var(--borderWidth));
+	left: calc(-1 * var(--borderWidth));
+	height: calc(100% + var(--borderWidth) * 2);
+	width: calc(100% + var(--borderWidth) * 2);
+	background: linear-gradient(
+		60deg,
+		#B3C964,
+		#f6b500,
+		#418b3e,
+		#B3C964,
+		#418b3e
+	);
+	border-radius: calc(2 * var(--borderWidth));
+	z-index: -1;
+	animation: animatedgradient 3s linear alternate infinite;
+	background-size: 300% 300%;
+}
 #github-logo:after {
 	content: "";
 	position: absolute;
