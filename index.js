@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname,'')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'/views'))
 
-app.listen(port,()=> {console.log('Listening on port 9000')});
+app.listen(port);
 
 app.get('/', (req,res)=> {
     try {

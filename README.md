@@ -9,7 +9,7 @@ My own personal website that hosts all my public projects and acts as a resume
    - Css styling
    - Dark mode and color mode loads based on device theme
    - Nodejs
-      - Uses express and ejs for https routing to load page and assets
+      - Express and ejs for https routing to load page and assets
    - Deployed using gcloud
 
 2. Carolina heals 🧘🏼‍♀️  
