@@ -1,14 +1,14 @@
 {
-  "name": "webdevjev2",
+  "name": "webDevJevBlogsite",
   "version": "1.0.0",
-  "description": "",
+  "description": "My personal portofolio page w/ attached blogsite",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ."
+    "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jevon Thompson",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.9",
