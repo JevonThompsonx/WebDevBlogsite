@@ -4,13 +4,13 @@ My own personal website that hosts all my public projects and acts as a resume
 
 ## Projects  🏗️
 
-1. Dictionary API  📖
+1. WebDevJev blogsite
 
-   - Bootstrap base styling
-   - Javascript DOM manipulation
-     - Dark mode toggle
-     - [Dictionary API's](https://dictionaryapi.dev "link to dictionary API's homepage") search on load and submit
-   - responsive design  
+   - Css styling
+   - Dark mode and color mode loads based on device theme
+   - Nodejs
+      - Uses express and ejs for https routing to load page and assets
+   - Deployed using gcloud
 
 2. Carolina heals 🧘🏼‍♀️  
 
@@ -45,6 +45,14 @@ My own personal website that hosts all my public projects and acts as a resume
      2. A list (***list a***) is created with the name, image, and genres  
          - A second list (***list b***) is nested inside of the ***list a*** containing the genre types
      3. Results are returned to the DOM tree, loading ***list a*** visually
+
+6. Dictionary API  📖
+
+   - Bootstrap base styling
+   - Javascript DOM manipulation
+     - Dark mode toggle
+     - [Dictionary API's](https://dictionaryapi.dev "link to dictionary API's homepage") search on load and submit
+   - responsive design  
 
 ## About me 👨‍💻
 
