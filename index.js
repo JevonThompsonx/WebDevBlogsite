@@ -20,6 +20,11 @@ res.render('index')
     }
 })
 
+let blogPosts = [
+    {
+        
+    }
+]
 
 app.get('/WebDevBlog', (req,res)=> {
     res.render('blog')
