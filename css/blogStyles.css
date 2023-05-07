@@ -184,6 +184,12 @@ a {
 :root {
 }
 
+.postsContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
 @media (prefers-color-scheme: dark) {
 	body,
 	.navbar,

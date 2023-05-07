@@ -22,10 +22,31 @@ res.render('index')
 
 let blogPosts = [
     {
-        
+        Title: 'My life as a developer',
+        date: '05/06/2023',
+        post: 'loremipsumstuff'
+    },     {
+        Title: 'My javascript journey',
+        date: '05/01/2023',
+        post: 'loremipsumstuff'
+    }, 
+    {
+        Title: 'JS',
+        date: '05/20/2023',
+        post: 'loremipsumstuff'
+    },
+        {
+        Title: 'FrontEnd vs Backend',
+        date: '05/31/2023',
+        post: 'loremipsumstuff'
+    },{
+        Title: 'nodeJS',
+        date: '05/25/2023',
+        post: 'loremipsumstuff'
     }
+    
 ]
 
 app.get('/WebDevBlog', (req,res)=> {
-    res.render('blog')
+    res.render('blog', {blogPosts})
 })
