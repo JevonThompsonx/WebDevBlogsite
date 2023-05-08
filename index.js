@@ -93,7 +93,7 @@ let blogPosts = [{
 
 app.get('/WebDevBlog', (req, res) => {
     let newPosts= blogPosts.slice(0,4)
-    res.render('blogPage/realBlog', {
+    res.render('blogPage/testBlog', {
         blogPosts, newPosts
     })
 })
