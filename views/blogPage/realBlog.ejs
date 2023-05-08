@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('blogHead') %>
+
+<head>
+    <link rel="stylesheet" href="css/realBlogStyles.css">
+</head>
+
+<body>
+    <%- include('blogNav') %>
+
+    <section class="blog-div">
+        <div class="top-div">
+            <div class="top-left main-article">
+                <div class="main-article-image"></div>
+                <div class="main-article-text">                        <h1 class="main-text-title">Main text here</h1>
+
+                    <div class="main-text-text-box">
+                        <p class="main-text-text-box">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, similique...</p>
+                        <button class="main-text-button">Read more</button>
+                    </div>
+                </div>
+            </div>
+            <div class="top-right new-articles-section">
+                <p class="new-title">New</p>
+                <% for( let post of newPosts ) { %>
+                    <div class="new-post-div">
+                <a href="">
+                    <h3>Lorem.</h3>
+                </a>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, dolor.</p>
+
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <div class="bottom-div">
+            <div class="bottom-articles">
+                <div class="bottom-article-image-div">
+                <img class="bottom-article-image" href=''>
+
+                </div>
+                <div class="bottom-text-box">
+                    <p class="bottom-text-box-number">01</p>
+                    <h4 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h4>
+                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
+                        facilis.</p>
+                </div>
+            </div>
+            <div class="bottom-articles">
+                <div class="bottom-article-image-div">
+                <img class="bottom-article-image" href=''>
+
+                </div>
+                <div class="bottom-text-box">
+                    <p class="bottom-text-box-number">01</p>
+                    <h4 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h4>
+                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
+                        facilis.</p>
+                </div>
+            </div>
+            <div class="bottom-articles">
+                <div class="bottom-article-image-div">
+                <img class="bottom-article-image" href=''>
+
+                </div>
+                <div class="bottom-text-box">
+                    <p class="bottom-text-box-number">01</p>
+                    <h4 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h4>
+                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
+                        facilis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
