@@ -2,6 +2,7 @@ import express from 'express';
 import ejs from 'ejs';
 import path from 'path';
 import fileDirName from './scripts/file-dir-name.js';
+
 const app = express();
 const {
     __dirname
@@ -11,8 +12,9 @@ const port = 8080;
 app.use(express.static(path.join(__dirname, '')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
-
 app.listen(port);
+app.use(express.urlencoded({ extended: true })) 
+app.use(express.json())
 
 app.get('/', (req, res) => {
     try {
@@ -23,7 +25,7 @@ app.get('/', (req, res) => {
 })
 
 let blogPosts = [{
-        Title: 'My life as a developer',
+        title: 'My life as a developer',
         date: '05/06/2023',
         category: 'good news',
         post: 'loremipsumstuff',
@@ -32,7 +34,7 @@ let blogPosts = [{
         largeImage: 'urlHere.com',
         clicks: 0
     }, {
-        Title: 'My javascript journey',
+        title: 'My javascript journey',
         date: '05/01/2023',
         category: 'good news',
         post: 'loremipsumstuff',
@@ -42,7 +44,7 @@ let blogPosts = [{
         clicks: 5
     },
     {
-        Title: 'FrontEnd vs Backend',
+        title: 'FrontEnd vs Backend',
         date: '05/31/2023',
         category: 'good news',
 
@@ -54,7 +56,7 @@ let blogPosts = [{
         clicks: 7
     },
     {
-        Title: 'My life as a developer',
+        title: 'My life as a developer',
         date: '05/06/2023',
         category: 'good news',
 
@@ -65,7 +67,7 @@ let blogPosts = [{
         largeImage: 'urlHere.com',
         clicks: 8
     }, {
-        Title: 'My javascript journey',
+        title: 'My javascript journey',
         date: '05/01/2023',
         category: 'good news',
 
@@ -77,7 +79,7 @@ let blogPosts = [{
         clicks: 2
     },
     {
-        Title: 'FrontEnd vs Backend',
+        title: 'FrontEnd vs Backend',
         date: '05/31/2023',
         category: 'good news',
 
@@ -92,20 +94,17 @@ let blogPosts = [{
 ]
 
 app.get('/WebDevBlog', (req, res) => {
-    let newPosts= blogPosts.slice(0,4)
-    res.render('blogPage/testBlog', {
+    let newPosts= blogPosts.slice(0,5)
+    res.render('blogPage/realBlog', {
         blogPosts, newPosts
     })
 })
-app.get('/WebDevBlog/:post', (req, res) => {
-    let {
-        post
-    } = req.params
-    //search for title in database and return the result
-    //as the page to load
-    //send page to 'post' when rendering as a variable
-    res.render('/blogPage/post', {
-        post,
-        blogPost,
-    })
+app.get('/WebDevBlog/newPost', (req,res)=> {
+        res.render('blogPage/posts')
+})
+app.post('/WebDevBlog', (req, res) => {
+    let {title , date, category, post, smallImage, largeImage} = req.body
+    blogPosts.push({title , date, category, post, smallImage, largeImage})
+    console.log(req.body)
+    res.send(blogPosts)
 })

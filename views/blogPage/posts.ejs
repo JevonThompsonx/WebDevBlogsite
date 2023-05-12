@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('blogHead') %>
+<body>
+    <form action="/WebDevBlog" method="post">
+        <label for="post-title">Title: </label>
+        <input type="text" placeholder="Post title" name="title" id="post-title">
+        <label for="post-date">Date:</label>
+        <input type="date" name="date" id="post-date">
+        <label for="category">Category:</label>
+        <input type="text" name="category" placeholder="category" id="category">
+                <label for="post-text">Post:</label>
+        <input type="text" name="post" placeholder="category" id="post-text">
+
+        <label for="small-image">Small thumbnail url</label>
+        <input type="text" name="smallImage" id="small-image">
+        <label for="large-image">Large thumbnail url</label>
+        <input type="text" name="largeImage" id="large-image">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

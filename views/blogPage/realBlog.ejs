@@ -6,73 +6,63 @@
     <link rel="stylesheet" href="css/realBlogStyles.css">
 </head>
 
-<body>
+<body class="w-100 d-flex flex-column">
     <%- include('blogNav') %>
 
-    <section class="blog-div">
-        <div class="top-div">
-            <div class="top-left main-article">
-                <div class="main-article-image"></div>
-                <div class="main-article-text">                        <h1 class="main-text-title">Main text here</h1>
+    <section class="w-75 h-75 m-auto align-self-center" id="blog-div">
+        <div class="d-flex flex-column flex-md-row h-50 mb-5" id="top">
+            <div class="main-article d-flex flex-column justify-content-between h-100 w-75" id="top-left">
+                <div class="main-article-image h-50 w-100 p-3 d-inline-block "> <img class="img-fluid"
+                        src="https://images.unsplash.com/photo-1683643593317-be972fa421d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                        alt="main article picture"></div>
+                <div class="d-flex flex-column justify-content-evenly h-25" id="main-article-text">
+                    <h1 class="main-text-title">Main text here</h1>
 
-                    <div class="main-text-text-box">
-                        <p class="main-text-text-box">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, similique...</p>
-                        <button class="main-text-button">Read more</button>
+                    <div id="main-text-text-box">
+                        <p class='mb-3' id="main-text-text-box">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Accusamus, similique(10 words)...</p>
+                        <button class="align-self-end" id="main-text-button">Read more</button>
                     </div>
                 </div>
             </div>
-            <div class="top-right new-articles-section">
-                <p class="new-title">New</p>
+            <div class="d-flex flex-column justify-content-evenly align-items-center w-25" id="top-right">
+                <p class='mb-3' id="new-title">New</p>
                 <% for( let post of newPosts ) { %>
-                    <div class="new-post-div">
-                <a href="">
-                    <h3>Lorem.</h3>
-                </a>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, dolor.</p>
+                <div class="new-post-div mb-3">
+                    <a href="">
+                        <h3>Lorem.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero fugit ut illum alias, iure
+                            reprehenderit!(15 words)</p>
 
-                    </div>
+                    </a>
+
+                </div>
                 <% } %>
             </div>
         </div>
-        <div class="bottom-div">
-            <div class="bottom-articles">
-                <div class="bottom-article-image-div">
-                <img class="bottom-article-image" href=''>
+        <div class=" d-flex flex-column flex-md-row w-100 justify-content-evenly" id="bottom-div">
+            <% for( let index = 0; index < 3; index++ ) { %>
+            <div class="d-flex flex-row justify-content-evenly bottom-articles">
+                <div class=" rounded bottom-article-image-div" >
+                    <img class="img-fluid bottom-article-image"
+                        src='https://images.unsplash.com/photo-1682687220305-ce8a9ab237b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80'>
 
                 </div>
-                <div class="bottom-text-box">
-                    <p class="bottom-text-box-number">01</p>
-                    <h4 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h4>
-                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
-                        facilis.</p>
-                </div>
-            </div>
-            <div class="bottom-articles">
-                <div class="bottom-article-image-div">
-                <img class="bottom-article-image" href=''>
 
-                </div>
-                <div class="bottom-text-box">
+                <a class="bottom-text-box" href="">
                     <p class="bottom-text-box-number">01</p>
                     <h4 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h4>
-                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
-                        facilis.</p>
-                </div>
-            </div>
-            <div class="bottom-articles">
-                <div class="bottom-article-image-div">
-                <img class="bottom-article-image" href=''>
+                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur(6 words)</p>
+                </a>
 
-                </div>
-                <div class="bottom-text-box">
-                    <p class="bottom-text-box-number">01</p>
-                    <h4 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h4>
-                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
-                        facilis.</p>
-                </div>
             </div>
+            <% } %>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+
 </body>
 
 </html>
