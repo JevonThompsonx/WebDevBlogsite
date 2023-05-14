@@ -29,10 +29,10 @@
                 <h2 class='mb-3' id="new-title">New</h2>
                 <% for( let post of newPosts ) { %>
                 <div class="new-post-div mb-3">
-                    <a href="">
-                        <h5>Lorem.</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero fugit ut illum alias, iure
-                            reprehenderit!(15 words)</p>
+                    <a href="WebDevBlog/<%= post.id %>">
+                        <h5><%= post.title %>.</h5>
+                        <% let slicedPost = (post.post).slice(0,16) %>
+                        <p><%= slicedPost %></p>
 
                     </a>
 
