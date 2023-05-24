@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('blogHead') %>
+<body class="d-flex flex-column align-items-center vh-100 w-100 mt-5">
+    <%- include('blogNav') %>
+
+ <form method="POST" action="/WebDevBlog/<%=id%>?_method=PATCH" class="d-flex flex-column h-50 w-auto justify-content-evenly text-center">
+        <label> <%= title %> </label>
+        <label for="post">New post: </label>
+        <textarea name="post text" id="post"  placeholder="new post here" cols="30" rows="10"> <%= post %></textarea> 
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

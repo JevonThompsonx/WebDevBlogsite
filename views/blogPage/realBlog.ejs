@@ -2,10 +2,6 @@
 <html lang="en">
 <%- include('blogHead') %>
 
-<head>
-    <link rel="stylesheet" href="css/realBlogStyles.css">
-</head>
-
 <body class="w-100 d-flex flex-column">
     <%- include('blogNav') %>
 
@@ -27,11 +23,11 @@
             </div>
             <div class="d-flex flex-column justify-content-evenly align-items-center w-25" id="top-right">
                 <h2 class='mb-3' id="new-title">New</h2>
-                <% for( let post of newPosts ) { %>
+                <% for( let post of blogPosts ) { %>
                 <div class="new-post-div mb-3">
                     <a href="WebDevBlog/<%= post.id %>">
-                        <h5><%= post.title %>.</h5>
-                        <% let slicedPost = (post.post).slice(0,16) %>
+                        <h5><%= post.title %></h5>
+                        <% let slicedPost = post.post %>
                         <p><%= slicedPost %></p>
 
                     </a>
@@ -41,18 +37,20 @@
             </div>
         </div>
         <div class=" d-flex flex-column flex-md-row w-100 justify-content-evenly" id="bottom-div">
-            <% for( let index = 0; index < 3; index++ ) { %>
+            <% let highlights = blogPosts.slice(3,6) %>
+            <% let num = 1%>
+            <% for( let post of highlights ) { %>
             <div class="d-flex flex-row justify-content-evenly bottom-articles">
-                <div class=" rounded bottom-article-image-div" >
+                <div class=" rounded bottom-article-image-div">
                     <img class="img-fluid bottom-article-image"
                         src='https://images.unsplash.com/photo-1682687220305-ce8a9ab237b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80'>
 
                 </div>
 
-                <a class="bottom-text-box" href="">
-                    <p class="bottom-text-box-number">01</p>
-                    <h5 class="bottom-text-box-title">Lorem ipsum dolor sit amet.</h5>
-                    <p class="bottom-text-box-post"> Lorem ipsum dolor sit amet consectetur(6 words)</p>
+                <a class="bottom-text-box" href="/WebDevBlog/<%= post.id %>">
+                    <p class="bottom-text-box-number"><%= `0${num++}` %></p>
+                    <h5 class="bottom-text-box-title"><%= post.title %></h5>
+                    <p class="bottom-text-box-post"> <%= (post.post) %></p>
                 </a>
 
             </div>
@@ -62,7 +60,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h555rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
-
-</body>
 
 </html>

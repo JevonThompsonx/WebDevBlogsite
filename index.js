@@ -1,32 +1,43 @@
 import express from 'express';
 import ejs from 'ejs';
+
+//needed for filepath
 import path from 'path';
-import fileDirName from './scripts/file-dir-name.js';
-import { v4 as uuid } from 'uuid';
+import fileDirName from './scripts/file-dir-name.js'; 
+
+//for testing only 
+import { v4 as uuid } from 'uuid'; 
+
+//needed to override form req for editing post
+import methodOverride  from 'method-override' 
 
 const app = express();
 const {
     __dirname
 } = fileDirName(
     import.meta);
-const port = 8080;
+//serves files 
 app.use(express.static(path.join(__dirname, '')));
+
+//Sets ejs as view engine
 app.set('view engine', 'ejs');
+//sets view folder as '/views'
 app.set('views', path.join(__dirname, '/views'))
+
+//DO NOT REMOVE - used for gCloud 
+const port = 8080;
 app.listen(port);
+
+//middleware
 app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json())
+app.use(methodOverride('_method'))
 
-app.get('/', (req, res) => {
-    try {
-        res.render('index')
-    } catch {
-        res.statusCode(400)
-    }
-})
 
+
+//faux data
 let blogPosts = [
     {
         id: uuid(),
@@ -109,17 +120,32 @@ let blogPosts = [
 
 ]
 
-app.get('/WebDevBlog', (req, res) => {
-    let newPosts = blogPosts.slice(0, 5)
+app.get('/', (req, res) => { //main page
+    try {
+        res.render('index')
+    } catch {
+        res.statusCode(400)
+    }
+})
+
+
+app.get('/WebDevBlog', (req, res) => { //main blog page
+    try {
     res.render('blogPage/realBlog', {
         blogPosts,
-        newPosts
-    })
+    }) }
+    catch {
+        res.statusCode(400)
+    }
 })
-app.get('/WebDevBlog/newPost', (req, res) => {
-    res.render('blogPage/newPost')
+app.get('/WebDevBlog/newPost', (req, res) => { //new post 
+    try {
+    res.render('blogPage/newPost') }
+     catch {
+        res.statusCode(400)
+    }
 })
-app.post('/WebDevBlog', (req, res) => {
+app.post('/WebDevBlog', (req, res) => { //posting from newPost form
     let {
         title,
         date,
@@ -138,19 +164,31 @@ app.post('/WebDevBlog', (req, res) => {
         largeImage, 
         id
     })
-    console.log(req.body)
-    res.send(blogPosts)
+    res.redirect('blogPage/realBlog')
 })
 
-app.get('/WebDevBlog/:postId', (req, res) => {
+app.get('/WebDevBlog/:postId', (req, res) => { //finding specific post
     let {
         postId: id
     } = req.params
-    const singlePost = blogPosts.find(post => {
-     return  post.id === id
-    })
-    console.log(singlePost)
+    const searchedPost = blogPosts.find(post => post.id === id)
     res.render('blogPage/showPost', {
-        ...singlePost
+        ...searchedPost
     })
 })
+
+app.get('/WebDevBlog/:postId/edit', (req,res)=> { //editing post form
+    let {postId:id} = req.params
+    const searchedPost = blogPosts.find(post => post.id === id)
+    res.render('blogPage/editPost', {...searchedPost})
+} )
+
+
+app.patch('/WebDevBlog/:postId', (req, res) => { // edit post patch req
+    let {postId:id} = req.params
+    const searchedPost = blogPosts.find(post => post.id === id)
+    const newPost = req.body.post;
+    searchedPost.post = newPost
+    res.redirect('/WebDevBlog')
+}) 
+
