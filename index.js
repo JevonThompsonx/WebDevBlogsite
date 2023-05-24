@@ -185,10 +185,10 @@ app.get('/WebDevBlog/:postId/edit', (req,res)=> { //editing post form
 
 
 app.patch('/WebDevBlog/:postId', (req, res) => { // edit post patch req
-    let {postId:id} = req.params
-    const searchedPost = blogPosts.find(post => post.id === id)
+    let {postId:id} = req.params;
     const newPost = req.body.post;
-    searchedPost.post = newPost
+    const searchedPost = blogPosts.find(post => post.id === id);
+    searchedPost.post = newPost;
     res.redirect('/WebDevBlog')
 }) 
 
