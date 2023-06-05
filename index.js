@@ -164,7 +164,7 @@ app.post('/WebDevBlog', (req, res) => { //posting from newPost form
         largeImage, 
         id
     })
-    res.redirect('blogPage/realBlog')
+    res.redirect('/WebDevBlog')
 })
 
 app.get('/WebDevBlog/:postId', (req, res) => { //finding specific post
@@ -186,9 +186,17 @@ app.get('/WebDevBlog/:postId/edit', (req,res)=> { //editing post form
 
 app.patch('/WebDevBlog/:postId', (req, res) => { // edit post patch req
     let {postId:id} = req.params;
-    const newPost = req.body.post;
+    const {newPost} = req.body;
     const searchedPost = blogPosts.find(post => post.id === id);
     searchedPost.post = newPost;
     res.redirect('/WebDevBlog')
 }) 
 
+app.delete('/WebDevBlog/:postId', (req,res) => {
+        let {postId:id} = req.params;
+        const searchedPost = blogPosts.find(post => post.id === id);
+        let searchedPostNum = blogPosts.indexOf(searchedPost)
+        blogPosts.splice(searchedPostNum,1)
+        res.redirect('/WebDevBlog')
+
+} )

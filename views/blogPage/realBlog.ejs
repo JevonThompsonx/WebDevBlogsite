@@ -17,13 +17,17 @@
                     <div id="main-text-text-box">
                         <p class='mb-3' id="main-text-text-box">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Accusamus, similique(10 words)...</p>
-                        <button class="align-self-end" id="main-text-button">Read more</button>
+                            <div class="button-div d-flex flex-row justify-content-evenly w-25">
+                                                        <button class="" id="main-text-button">Read more</button>
+                        <form action="/WebDevBlog/newPost" method="get"><button type="submit">New post!</button></form>
+
+                            </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-evenly align-items-center w-25" id="top-right">
                 <h2 class='mb-3' id="new-title">New</h2>
-                <% for( let post of blogPosts ) { %>
+                <% for( let post of blogPosts.slice((blogPosts.length - 3)) ) { %>
                 <div class="new-post-div mb-3">
                     <a href="WebDevBlog/<%= post.id %>">
                         <h5><%= post.title %></h5>
