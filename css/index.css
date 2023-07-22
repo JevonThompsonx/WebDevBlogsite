@@ -128,6 +128,9 @@ h1,
 	font-family: "Montserrat", sans-serif;
 }
 .titles {
+	font-size: 3rem;
+}
+h4 {
 	font-size: 2rem;
 }
 .proj-heading,
@@ -177,7 +180,7 @@ a {
 
 #welcome-section {
 	width: 100vw;
-	height: calc(80vh);
+	height: 100vh;
 	text-align: center;
 	font-size: calc(3rem);
 }
@@ -306,18 +309,22 @@ a {
 /* project section colors */
 
 .css {
-	color: #4486F5;
+	color: #4486f5;
 }
 
 .javascript {
 	color: #f6b500;
 }
 
-.bootstrap {color: #5D3C7F;}
+.bootstrap {
+	color: #5d3c7f;
+}
 
-.nodejs {color: #418b3e;}
+.nodejs {
+	color: #418b3e;
+}
 .gcloud {
-	color: #B3C964;
+	color: #b3c964;
 }
 .proj-row {
 	width: 100%;
@@ -476,7 +483,7 @@ ol {
 
 #skills-section {
 	margin: auto;
-	height: 40vh;
+	height: 60vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -650,10 +657,10 @@ ol {
 	width: calc(100% + var(--borderWidth) * 2);
 	background: linear-gradient(
 		60deg,
-		#B3C964,
+		#b3c964,
 		#f6b500,
 		#418b3e,
-		#B3C964,
+		#b3c964,
 		#418b3e
 	);
 	border-radius: calc(2 * var(--borderWidth));
@@ -876,7 +883,6 @@ form.contFrm {
 		padding: 0 14px;
 		font-size: 14px;
 	}
-
 }
 
 @media (max-width: 767px) {
@@ -1032,7 +1038,9 @@ form.contFrm {
 	#project-section {
 		height: calc((var(--projSectionSize)) * 1.5);
 	}
-
+	#skills-section {
+		height: 80vh;
+	}
 	.proj-card {
 		height: var(--projCardSize);
 		aspect-ratio: 3/5;
@@ -1045,11 +1053,11 @@ form.contFrm {
 
 @media (max-width: 450px) {
 	#skills-section {
-		height: 750px;
+		height: 850px;
 	}
 
 	#project-section {
-		height: calc(var(--projSectionSize) * 2.5);
+		height: calc(var(--projSectionSize) * 2.3);
 	}
 	.proj-card {
 		height: var(--projCardSize);
