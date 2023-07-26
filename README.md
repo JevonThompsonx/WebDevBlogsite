@@ -13,10 +13,9 @@ My own personal website that hosts all my public projects and acts as a resume
 
 2. Carolina heals 🧘🏼‍♀️  
 
-   - Launched site
-   - Client collaboratio
-   - Base bootstrap stylin
-   - Calendly integration for schedulin
+   - Client collaborated site
+   - Base bootstrap styling
+   - Calendly integration for scheduling
    - SEO optimized
    - Accessibility focused
    - responsive design  
@@ -25,7 +24,6 @@ My own personal website that hosts all my public projects and acts as a resume
 
    - Bootstrap quick styling
    - Javascript share button
-   - Font awesome social media/share button icons
    - responsive design  
 
 4. PingPongProject  🏓  
