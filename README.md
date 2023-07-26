@@ -5,26 +5,27 @@ My own personal website that hosts all my public projects and acts as a resume
 
 1. WebDevJev blogsite 🌐✍🏾
 
-   - Css styling
+   - CSS styling
    - Dark mode and color mode loads based on device theme
    - Nodejs
-      - Express and ejs for https routing to load page and assets
+      - Express and ejs for https routing to load page and views
    - Deployed using gcloud
+     - Integrates github actions to auto deploy on 'main' repo merge or push  
 
 2. Carolina heals 🧘🏼‍♀️  
 
    - Client collaborated site
-   - Base bootstrap styling
+   - Bootstrap styling && CSS styling
    - Calendly integration for scheduling
    - SEO optimized
    - Accessibility focused
-   - responsive design  
+   - Responsive design  
 
 3. Linktree clone  🌐
 
-   - Bootstrap quick styling
+   - Bootstrap styling
    - Javascript share button
-   - responsive design  
+   - responsive design
 
 4. PingPongProject  🏓  
 
@@ -45,7 +46,7 @@ My own personal website that hosts all my public projects and acts as a resume
 
 6. Dictionary API  📖
 
-   - Bootstrap base styling
+   - Bootstrap styling
    - Javascript DOM manipulation
      - Dark mode toggle
      - [Dictionary API's](https://dictionaryapi.dev "link to dictionary API's homepage") search on load and submit
