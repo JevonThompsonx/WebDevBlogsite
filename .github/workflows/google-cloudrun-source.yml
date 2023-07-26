@@ -53,7 +53,7 @@ on:
 env:
   PROJECT_ID: web-dev-jev-blogsite # TODO: update Google Cloud project id
   SERVICE: webdevblogsite # TODO: update Cloud Run service name
-  REGION: us-central # TODO: update Cloud Run service region
+  REGION: us-central1 # TODO: update Cloud Run service region
 
 jobs:
   deploy:
