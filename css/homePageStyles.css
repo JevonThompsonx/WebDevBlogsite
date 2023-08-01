@@ -139,9 +139,9 @@ a {
 	--color2: #865dff;
 	--from: 30deg;
 	--distance: 46%;
-	--projCards: 5;
+	--projCards: 4;
 	--projCardSize: 650px;
-	--projSectionSize: calc(var(--projCardSize) * 3);
+	--projSectionSize: calc(var(--projCardSize) * var(--projCards));
 }
 
 .welcome-img-box::after {
@@ -179,6 +179,7 @@ a {
 	justify-content: space-around;
 	align-items: center;
 }
+
 /* project section colors */
 
 .css {
@@ -693,18 +694,17 @@ form.contFrm {
 	#project-section {
 		height: calc(var(--projSectionSize) * 1.3);
 	}
-
 }
-	/*Laptop */
-	@media (max-width: 1024px) {
-		#skills-section {
-			height: calc(var(--skill-size) * 1);
-		}
-	
+/*Laptop */
+@media (max-width: 1024px) {
+	#skills-section {
+		height: calc(var(--skill-size) * 1);
+	}
+
 	#stack-section {
 		height: calc(var(--skill-size) * 1.5);
 	}
-	
+
 	/*Ipad/Tablet */
 	@media (max-width: 820px) {
 		#project-section {
