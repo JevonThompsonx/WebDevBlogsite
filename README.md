@@ -4,55 +4,88 @@ My own personal website that hosts all my public projects and acts as a resume
 
 ## Projects  🏗️
 
-1. WebDevJev blogsite 🌐✍🏾
+### [WebDevJev blogsite 🌐✍🏾](https://arboreal-vector-385620.ue.r.appspot.com/)
 
-   - CSS styling
-   - Dark mode and color mode loads based on device theme
-   - Nodejs
-      - Express and ejs for https routing to load page and views
-   - Deployed using gcloud
-     - Integrates github actions to auto deploy on 'main' repo merge or push  
+- CSS styling
+- Dark mode and color mode loads based on device theme
+- Nodejs
+  - Express and ejs for https routing to load page and views
+- Deployed using gcloud
+  - Integrates github actions to auto deploy on 'main' repo merge or push  
 
-2. Carolina heals 🧘🏼‍♀️  
+### [Carolina heals 🧘🏼‍♀️](https://www.carolinaheals.com/)  
 
-   - Client collaborated site
-   - Bootstrap styling && CSS styling
-   - Calendly integration for scheduling
-   - SEO optimized
-   - Accessibility focused
-   - Responsive design  
+- Client collaborated site
+- Bootstrap styling && CSS styling
+- Calendly integration for scheduling
+- SEO optimized
+- Accessibility focused
+- Responsive design  
 
-3. Linktree clone  🌐
+### [Dictionary API  📖](https://jevonthompsonx.github.io/DictionaryAPI/)
 
-   - Bootstrap styling
-   - Javascript share button
-   - responsive design
+#### Random search on load 🔀🔎
 
-4. PingPongProject  🏓  
+- uses [Herokuapp](https://random-word-api.herokuapp.com/word)
+- defaults search term to 'keyboard' if random word isn't found
 
-   - Bootstrap styling  
-   - Javscript DOM manipulation score tracker
-     - Sets max score using variables
-     - Resets score when setting max
-     - Locks score at max using if/else
-     - Reset button for manual score reset  
+#### DOM Manipulation based on results 🏗️
 
-5. TV Show Search  📺
+- Updates word, pronounciation, audio, synonym, link to wikepedia source page for more info, meaning and part of speech for searched word
+- Error message for each potential failure
 
-   - The search uses the [TV Maze API](https://www.tvmaze.com) to return results  
+#### Theme switcher ☀️🌕
+
+- Dark/Light mode toggle on top right using sun/moon icon
+
+### [Calculator 🖩](https://jevonthompsonx.github.io/calculator/)  
+
+ An online calculator
+
+#### CSS  
+
+- Flexbox centering  
+- Color buttons
+- Button color changes on hover and click for feedback  
+- Color calculator frame  
+
+#### Javascript
+
+- Variables used to capcture and operate on numbers  
+
+### [Link Tree Clone 🔗🌐](https://jevonthompsonx.github.io/LinkTree-Clone/)
+
+#### Contains links to
+
+- [My website](https://web-dev-jev-blogsite.ue.r.appspot.com/)
+- [My twitter](https://twitter.com/JevonThompson12)
+- [My instagram](https://www.instagram.com/jevonxt/)
+- [My github](https://github.com/JevonThompsonx?tab=repositories)
+- [Carolina heals client website](https://www.carolinaheals.com)
+
+#### Features  
+
+- Bootstrap styling
+- Javascript share button
+- responsive design
+
+### [PingPongProject  🏓](https://jevonthompsonx.github.io/PingPongProject/)  
+
+- Bootstrap styling  
+- Javscript DOM manipulation score tracker
+  - Sets max score using variables
+  - Resets score when setting max
+  - Locks score at max using if/else
+  - Reset button for manual score reset  
+
+### [TV Show Search  📺](https://jevonthompsonx.github.io/TV-Show-Search/)
+
+- The search uses the [TV Maze API](https://www.tvmaze.com) to return results  
      1. The Api is searched then returns the name of the show, it's image and genres
      2. A list (***list a***) is created with the name, image, and genres  
          - A second list (***list b***) is nested inside of the ***list a*** containing the genre types
      3. Results are returned to the DOM tree, loading ***list a*** visually
-
-6. Dictionary API  📖
-
-   - Bootstrap styling
-   - Javascript DOM manipulation
-     - Dark mode toggle
-     - [Dictionary API's](https://dictionaryapi.dev "link to dictionary API's homepage") search on load and submit
-   - responsive design  
-
+  
 ## About me 👨‍💻
 
 ### Background
