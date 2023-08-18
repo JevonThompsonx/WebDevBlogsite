@@ -48,7 +48,7 @@ a {
 	border: none;
 }
 #welcome-section-social-links a:hover {
-	color: #865dff;
+	color: #ffa3fd;
 }
 
 #welcome-section {
@@ -170,13 +170,20 @@ a {
 		#fff calc(100% - var(--border) + 1px)
 	);
 }
-
+#progress-home {
+	height: fit-content;
+	width: 100vw;
+	padding-block: 1vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 #project-section {
 	width: 100vw;
 	height: var(--projSectionSize);
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 }
 
@@ -443,7 +450,7 @@ input {
 }
 
 #contact-social-links a:hover {
-	color: #865dff;
+	color: #ffa3fd;
 }
 
 .contact-sec .contact-ul i {
