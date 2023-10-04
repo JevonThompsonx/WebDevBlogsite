@@ -132,7 +132,7 @@ app.get('/', (req, res) => { //main page
 app.get('/WebDevBlog', (req, res) => { //main blog page
     try {
     res.render('blogPage/realBlog', {
-        blogPosts,
+        blogPosts
     }) }
     catch {
         res.statusCode(400)
