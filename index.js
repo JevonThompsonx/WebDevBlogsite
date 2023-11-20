@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
 
 //DO NOT REMOVE - used for gCloud 
-const port = 8080;
+const port = process.env.PORT || 8080;
 app.listen(port);
 
 //middleware
