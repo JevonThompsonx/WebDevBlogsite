@@ -199,6 +199,9 @@ a {
 .gcloud {
 	color: #b3c964;
 }
+.railway {
+	font-weight: bold;
+}
 .proj-row {
 	width: 100%;
 	height: 80%;
