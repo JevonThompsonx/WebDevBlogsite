@@ -1,4 +1,4 @@
-# [Personal-site🐙🛸](https://arboreal-vector-385620.ue.r.appspot.com(https://web-dev-jev-blogsite.ue.r.appspot.com))
+# [Personal-site🐙🛸](https://webdevblogsite-production.up.railway.app)
 
 My own personal website that hosts all my public projects and acts as a resume  
 
