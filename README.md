@@ -1,4 +1,4 @@
-# [Personal-site🐙🛸](https://webdevblogsite-production.up.railway.app)
+# [Personal-site🐙🛸 link 1 ](https://webdevblogsite-production.up.railway.app) || [Personal-site🐙🛸 link 2 ](https://web-dev-blogsite.onrender.com)
 
 My own personal website that hosts all my public projects and acts as a resume  
 
