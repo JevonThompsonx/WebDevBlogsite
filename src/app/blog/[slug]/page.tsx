@@ -11,7 +11,6 @@ import { extractTableOfContents } from "@/lib/markdown";
 import { estimateReadingTime, formatDate } from "@/lib/utils";
 import {
   getAdjacentPublishedPosts,
-  getAllPostSlugs,
   getPublishedPostBySlug,
 } from "@/server/queries/posts";
 
@@ -19,11 +18,6 @@ interface BlogPostPageProps {
   params: Promise<{
     slug: string;
   }>;
-}
-
-export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs();
-  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -48,7 +42,7 @@ export async function generateMetadata({
   });
 }
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
