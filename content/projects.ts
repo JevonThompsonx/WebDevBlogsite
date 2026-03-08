@@ -25,7 +25,7 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/JevonThompsonx/WebDevBlogsite",
     liveUrl: "https://web-dev-blogsite.vercel.app/",
-    image: "/images/mySite.webp",
+    image: "/images/rewrittenBlog.webp",
     featured: true,
     order: 1,
   },
