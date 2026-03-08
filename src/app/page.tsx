@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemePortrait } from "@/components/theme-portrait";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { BlogList } from "@/components/blog/blog-list";
 import { ProjectGrid } from "@/components/projects/project-grid";
@@ -50,20 +51,28 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_88%,white_12%)] p-6 shadow-[var(--shadow-soft)]">
-          <p className="section-eyebrow">What this site shows</p>
-          <div className="mt-5 grid gap-4 text-sm leading-7 text-[var(--color-foreground-soft)]">
-            <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
-              Self-hosted and operational work across Linux, virtualization,
-              containers, and secure remote access.
-            </div>
-            <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
-              Portfolio projects that still reflect my web development
-              background, from frontend builds to full-stack rewrites.
-            </div>
-            <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
-              Writing about systems, tradeoffs, learning, and the practical work
-              behind the tools I run.
+        <div className="grid gap-6">
+          <ThemePortrait
+            alt="Portrait of Jevon Thompson"
+            className="max-w-[22rem] sm:max-w-[24rem] lg:ml-auto lg:max-w-[27rem]"
+            priority
+            sizes="(max-width: 640px) 22rem, (max-width: 1024px) 24rem, 27rem"
+          />
+          <div className="rounded-[2rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_88%,white_12%)] p-6 shadow-[var(--shadow-soft)]">
+            <p className="section-eyebrow">What this site shows</p>
+            <div className="mt-5 grid gap-4 text-sm leading-7 text-[var(--color-foreground-soft)]">
+              <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
+                Self-hosted and operational work across Linux, virtualization,
+                containers, and secure remote access.
+              </div>
+              <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
+                Portfolio projects that still reflect my web development
+                background, from frontend builds to full-stack rewrites.
+              </div>
+              <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
+                Writing about systems, tradeoffs, learning, and the practical
+                work behind the tools I run.
+              </div>
             </div>
           </div>
         </div>

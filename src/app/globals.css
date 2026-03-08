@@ -3,36 +3,36 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --color-background: #f4eee7;
-  --color-background-elevated: #fbf7f2;
-  --color-foreground: #181311;
-  --color-foreground-soft: #3e3530;
-  --color-muted: #675b54;
-  --color-surface: #fff8f1;
-  --color-surface-strong: #f0e5da;
-  --color-border: rgba(24, 19, 17, 0.12);
-  --color-accent: #c85e35;
-  --color-accent-strong: #a44722;
-  --color-accent-foreground: #fff4ec;
-  --shadow-soft: 0 24px 60px rgba(70, 39, 19, 0.12);
+  --color-background: #f7f5ff;
+  --color-background-elevated: #fcfbff;
+  --color-foreground: #11001c;
+  --color-foreground-soft: #251730;
+  --color-muted: #554d61;
+  --color-surface: #fbfaff;
+  --color-surface-strong: #e7edf5;
+  --color-border: rgba(146, 191, 217, 0.46);
+  --color-accent: #7fb5d3;
+  --color-accent-strong: #5f9fc2;
+  --color-accent-foreground: #0f1720;
+  --shadow-soft: 0 24px 60px rgba(17, 0, 28, 0.14);
   --font-display: var(--font-sora);
   --font-body: var(--font-source-sans);
   --font-mono: var(--font-jetbrains-mono);
 }
 
 .dark {
-  --color-background: #090b11;
-  --color-background-elevated: #121620;
-  --color-foreground: #f8f3ec;
-  --color-foreground-soft: #d3c6ba;
-  --color-muted: #b2a59a;
-  --color-surface: #131824;
-  --color-surface-strong: #191f2d;
-  --color-border: rgba(236, 225, 213, 0.1);
-  --color-accent: #ed754a;
-  --color-accent-strong: #ff9569;
-  --color-accent-foreground: #190d09;
-  --shadow-soft: 0 28px 70px rgba(0, 0, 0, 0.38);
+  --color-background: #11001c;
+  --color-background-elevated: #1a0a2a;
+  --color-foreground: #f8f7ff;
+  --color-foreground-soft: #e3daf2;
+  --color-muted: #cabfe2;
+  --color-surface: #190826;
+  --color-surface-strong: #32004f;
+  --color-border: rgba(255, 143, 177, 0.24);
+  --color-accent: #ff8fb1;
+  --color-accent-strong: #ffa3fd;
+  --color-accent-foreground: #19041f;
+  --shadow-soft: 0 28px 70px rgba(0, 0, 0, 0.34);
 }
 
 * {
@@ -47,16 +47,27 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(237, 117, 74, 0.18), transparent 26%),
+    radial-gradient(circle at top, rgba(146, 191, 217, 0.32), transparent 26%),
     radial-gradient(
       circle at bottom right,
-      rgba(81, 133, 193, 0.12),
+      rgba(204, 206, 211, 0.34),
       transparent 28%
     ),
     var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-body), sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 177, 0.18), transparent 26%),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255, 163, 253, 0.14),
+      transparent 28%
+    ),
+    var(--color-background);
 }
 
 a {
@@ -91,7 +102,7 @@ img {
   left: -8rem;
   height: 18rem;
   width: 18rem;
-  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 38%, transparent);
 }
 
 .page-shell::after {
@@ -99,7 +110,7 @@ img {
   bottom: 8rem;
   height: 20rem;
   width: 20rem;
-  background: rgba(83, 141, 205, 0.12);
+  background: color-mix(in srgb, var(--color-accent-strong) 24%, transparent);
 }
 
 .section-eyebrow {

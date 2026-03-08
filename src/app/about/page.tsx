@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { ThemePortrait } from "@/components/theme-portrait";
 import { buildMetadata } from "@/lib/metadata";
 import { aboutContent, siteConfig, skillGroups } from "@/lib/site";
 
@@ -15,16 +15,11 @@ export default function AboutPage() {
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <section className="grid gap-10 lg:grid-cols-[22rem_minmax(0,1fr)] lg:items-start">
-        <div className="overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-soft)]">
-          <Image
-            alt="Portrait of Jevon Thompson"
-            className="h-full w-full object-cover"
-            height={900}
-            priority
-            src="/images/Me-modified.webp"
-            width={720}
-          />
-        </div>
+        <ThemePortrait
+          alt="Portrait of Jevon Thompson"
+          className="max-w-[20rem] sm:max-w-[22rem] lg:mx-0 lg:max-w-[24rem]"
+          priority
+        />
 
         <div className="space-y-8">
           <div className="space-y-4">
