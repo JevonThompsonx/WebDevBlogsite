@@ -3,6 +3,24 @@ import { z } from "zod";
 const isProduction = process.env.NODE_ENV === "production";
 const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
 
+function resolveDatabaseUrl(): string | undefined {
+  return (
+    process.env.DATABASE_URL ??
+    process.env.TURSO_DATABASE_URL ??
+    process.env.POSTGRES_URL ??
+    process.env.POSTGRES_PRISMA_URL ??
+    process.env.POSTGRES_URL_NON_POOLING
+  );
+}
+
+function resolveDatabaseAuthToken(): string | undefined {
+  return (
+    process.env.DATABASE_AUTH_TOKEN ??
+    process.env.TURSO_AUTH_TOKEN ??
+    process.env.POSTGRES_PASSWORD
+  );
+}
+
 const serverSchema = z.object({
   AUTH_SECRET: z.string().min(1, "AUTH_SECRET is required"),
   AUTH_GITHUB_ID: z.string().min(1, "AUTH_GITHUB_ID is required"),
@@ -30,8 +48,8 @@ function resolveServerEnvSource(): Record<string, string | undefined> {
       AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
       AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
       ADMIN_GITHUB_ID: process.env.ADMIN_GITHUB_ID,
-      DATABASE_URL: process.env.DATABASE_URL,
-      DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,
+      DATABASE_URL: resolveDatabaseUrl(),
+      DATABASE_AUTH_TOKEN: resolveDatabaseAuthToken(),
       NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     };
   }
@@ -44,9 +62,9 @@ function resolveServerEnvSource(): Record<string, string | undefined> {
       process.env.AUTH_GITHUB_ID ?? "development-github-client-id",
     AUTH_GITHUB_SECRET:
       process.env.AUTH_GITHUB_SECRET ?? "development-github-client-secret",
-    ADMIN_GITHUB_ID: process.env.ADMIN_GITHUB_ID ?? "0",
-    DATABASE_URL: process.env.DATABASE_URL ?? "file:./local.db",
-    DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,
+    ADMIN_GITHUB_ID: process.env.ADMIN_GITHUB_ID ?? "104575457",
+    DATABASE_URL: resolveDatabaseUrl() ?? "file:./local.db",
+    DATABASE_AUTH_TOKEN: resolveDatabaseAuthToken(),
     NEXT_PUBLIC_APP_URL:
       process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   };

@@ -65,8 +65,9 @@ Required values:
 - `AUTH_GITHUB_ID`
 - `AUTH_GITHUB_SECRET`
 - `ADMIN_GITHUB_ID`
-- `DATABASE_URL`
-- `DATABASE_AUTH_TOKEN` for hosted LibSQL/Turso only
+- `DATABASE_URL` or `TURSO_DATABASE_URL`
+- `DATABASE_AUTH_TOKEN` or `TURSO_AUTH_TOKEN` for hosted LibSQL/Turso only
+- `NEXTAUTH_URL`
 - `NEXT_PUBLIC_APP_URL`
 
 For local development, `DATABASE_URL="file:./local.db"` works out of the box.
@@ -210,9 +211,12 @@ Features currently implemented:
 
 - `DATABASE_URL` - local file path or hosted LibSQL URL
 - `DATABASE_AUTH_TOKEN` - required for hosted LibSQL/Turso if your database uses token auth
+- `TURSO_DATABASE_URL` - Vercel Turso integration variable name, supported directly by this app
+- `TURSO_AUTH_TOKEN` - Vercel Turso integration token variable name, supported directly by this app
 
 ### App
 
+- `NEXTAUTH_URL` - auth callback/base URL for NextAuth, especially important in production
 - `NEXT_PUBLIC_APP_URL` - canonical app URL for metadata and feeds
 
 ## Local development notes
@@ -231,6 +235,43 @@ Recommended production setup:
 - configure GitHub OAuth callback URL:
   `https://your-domain.com/api/auth/callback/github`
 - set all environment variables in the Vercel dashboard
+- set both `NEXTAUTH_URL` and `NEXT_PUBLIC_APP_URL` to your real production domain
+- make sure Vercel Preview and Production environments both have the required variables if you want preview deploys to build successfully
+
+If you connected Turso through Vercel's integration, this project already supports:
+
+- `TURSO_DATABASE_URL`
+- `TURSO_AUTH_TOKEN`
+
+You do not need to duplicate them into `DATABASE_URL` and `DATABASE_AUTH_TOKEN` unless you want a provider-agnostic setup.
+
+If the integration created different names than expected, open the Vercel project settings and confirm the exact variable names under Environment Variables. The runtime 500 you saw means the app did not receive a database URL at request time.
+
+### Exact Vercel deploy steps
+
+1. Push this repo to GitHub.
+2. In Vercel, import the GitHub repo.
+3. Keep the project root as the repository root.
+4. Let Vercel use the included `vercel.json` settings.
+5. Confirm Turso is connected so `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` exist in Vercel.
+6. Add the remaining Vercel env vars manually:
+   - `AUTH_SECRET`
+   - `AUTH_GITHUB_ID`
+   - `AUTH_GITHUB_SECRET`
+   - `ADMIN_GITHUB_ID=104575457`
+   - `NEXTAUTH_URL=https://your-domain.com`
+   - `NEXT_PUBLIC_APP_URL=https://your-domain.com`
+7. In GitHub OAuth app settings, add callback URL:
+   `https://your-domain.com/api/auth/callback/github`
+8. Deploy.
+9. After deploy, sign in and verify `/admin` works.
+10. If production DB is empty, run `bun run db:seed` against the hosted Turso database from your machine.
+
+Vercel build behavior:
+
+- Vercel uses `vercel.json` and Bun for install/build
+- `bun run build` applies pending SQL migrations before running `next build`
+- migrations are tracked in the database through the `__migrations` table, so already-applied SQL files are skipped
 
 Production checklist:
 
@@ -249,9 +290,22 @@ Before pushing this repo:
 
 - make sure `.env.local` is not committed
 - make sure `local.db` is not committed
+- make sure `.vercel/` is not committed
 - keep `bun.lock` committed
 - verify the old legacy files are intentionally removed in your commit
 - add your repo URL to the README if you want public visitors to find source quickly
+
+No secrets or auth tokens should ever be committed. This repo only contains examples and documentation.
+
+### Your current production values
+
+For your deployed domain, use:
+
+- `NEXTAUTH_URL=https://web-dev-blogsite.vercel.app`
+- `NEXT_PUBLIC_APP_URL=https://web-dev-blogsite.vercel.app`
+- `ADMIN_GITHUB_ID=104575457`
+
+`AUTH_SECRET` should be a separate random secret string, not your GitHub client secret.
 
 ## Extra docs
 
