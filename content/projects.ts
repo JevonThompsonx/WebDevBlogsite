@@ -144,6 +144,30 @@ export const projects: Project[] = [
     order: 5,
   },
   {
+    slug: "steam-non-steam-game-manager",
+    title: "Steam Non-Steam Game Manager",
+    description:
+      "An interactive Windows CLI that manages non-Steam shortcuts, repairs broken entries, and downloads SteamGridDB artwork.",
+    longDescription:
+      "This Python project automates one of the more annoying parts of managing a large Windows game library: keeping non-Steam shortcuts clean inside Steam. It discovers Steam installations and user IDs, reads and writes the binary shortcuts file, creates backups before changes, scans configured drives for games, fixes broken fields, and can download artwork into Steam's grid directory. The result is a more reliable workflow for managing custom shortcuts without editing Steam data by hand.",
+    techStack: [
+      "Python",
+      "Windows CLI",
+      "Steam VDF",
+      "SteamGridDB",
+      "Automation",
+    ],
+    highlights: [
+      "Automatically detects Steam install paths and Steam user IDs.",
+      "Repairs broken shortcut fields and creates timestamped backups before every write.",
+      "Scans configured drives for games and downloads matching artwork into Steam's grid directory.",
+    ],
+    githubUrl:
+      "https://github.com/JevonThompsonx/Add-Non-Steam-Games/tree/main",
+    featured: false,
+    order: 6,
+  },
+  {
     slug: "carolina-heals",
     title: "Carolina Heals",
     description:
@@ -155,7 +179,7 @@ export const projects: Project[] = [
     githubUrl: "https://carolina-two.vercel.app",
     image: "/images/proj-carolina.webp",
     featured: true,
-    order: 6,
+    order: 7,
   },
   {
     slug: "linktree-clone",
@@ -169,7 +193,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/LinkTree-Clone",
     image: "/images/proj-linktree.webp",
     featured: false,
-    order: 7,
+    order: 8,
   },
   {
     slug: "ping-pong-score-tracker",
@@ -183,7 +207,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/PingPongProject",
     image: "/images/proj-ping.webp",
     featured: false,
-    order: 8,
+    order: 9,
   },
   {
     slug: "tv-show-search",
@@ -197,7 +221,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/TV-Show-Search",
     image: "/images/tv.webp",
     featured: false,
-    order: 9,
+    order: 10,
   },
   {
     slug: "dictionary-api",
@@ -211,6 +235,6 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/DictionaryAPI",
     image: "/images/proj-dict.webp",
     featured: false,
-    order: 10,
+    order: 11,
   },
 ];
