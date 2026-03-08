@@ -140,6 +140,7 @@ export const projects: Project[] = [
       "Included persistent theme state and early stalemate detection for a smoother UX.",
     ],
     image: "/images/tictactoe.webp",
+    liveUrl: "https://react-tic-tac-toe-gamma-six.vercel.app/",
     featured: false,
     order: 5,
   },
