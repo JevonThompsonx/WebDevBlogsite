@@ -83,6 +83,26 @@ export default async function ProjectDetailPage({
             </div>
           </div>
 
+          {project.highlights && project.highlights.length > 0 ? (
+            <div>
+              <p className="section-eyebrow">Highlights</p>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-[var(--color-foreground-soft)]">
+                {project.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {project.accessNote ? (
+            <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_80%,white_20%)] p-4 text-sm leading-7 text-[var(--color-foreground-soft)]">
+              <p className="font-medium text-[var(--color-foreground)]">
+                Access note
+              </p>
+              <p className="mt-2">{project.accessNote}</p>
+            </div>
+          ) : null}
+
           <div className="grid gap-3 text-sm font-medium">
             {project.liveUrl ? (
               <a
@@ -106,6 +126,18 @@ export default async function ProjectDetailPage({
                 <Github className="h-4 w-4" />
               </a>
             ) : null}
+            {project.resourceLinks?.map((resource) => (
+              <a
+                className="inline-flex items-center justify-between rounded-[1.25rem] border border-[var(--color-border)] px-4 py-3 transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                href={resource.url}
+                key={resource.url}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {resource.label}
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            ))}
           </div>
         </aside>
       </div>

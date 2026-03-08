@@ -4,6 +4,12 @@ export interface Project {
   description: string;
   longDescription: string;
   techStack: string[];
+  highlights?: string[];
+  accessNote?: string;
+  resourceLinks?: Array<{
+    label: string;
+    url: string;
+  }>;
   liveUrl?: string;
   githubUrl?: string;
   image?: string;

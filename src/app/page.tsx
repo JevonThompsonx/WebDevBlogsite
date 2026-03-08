@@ -26,15 +26,18 @@ export default async function HomePage() {
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-24 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <section className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-end">
         <div className="space-y-8">
-          <p className="section-eyebrow">Personal site rebuild</p>
+          <p className="section-eyebrow">Systems + software</p>
           <div className="space-y-6">
             <h1 className="section-title max-w-4xl">
-              Systems-minded development with a sharper public presence.
+              Systems administration first, with a strong web development
+              foundation.
             </h1>
             <p className="section-copy">
-              I&apos;m Jevon Thompson, an IT Systems Administrator and Developer
-              focused on thoughtful web experiences, clear technical writing,
-              and dependable delivery.
+              I&apos;m Jevon Thompson, a systems administrator who enjoys Linux,
+              self-hosted infrastructure, documentation, and dependable
+              delivery. I still build web apps and frontend experiments, but my
+              current focus is operating useful systems and showing the work
+              behind them.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -51,16 +54,16 @@ export default async function HomePage() {
           <p className="section-eyebrow">What this site shows</p>
           <div className="mt-5 grid gap-4 text-sm leading-7 text-[var(--color-foreground-soft)]">
             <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
-              Production-ready thinking across UX, structure, and
-              maintainability.
+              Self-hosted and operational work across Linux, virtualization,
+              containers, and secure remote access.
             </div>
             <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
-              Portfolio work that balances frontend detail with backend
-              discipline.
+              Portfolio projects that still reflect my web development
+              background, from frontend builds to full-stack rewrites.
             </div>
             <div className="rounded-[1.5rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_78%,white_22%)] p-4">
-              Writing about the problems, tradeoffs, and systems behind the
-              code.
+              Writing about systems, tradeoffs, learning, and the practical work
+              behind the tools I run.
             </div>
           </div>
         </div>
@@ -71,7 +74,8 @@ export default async function HomePage() {
           <div className="space-y-3">
             <p className="section-eyebrow">Featured projects</p>
             <h2 className="section-title text-[clamp(2rem,3vw,3.4rem)]">
-              Work that reflects where I&apos;m headed.
+              Infrastructure, self-hosting, and the projects that support the
+              journey.
             </h2>
           </div>
           <Link
@@ -90,7 +94,7 @@ export default async function HomePage() {
           <div className="space-y-3">
             <p className="section-eyebrow">Latest posts</p>
             <h2 className="section-title text-[clamp(2rem,3vw,3.4rem)]">
-              Notes from the build process.
+              Notes on systems, software, and continuous improvement.
             </h2>
           </div>
           <Link
@@ -108,7 +112,7 @@ export default async function HomePage() {
         <div className="space-y-4">
           <p className="section-eyebrow">About</p>
           <h2 className="section-title text-[clamp(2rem,3vw,3.4rem)]">
-            Curiosity turned into systems work and software craft.
+            Curiosity grew into systems work, self-hosting, and software craft.
           </h2>
           <p className="section-copy">{aboutContent.short}</p>
           <Link className={buttonClasses("secondary", "md")} href="/about">

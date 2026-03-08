@@ -6,7 +6,7 @@ import { aboutContent, siteConfig, skillGroups } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "About | Jevon Thompson",
   description:
-    "Learn about Jevon Thompson's background, motivation for coding, and the skills shaping his work in systems and software.",
+    "Learn about Jevon Thompson's background in systems administration, self-hosted infrastructure, and continuing web development work.",
   path: "/about",
   image: "/images/Me-modified.webp",
 });
@@ -30,7 +30,7 @@ export default function AboutPage() {
           <div className="space-y-4">
             <p className="section-eyebrow">About me</p>
             <h1 className="section-title max-w-4xl">
-              Curiosity first, then systems, then software.
+              Hands-on systems work, with web development still in the toolkit.
             </h1>
             <p className="section-copy">{aboutContent.resumeSummary}</p>
           </div>
@@ -44,7 +44,7 @@ export default function AboutPage() {
             </div>
             <div className="rounded-[1.75rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_88%,white_12%)] p-6 shadow-[var(--shadow-soft)]">
               <h2 className="font-[family-name:var(--font-display)] text-2xl text-[var(--color-foreground)]">
-                Why I code
+                Why I still build software
               </h2>
               <p className="mt-4 leading-8">{aboutContent.whyCode}</p>
             </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
         <div className="space-y-3">
           <p className="section-eyebrow">Skills</p>
           <h2 className="section-title text-[clamp(2rem,3vw,3.4rem)]">
-            A blend of developer tools, platform work, and delivery habits.
+            A mix of infrastructure, operations, and development experience.
           </h2>
         </div>
 

@@ -3,22 +3,142 @@ import type { Project } from "@/types";
 export const projects: Project[] = [
   {
     slug: "personal-site",
-    title: "Personal Blog & Portfolio",
+    title: "Current Portfolio & Blog Rewrite",
     description:
-      "A full-stack rewrite of my portfolio into a Next.js app with a real CMS-style blog, protected admin tools, and polished content design.",
+      "A Next.js rebuild of my personal site that presents my work as a systems administrator with a strong web development background.",
     longDescription:
-      "This project turns my old Express and EJS portfolio into a modern App Router experience. It focuses on strong SEO, a better reading experience for technical writing, and a production-ready blog workflow with authentication and persistence.",
+      "This rewrite replaces my older Express and EJS portfolio with a modern Next.js application. It adds a protected admin workflow, a database-backed blog, better SEO, and a clearer way to present both my self-hosted infrastructure work and my web projects.",
     techStack: [
       "Next.js",
       "TypeScript",
       "Tailwind CSS",
       "Drizzle ORM",
       "Auth.js",
+      "Vercel",
+      "Turso",
+    ],
+    highlights: [
+      "Rebuilt an older Node and Express portfolio into a modern App Router application.",
+      "Added protected blog administration with GitHub OAuth and a database-backed publishing workflow.",
+      "Improved SEO, metadata, RSS, sitemap generation, and content structure for long-form writing.",
     ],
     githubUrl: "https://github.com/JevonThompsonx/WebDevBlogsite",
+    liveUrl: "https://web-dev-blogsite.vercel.app/",
     image: "/images/mySite.webp",
     featured: true,
     order: 1,
+  },
+  {
+    slug: "personal-site-archived",
+    title: "Personal Site Archive",
+    description:
+      "The original Express and EJS version of my portfolio, preserved as an archived snapshot before the rewrite.",
+    longDescription:
+      "This archived build was my original personal site and public project hub. It served as a portfolio, resume, and blog built with Node.js, Express, EJS, and custom CSS, including theme-aware styling and automated deployment workflows. It represents the foundation I later rebuilt into the current Next.js site.",
+    techStack: [
+      "Node.js",
+      "Express",
+      "EJS",
+      "CSS",
+      "GitHub Actions",
+      "Google Cloud",
+    ],
+    highlights: [
+      "Hosted my early portfolio, resume, and public project showcase.",
+      "Used Express routing and EJS templates to serve themed pages and project views.",
+      "Included automated deployment workflows and theme-aware color behavior.",
+    ],
+    liveUrl: "https://web-dev-blog-archive.vercel.app/",
+    image: "/images/mySite.webp",
+    featured: false,
+    order: 2,
+  },
+  {
+    slug: "proxmox-media-automation-platform",
+    title: "Proxmox Media & Automation Platform",
+    description:
+      "A self-hosted media and automation environment running on a multi-node Proxmox cluster with secure remote access and containerized services.",
+    longDescription:
+      "This project centers on designing and maintaining a private self-hosted platform on top of a six-node Proxmox cluster. I use it to practice virtualization, service isolation, remote access, storage planning, and operational reliability. The stack includes media streaming, request management, transcoding, and supporting automation services, but this portfolio intentionally avoids publishing internal endpoints, topology details, or anything else that would create unnecessary attack surface.",
+    techStack: [
+      "Proxmox",
+      "Linux",
+      "Docker Compose",
+      "Jellyfin",
+      "Tdarr",
+      "Tailscale",
+      "Cloudflare Tunnel",
+    ],
+    highlights: [
+      "Built and operated a six-node Proxmox cluster for hosting services and infrastructure experimentation.",
+      "Containerized a private media and automation stack with secure remote access through Tailscale and Cloudflare.",
+      "Focused on service separation, remote administration, and safe external exposure without publishing internal endpoints.",
+    ],
+    accessNote:
+      "This is a private infrastructure project. Public URLs and operational details are intentionally omitted for security.",
+    resourceLinks: [
+      {
+        label: "Proxmox VE",
+        url: "https://www.proxmox.com/en/proxmox-virtual-environment/overview",
+      },
+      { label: "Jellyfin", url: "https://jellyfin.org/" },
+      { label: "Tdarr", url: "https://home.tdarr.io/" },
+      { label: "Tailscale", url: "https://tailscale.com/" },
+      {
+        label: "Cloudflare Tunnel",
+        url: "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/",
+      },
+    ],
+    featured: true,
+    order: 3,
+  },
+  {
+    slug: "private-cloud-collaboration-platform",
+    title: "Private Cloud Collaboration Platform",
+    description:
+      "A self-hosted Ubuntu platform combining Nextcloud, Immich, and Docker Compose for file sync, notes, calendar workflows, and private photo management.",
+    longDescription:
+      "This project is a private collaboration and storage environment built around a bare metal Ubuntu host. I use it as a personal file server and knowledge-management platform through Nextcloud, plus a separate Immich deployment for photo management. Services are exposed through secure remote-access patterns, while public writeups stay intentionally high level so the portfolio shows architecture decisions without exposing useful attack-surface details.",
+    techStack: [
+      "Ubuntu",
+      "Docker Compose",
+      "Nextcloud",
+      "Immich",
+      "WebDAV",
+      "Tailscale",
+      "Cloudflare Tunnel",
+    ],
+    highlights: [
+      "Runs on bare metal Ubuntu with services managed through Docker Compose.",
+      "Supports notes, calendar, task tracking, WebDAV file access, and private photo management.",
+      "Balances convenience and security by documenting the architecture publicly without exposing sensitive endpoints.",
+    ],
+    accessNote:
+      "This is a private self-hosted platform. Public URLs and configuration specifics are intentionally withheld.",
+    resourceLinks: [
+      { label: "Nextcloud", url: "https://nextcloud.com/" },
+      { label: "Immich", url: "https://immich.app/" },
+      { label: "Docker Compose", url: "https://docs.docker.com/compose/" },
+      { label: "Tailscale", url: "https://tailscale.com/" },
+    ],
+    featured: true,
+    order: 4,
+  },
+  {
+    slug: "sunline-tic-tac-toe",
+    title: "Sunline Tic Tac Toe",
+    description:
+      "A polished React and TypeScript single-page app with AI difficulty modes, score tracking, and theme persistence.",
+    longDescription:
+      "Sunline Tic Tac Toe is a modern frontend project focused on interaction design and state management. It supports player-versus-player and player-versus-AI modes, tracks scores across rounds, preserves the selected theme, and detects drawn games early when no future win path remains.",
+    techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vitest"],
+    highlights: [
+      "Built both player-versus-player and player-versus-AI game flows.",
+      "Added easy, medium, and hard AI difficulties with score tracking across rounds.",
+      "Included persistent theme state and early stalemate detection for a smoother UX.",
+    ],
+    featured: false,
+    order: 5,
   },
   {
     slug: "carolina-heals",
@@ -32,7 +152,7 @@ export const projects: Project[] = [
     githubUrl: "https://carolina-two.vercel.app",
     image: "/images/proj-carolina.webp",
     featured: true,
-    order: 2,
+    order: 6,
   },
   {
     slug: "linktree-clone",
@@ -46,7 +166,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/LinkTree-Clone",
     image: "/images/proj-linktree.webp",
     featured: false,
-    order: 3,
+    order: 7,
   },
   {
     slug: "ping-pong-score-tracker",
@@ -60,7 +180,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/PingPongProject",
     image: "/images/proj-ping.webp",
     featured: false,
-    order: 4,
+    order: 8,
   },
   {
     slug: "tv-show-search",
@@ -73,8 +193,8 @@ export const projects: Project[] = [
     liveUrl: "https://jevonthompsonx.github.io/TV-Show-Search/",
     githubUrl: "https://github.com/JevonThompsonx/TV-Show-Search",
     image: "/images/tv.webp",
-    featured: true,
-    order: 5,
+    featured: false,
+    order: 9,
   },
   {
     slug: "dictionary-api",
@@ -88,6 +208,6 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/JevonThompsonx/DictionaryAPI",
     image: "/images/proj-dict.webp",
     featured: false,
-    order: 6,
+    order: 10,
   },
 ];
