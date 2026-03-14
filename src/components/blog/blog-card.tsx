@@ -15,10 +15,11 @@ export function BlogCard({ post }: BlogCardProps) {
     <Card className="group overflow-hidden">
       <Link className="block h-full" href={`/blog/${post.slug}`}>
         <div className="relative aspect-[16/10] overflow-hidden bg-[color-mix(in_srgb,var(--color-surface)_75%,black_25%)]">
+          <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,transparent_18%,rgba(17,0,28,0.2)_100%)] opacity-80" />
           {post.coverImage ? (
             <Image
               alt={post.title}
-              className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               src={post.coverImage}
@@ -32,7 +33,7 @@ export function BlogCard({ post }: BlogCardProps) {
           )}
         </div>
 
-        <div className="space-y-5 p-6">
+        <div className="space-y-5 p-6 sm:p-7">
           <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-muted)]">
             <Badge>{post.category}</Badge>
             <span>{formatDate(post.createdAt)}</span>
@@ -40,7 +41,7 @@ export function BlogCard({ post }: BlogCardProps) {
           </div>
 
           <div className="space-y-3">
-            <h3 className="font-[family-name:var(--font-display)] text-2xl leading-tight text-[var(--color-foreground)]">
+            <h3 className="font-[family-name:var(--font-display)] text-[1.8rem] leading-[1.02] text-[var(--color-foreground)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-[var(--color-accent-strong)]">
               {post.title}
             </h3>
             <p className="text-sm leading-7 text-[var(--color-foreground-soft)]">
@@ -48,7 +49,7 @@ export function BlogCard({ post }: BlogCardProps) {
             </p>
           </div>
 
-          <div className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent)]">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-accent)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:gap-3 group-hover:text-[var(--color-accent-strong)]">
             Read article
             <ArrowUpRight className="h-4 w-4" />
           </div>

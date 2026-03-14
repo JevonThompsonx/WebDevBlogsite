@@ -160,7 +160,7 @@ export async function PostContent({ markdown }: PostContentProps) {
   };
 
   return (
-    <div className="prose prose-invert max-w-none prose-headings:font-[family-name:var(--font-display)] prose-headings:text-[var(--color-foreground)] prose-p:text-[var(--color-foreground-soft)] prose-strong:text-[var(--color-foreground)] prose-li:text-[var(--color-foreground-soft)] prose-blockquote:border-l-[var(--color-accent)] prose-blockquote:text-[var(--color-foreground)] prose-hr:border-[var(--color-border)] dark:prose-invert">
+    <div className="prose prose-invert max-w-none prose-headings:font-[family-name:var(--font-display)] prose-headings:text-[var(--color-foreground)] prose-h2:text-[2rem] prose-h2:leading-[1.02] prose-h3:text-[1.45rem] prose-h3:leading-[1.1] prose-p:text-[var(--color-foreground-soft)] prose-p:leading-8 prose-a:no-underline prose-strong:text-[var(--color-foreground)] prose-li:text-[var(--color-foreground-soft)] prose-li:leading-8 prose-blockquote:rounded-r-[1.5rem] prose-blockquote:border-l-[var(--color-accent)] prose-blockquote:bg-[color-mix(in_srgb,var(--color-surface)_80%,white_20%)] prose-blockquote:px-6 prose-blockquote:py-3 prose-blockquote:text-[var(--color-foreground)] prose-hr:border-[var(--color-border)] dark:prose-invert">
       <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
         {markdown}
       </ReactMarkdown>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowUpRight, Github } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, ArrowUpRight, Github, Layers3 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { buildMetadata } from "@/lib/metadata";
@@ -50,11 +51,16 @@ export default async function ProjectDetailPage({
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
-        <section className="space-y-6">
+    <div className="site-container flex w-full flex-col gap-8 py-8 pb-16 sm:py-10 lg:gap-10 lg:pb-20">
+      <Link className="section-link" href="/projects">
+        <ArrowLeft className="h-4 w-4" />
+        Back to projects
+      </Link>
+
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-start lg:gap-10">
+        <section className="surface-panel space-y-6 px-6 py-7 sm:px-8 sm:py-8 lg:px-10">
           <p className="section-eyebrow">Project detail</p>
-          <h1 className="section-title max-w-4xl text-[clamp(2.5rem,5vw,4.6rem)]">
+          <h1 className="section-title max-w-4xl text-[clamp(2.8rem,5vw,5rem)]">
             {project.title}
           </h1>
           <p className="section-copy">{project.longDescription}</p>
@@ -73,9 +79,14 @@ export default async function ProjectDetailPage({
           ) : null}
         </section>
 
-        <aside className="space-y-6 rounded-[2rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_88%,white_12%)] p-6 shadow-[var(--shadow-soft)] lg:sticky lg:top-28">
+        <aside className="surface-panel space-y-6 p-6 sm:p-7 lg:sticky lg:top-28">
           <div>
-            <p className="section-eyebrow">Stack</p>
+            <div className="flex items-center gap-3">
+              <Layers3 className="h-4 w-4 text-[var(--color-accent)]" />
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
+                Stack
+              </p>
+            </div>
             <div className="mt-4 flex flex-wrap gap-2">
               {project.techStack.map((item) => (
                 <Badge key={`${project.slug}-${item}`}>{item}</Badge>
@@ -85,10 +96,14 @@ export default async function ProjectDetailPage({
 
           {project.highlights && project.highlights.length > 0 ? (
             <div>
-              <p className="section-eyebrow">Highlights</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
+                Highlights
+              </p>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-[var(--color-foreground-soft)]">
                 {project.highlights.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li className="surface-tile px-4 py-3" key={item}>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -106,7 +121,7 @@ export default async function ProjectDetailPage({
           <div className="grid gap-3 text-sm font-medium">
             {project.liveUrl ? (
               <a
-                className="inline-flex items-center justify-between rounded-[1.25rem] border border-[var(--color-border)] px-4 py-3 transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                className="surface-tile inline-flex items-center justify-between px-4 py-3"
                 href={project.liveUrl}
                 rel="noreferrer"
                 target="_blank"
@@ -117,7 +132,7 @@ export default async function ProjectDetailPage({
             ) : null}
             {project.githubUrl ? (
               <a
-                className="inline-flex items-center justify-between rounded-[1.25rem] border border-[var(--color-border)] px-4 py-3 transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                className="surface-tile inline-flex items-center justify-between px-4 py-3"
                 href={project.githubUrl}
                 rel="noreferrer"
                 target="_blank"
@@ -128,7 +143,7 @@ export default async function ProjectDetailPage({
             ) : null}
             {project.resourceLinks?.map((resource) => (
               <a
-                className="inline-flex items-center justify-between rounded-[1.25rem] border border-[var(--color-border)] px-4 py-3 transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                className="surface-tile inline-flex items-center justify-between px-4 py-3"
                 href={resource.url}
                 key={resource.url}
                 rel="noreferrer"

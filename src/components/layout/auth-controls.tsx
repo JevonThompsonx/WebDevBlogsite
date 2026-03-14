@@ -18,7 +18,7 @@ export function AuthControls({ isAuthenticated, isAdmin }: AuthControlsProps) {
       <div className="flex items-center gap-2">
         {isAdmin ? (
           <a
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] px-4 text-sm font-medium text-[var(--color-foreground)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] px-4 text-sm font-medium text-[var(--color-foreground)] shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-lift)]"
             href="/admin"
           >
             <Shield className="h-4 w-4" />

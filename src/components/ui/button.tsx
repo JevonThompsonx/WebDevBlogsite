@@ -6,13 +6,13 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-[var(--color-accent)] text-[var(--color-accent-foreground)] shadow-[0_16px_40px_rgba(237,117,74,0.22)] hover:bg-[var(--color-accent-strong)]",
+    "border border-transparent bg-[linear-gradient(135deg,color-mix(in_srgb,var(--color-accent)_92%,white_8%),color-mix(in_srgb,var(--color-accent-strong)_88%,white_12%))] text-[var(--color-accent-foreground)] shadow-[0_18px_44px_color-mix(in_srgb,var(--color-accent)_28%,transparent)] hover:-translate-y-0.5 hover:shadow-[0_24px_54px_color-mix(in_srgb,var(--color-accent)_32%,transparent)]",
   secondary:
-    "border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] text-[var(--color-foreground)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]",
+    "border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] text-[var(--color-foreground)] shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:text-[var(--color-foreground)] hover:shadow-[var(--shadow-lift)]",
   ghost:
-    "text-[var(--color-muted)] hover:bg-[color-mix(in_srgb,var(--color-surface)_76%,white_24%)] hover:text-[var(--color-foreground)]",
+    "border border-transparent text-[var(--color-muted)] hover:bg-[color-mix(in_srgb,var(--color-surface)_76%,white_24%)] hover:text-[var(--color-foreground)]",
   danger:
-    "bg-[color-mix(in_srgb,#b42318_80%,black_20%)] text-white hover:bg-[#b42318]",
+    "border border-transparent bg-[color-mix(in_srgb,#b42318_80%,black_20%)] text-white hover:-translate-y-0.5 hover:bg-[#b42318]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -32,7 +32,7 @@ export function buttonClasses(
   size: ButtonSize = "md",
 ): string {
   return cn(
-    "inline-flex items-center justify-center rounded-full font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] disabled:cursor-not-allowed disabled:opacity-60",
+    "inline-flex items-center justify-center rounded-full font-medium transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] disabled:cursor-not-allowed disabled:opacity-60",
     variantClasses[variant],
     sizeClasses[size],
   );
