@@ -74,10 +74,10 @@ export function extractTableOfContents(
       continue;
     }
 
-    const headingText = stripMarkdownSyntax(match[2]);
+    const headingText = stripMarkdownSyntax(match[2] ?? "");
 
     items.push({
-      level: match[1].length,
+      level: (match[1] ?? "").length,
       text: headingText,
       slug: slugForHeading(headingText),
     });

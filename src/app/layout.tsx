@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/providers";
 import { buildMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
+import { publicEnv } from "@/lib/env";
 import "./globals.css";
 
 const sora = Sora({
@@ -32,11 +33,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    url: publicEnv.NEXT_PUBLIC_APP_URL,
+    sameAs: [siteConfig.github, siteConfig.linkedin],
+    jobTitle: siteConfig.title,
+    email: siteConfig.email,
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${sora.variable} ${sourceSans.variable} ${jetbrainsMono.variable}`}
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema).replace(/</g, "\\u003c"),
+          }}
+          type="application/ld+json"
+        />
         <Providers>
           <div className="page-shell flex min-h-screen flex-col">
             <a className="skip-link" href="#main-content">
