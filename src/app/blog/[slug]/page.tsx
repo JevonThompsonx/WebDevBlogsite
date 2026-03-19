@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { buildMetadata } from "@/lib/metadata";
 import { extractTableOfContents } from "@/lib/markdown";
 import { estimateReadingTime, formatDate } from "@/lib/utils";
+import { publicEnv } from "@/lib/env";
+import { siteConfig } from "@/lib/site";
 import {
   getAdjacentPublishedPosts,
   getPublishedPostBySlug,
@@ -55,8 +57,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const [adjacentPosts] = await Promise.all([getAdjacentPublishedPosts(slug)]);
   const tableOfContents = extractTableOfContents(post.content);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url: `${publicEnv.NEXT_PUBLIC_APP_URL}/blog/${post.slug}`,
+    datePublished: post.createdAt,
+    dateModified: post.updatedAt,
+    author: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: publicEnv.NEXT_PUBLIC_APP_URL,
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: publicEnv.NEXT_PUBLIC_APP_URL,
+    },
+    ...(post.coverImage ? { image: post.coverImage } : {}),
+  };
+
   return (
-    <div className="site-container grid w-full gap-8 py-8 pb-16 sm:py-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-10 lg:pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <div className="site-container grid w-full gap-8 py-8 pb-16 sm:py-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-10 lg:pb-20">
       <article className="space-y-8">
         <Link className="section-link" href="/blog">
           <ArrowLeft className="h-4 w-4" />
@@ -136,5 +164,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <TableOfContents items={tableOfContents} />
       </div>
     </div>
+    </>
   );
 }

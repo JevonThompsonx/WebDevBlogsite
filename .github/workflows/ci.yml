@@ -16,4 +16,7 @@ jobs:
       - run: bun run type-check
       - run: bun run lint
       - run: bun run test
+      - run: bun audit
       - run: bun run build
+        env:
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
