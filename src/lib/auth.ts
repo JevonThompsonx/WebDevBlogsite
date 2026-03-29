@@ -7,9 +7,15 @@ import { getServerSession } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { serverEnv } from "@/lib/env";
 
+const sessionLifetimeSeconds = 60 * 60 * 12;
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
+    maxAge: sessionLifetimeSeconds,
+  },
+  jwt: {
+    maxAge: sessionLifetimeSeconds,
   },
   secret: serverEnv.AUTH_SECRET,
   providers: [
@@ -27,6 +33,23 @@ export const authOptions: NextAuthOptions = {
       }
 
       return providerAccountId === serverEnv.ADMIN_GITHUB_ID;
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      }
+
+      try {
+        const destination = new URL(url);
+
+        if (destination.origin === baseUrl) {
+          return url;
+        }
+      } catch {
+        return baseUrl;
+      }
+
+      return baseUrl;
     },
     async jwt({ token, account }) {
       const providerAccountId = account?.providerAccountId;

@@ -11,6 +11,11 @@ import {
   getCodeHighlighter,
   resolveCodeLanguage,
 } from "@/lib/markdown";
+import {
+  isExternalHttpLink,
+  isSafeLinkHref,
+  resolveSafeImageSource,
+} from "@/lib/security";
 import { cn } from "@/lib/utils";
 
 interface ParagraphWithImagesProps {
@@ -43,76 +48,6 @@ interface PostContentProps {
 }
 
 const isDevelopment = process.env.NODE_ENV === "development";
-
-function isRelativePath(url: string): boolean {
-  return (
-    url.startsWith("/") ||
-    url.startsWith("./") ||
-    url.startsWith("../") ||
-    url.startsWith("#") ||
-    url.startsWith("?")
-  );
-}
-
-function isSafeLinkHref(href: string): boolean {
-  const normalizedHref = href.trim();
-
-  if (normalizedHref.length === 0) {
-    return false;
-  }
-
-  if (isRelativePath(normalizedHref)) {
-    return true;
-  }
-
-  try {
-    const parsed = new URL(normalizedHref);
-    return ["http:", "https:", "mailto:"].includes(parsed.protocol);
-  } catch {
-    return false;
-  }
-}
-
-function isExternalHttpLink(href: string): boolean {
-  try {
-    const parsed = new URL(href);
-    return ["http:", "https:"].includes(parsed.protocol);
-  } catch {
-    return false;
-  }
-}
-
-function resolveSafeImageSource(src: string): string | null {
-  const normalizedSrc = src.trim();
-
-  if (normalizedSrc.length === 0) {
-    return null;
-  }
-
-  if (isRelativePath(normalizedSrc)) {
-    return normalizedSrc;
-  }
-
-  try {
-    const parsed = new URL(normalizedSrc);
-
-    if (parsed.protocol === "https:") {
-      return normalizedSrc;
-    }
-
-    if (
-      isDevelopment &&
-      parsed.protocol === "http:" &&
-      ["localhost", "127.0.0.1"].includes(parsed.hostname)
-    ) {
-      return normalizedSrc;
-    }
-
-    return null;
-  } catch {
-    return null;
-  }
-}
 
 export async function PostContent({ markdown }: PostContentProps) {
   const highlighter = await getCodeHighlighter();
@@ -189,7 +124,9 @@ export async function PostContent({ markdown }: PostContentProps) {
         return null;
       }
 
-      const safeSrc = resolveSafeImageSource(src);
+      const safeSrc = resolveSafeImageSource(src, {
+        allowInsecureLocalhost: isDevelopment,
+      });
 
       if (!safeSrc) {
         return null;

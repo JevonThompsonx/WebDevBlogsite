@@ -18,6 +18,17 @@ jobs:
       - run: bun run test
       - run: bun run build
 
+  sast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Semgrep SAST
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            p/owasp-top-ten
+            p/cwe-top-25
+
   dependency-scan:
     runs-on: ubuntu-latest
     steps:

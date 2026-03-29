@@ -23,29 +23,7 @@ if (isDevelopment && remoteImagePatterns.length === 0) {
   });
 }
 
-const contentSecurityPolicy = [
-  "default-src 'self'",
-  "base-uri 'self'",
-  "object-src 'none'",
-  "frame-ancestors 'none'",
-  "form-action 'self'",
-  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data: blob: https:",
-  `connect-src 'self' https://github.com https://api.github.com${isDevelopment ? " ws: wss:" : ""}`,
-  "frame-src 'none'",
-  ...(isDevelopment ? [] : ["upgrade-insecure-requests"]),
-]
-  .join("; ")
-  .replace(/\s{2,}/g, " ")
-  .trim();
-
 const securityHeaders = [
-  {
-    key: "Content-Security-Policy",
-    value: contentSecurityPolicy,
-  },
   {
     key: "Referrer-Policy",
     value: "strict-origin-when-cross-origin",
