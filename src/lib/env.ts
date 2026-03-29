@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-const isProduction = process.env.NODE_ENV === "production";
-const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
+const isDevelopment = process.env.NODE_ENV === "development";
+const isTest = process.env.NODE_ENV === "test";
 
 function resolveDatabaseUrl(): string | undefined {
   return (
@@ -42,7 +42,7 @@ const publicSchema = z.object({
 });
 
 function resolveServerEnvSource(): Record<string, string | undefined> {
-  if (isProduction && !isBuildPhase) {
+  if (!isDevelopment && !isTest) {
     return {
       AUTH_SECRET: process.env.AUTH_SECRET,
       AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,

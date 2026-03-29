@@ -240,4 +240,32 @@ export const projects: Project[] = [
     featured: false,
     order: 11,
   },
+  {
+    slug: "farmers-market",
+    title: "Farmers Market",
+    description:
+      "A modern full-stack farmers market app built with Next.js, Turso, Drizzle, and Auth.js.",
+    longDescription:
+      "Farmers Market is a full-stack App Router project focused on reliable marketplace workflows for farm and product listings, authenticated user actions, and search-driven discovery. The stack uses Next.js, TypeScript, Tailwind CSS 4, Turso with Drizzle ORM, and Auth.js v5, with Cloudinary and Unsplash integrations for media workflows. Core migration phases are complete in-repo, with remaining work centered on deployment rollout and final browser QA in live Vercel environments.",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "Turso",
+      "Drizzle ORM",
+      "Auth.js v5",
+      "Cloudinary",
+      "Unsplash API",
+      "Vitest",
+      "Playwright",
+    ],
+    highlights: [
+      "Implements farm and product listings with category filtering, full-text search, and detail pages.",
+      "Supports authenticated mutations, review ownership checks, schema validation with Zod, and route/action authorization.",
+      "Includes SEO and platform hardening through JSON-LD, sitemap/robots coverage, structured errors, headers, and mutation rate limiting.",
+    ],
+    featured: false,
+    order: 12,
+  },
 ];

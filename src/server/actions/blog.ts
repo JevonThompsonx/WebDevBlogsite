@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { getCurrentSession, isAdminSession } from "@/lib/auth";
 import { createPostSchema, updatePostSchema } from "@/schemas/blog";
 import {
+  PostConflictError,
+  PostNotFoundError,
   deletePostRecord,
   insertPost,
   slugExists,
@@ -107,7 +109,13 @@ export async function createPostAction(
 
   try {
     await insertPost(parsed.data);
-  } catch {
+  } catch (error) {
+    if (error instanceof PostConflictError) {
+      return invalidState("Choose a different slug.", {
+        slug: "That slug is already in use.",
+      });
+    }
+
     return invalidState("Something went wrong while saving the post.");
   }
 
@@ -151,7 +159,19 @@ export async function updatePostAction(
 
   try {
     await updatePostRecord(parsed.data);
-  } catch {
+  } catch (error) {
+    if (error instanceof PostConflictError) {
+      return invalidState("Choose a different slug.", {
+        slug: "That slug is already in use.",
+      });
+    }
+
+    if (error instanceof PostNotFoundError) {
+      return invalidState(
+        "This post no longer exists. Refresh the admin page and try again.",
+      );
+    }
+
     return invalidState("Something went wrong while updating the post.");
   }
 
@@ -168,6 +188,9 @@ export async function deletePostAction(formData: FormData): Promise<void> {
     return;
   }
 
-  await deletePostRecord(slug);
-  revalidatePostPages(slug);
+  const deleted = await deletePostRecord(slug);
+
+  if (deleted) {
+    revalidatePostPages(slug);
+  }
 }
