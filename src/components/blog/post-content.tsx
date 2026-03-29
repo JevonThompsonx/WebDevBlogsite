@@ -42,6 +42,78 @@ interface PostContentProps {
   markdown: string;
 }
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
+function isRelativePath(url: string): boolean {
+  return (
+    url.startsWith("/") ||
+    url.startsWith("./") ||
+    url.startsWith("../") ||
+    url.startsWith("#") ||
+    url.startsWith("?")
+  );
+}
+
+function isSafeLinkHref(href: string): boolean {
+  const normalizedHref = href.trim();
+
+  if (normalizedHref.length === 0) {
+    return false;
+  }
+
+  if (isRelativePath(normalizedHref)) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(normalizedHref);
+    return ["http:", "https:", "mailto:"].includes(parsed.protocol);
+  } catch {
+    return false;
+  }
+}
+
+function isExternalHttpLink(href: string): boolean {
+  try {
+    const parsed = new URL(href);
+    return ["http:", "https:"].includes(parsed.protocol);
+  } catch {
+    return false;
+  }
+}
+
+function resolveSafeImageSource(src: string): string | null {
+  const normalizedSrc = src.trim();
+
+  if (normalizedSrc.length === 0) {
+    return null;
+  }
+
+  if (isRelativePath(normalizedSrc)) {
+    return normalizedSrc;
+  }
+
+  try {
+    const parsed = new URL(normalizedSrc);
+
+    if (parsed.protocol === "https:") {
+      return normalizedSrc;
+    }
+
+    if (
+      isDevelopment &&
+      parsed.protocol === "http:" &&
+      ["localhost", "127.0.0.1"].includes(parsed.hostname)
+    ) {
+      return normalizedSrc;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export async function PostContent({ markdown }: PostContentProps) {
   const highlighter = await getCodeHighlighter();
   const nextHeadingSlug = createHeadingSlugger();
@@ -95,12 +167,18 @@ export async function PostContent({ markdown }: PostContentProps) {
         return <span>{children}</span>;
       }
 
+      if (!isSafeLinkHref(href)) {
+        return <span>{children}</span>;
+      }
+
+      const isExternalLink = isExternalHttpLink(href);
+
       return (
         <a
           className="text-[var(--color-accent)] underline decoration-[color-mix(in_srgb,var(--color-accent)_45%,transparent)] underline-offset-4 transition hover:text-[var(--color-accent-strong)]"
           href={href}
-          rel={href.startsWith("http") ? "noreferrer" : undefined}
-          target={href.startsWith("http") ? "_blank" : undefined}
+          rel={isExternalLink ? "noopener noreferrer" : undefined}
+          target={isExternalLink ? "_blank" : undefined}
         >
           {children}
         </a>
@@ -111,13 +189,19 @@ export async function PostContent({ markdown }: PostContentProps) {
         return null;
       }
 
+      const safeSrc = resolveSafeImageSource(src);
+
+      if (!safeSrc) {
+        return null;
+      }
+
       return (
         <span className="my-8 block overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-surface)]">
           <Image
             alt={alt ?? "Blog illustration"}
             className="h-auto w-full object-cover"
             height={720}
-            src={src}
+            src={safeSrc}
             width={1280}
           />
         </span>

@@ -1,6 +1,6 @@
 "use server";
 
-import { ZodError } from "zod";
+import { z, ZodError } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentSession, isAdminSession } from "@/lib/auth";
@@ -16,6 +16,12 @@ import {
 import type { ActionState } from "@/types";
 
 const unauthorizedMessage = "You are not authorized to manage posts.";
+const deletePostSlugSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .max(200)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 
 function invalidState(
   message: string,
@@ -180,17 +186,22 @@ export async function updatePostAction(
 }
 
 export async function deletePostAction(formData: FormData): Promise<void> {
-  await requireAdmin();
-
-  const slug = readString(formData, "slug");
-
-  if (slug.length === 0) {
+  try {
+    await requireAdmin();
+  } catch {
     return;
   }
 
-  const deleted = await deletePostRecord(slug);
+  const slug = readString(formData, "slug");
+  const parsedSlug = deletePostSlugSchema.safeParse(slug);
+
+  if (!parsedSlug.success) {
+    return;
+  }
+
+  const deleted = await deletePostRecord(parsedSlug.data);
 
   if (deleted) {
-    revalidatePostPages(slug);
+    revalidatePostPages(parsedSlug.data);
   }
 }
