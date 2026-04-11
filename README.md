@@ -1,39 +1,33 @@
 # Jevon Thompson Personal Site
 
-Modern portfolio and blog rebuilt with Next.js App Router, TypeScript, Tailwind CSS, Drizzle ORM, LibSQL, and GitHub-based admin authentication.
+Personal portfolio and technical blog built with Next.js App Router, TypeScript, Tailwind CSS, Drizzle ORM, LibSQL/Turso, and GitHub OAuth admin authentication. Deployed on Vercel.
 
-## What this repo is
+**Live site:** [web-dev-blogsite.vercel.app](https://web-dev-blogsite.vercel.app)
 
-This is a full rewrite of the old Express + EJS portfolio/blog into a production-oriented Next.js application.
+## What this is
 
-It includes:
+A production Next.js application combining a public portfolio with a database-backed blog and a protected admin area.
 
-- public marketing pages for home, projects, blog, and about
-- a database-backed blog with published and draft states
-- a protected admin area for post management
-- GitHub OAuth admin auth
-- SEO support with metadata, sitemap, robots, and RSS
-- markdown blog rendering with syntax-highlighted code blocks
+- Public pages: home, projects, blog, and about
+- Database-backed blog with published and draft states
+- Protected admin area for full post CRUD
+- GitHub OAuth — single-admin model via `ADMIN_GITHUB_ID`
+- SEO: metadata, sitemap, robots.txt, and RSS feed
+- Markdown rendering with Shiki syntax highlighting and table of contents
 
 ## Tech stack
 
-- Next.js `16.1.6`
-- React `19.2.4`
-- TypeScript `5.9.3`
-- Tailwind CSS `4.2.1`
-- Drizzle ORM `0.45.1`
-- LibSQL client `0.17.0`
-- NextAuth `4.24.13`
-- Zod `4.3.6`
-- Bun `1.3.10`
-
-## Project goals
-
-- replace the old in-memory blog with real persistence
-- make the site deployable to Vercel
-- keep the portfolio story and project showcase intact
-- support admin-only blog CRUD
-- make the repo understandable and maintainable after upload
+| Layer | Technology |
+|---|---|
+| Framework | Next.js `16.1.6` (App Router) |
+| Language | TypeScript `5.9.3` |
+| Styles | Tailwind CSS `4.2.1` |
+| ORM | Drizzle ORM `0.45.1` |
+| Database | LibSQL / Turso |
+| Auth | NextAuth `4.24.13` + GitHub OAuth |
+| Validation | Zod `4.3.6` |
+| Runtime | Bun `1.3.10` |
+| Hosting | Vercel |
 
 ## Quick start
 
@@ -45,278 +39,201 @@ bun install
 
 ### 2. Create your local env file
 
-Mac/Linux:
-
 ```bash
+# Mac/Linux
 cp .env.example .env.local
-```
 
-PowerShell:
-
-```powershell
+# PowerShell
 Copy-Item .env.example .env.local
 ```
 
-### 3. Fill in the required environment variables
+### 3. Fill in environment variables
 
-Required values:
+```env
+AUTH_SECRET="your-random-secret"
+AUTH_GITHUB_ID="your-github-oauth-client-id"
+AUTH_GITHUB_SECRET="your-github-oauth-client-secret"
+ADMIN_GITHUB_ID="your-numeric-github-user-id"
+DATABASE_URL="file:./local.db"
+NEXTAUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
 
-- `AUTH_SECRET`
-- `AUTH_GITHUB_ID`
-- `AUTH_GITHUB_SECRET`
-- `ADMIN_GITHUB_ID`
-- `DATABASE_URL` or `TURSO_DATABASE_URL`
-- `DATABASE_AUTH_TOKEN` or `TURSO_AUTH_TOKEN` for hosted LibSQL/Turso only
-- `NEXTAUTH_URL`
-- `NEXT_PUBLIC_APP_URL`
+For local development, `DATABASE_URL="file:./local.db"` works out of the box. `DATABASE_AUTH_TOKEN` is only needed for hosted Turso.
 
-For local development, `DATABASE_URL="file:./local.db"` works out of the box.
-
-### 4. Run database setup
+### 4. Set up the database
 
 ```bash
 bun run db:migrate
-bun run db:seed
+bun run db:seed  # optional: adds sample posts
 ```
 
-### 5. Start the app
+### 5. Start the dev server
 
 ```bash
 bun run dev
 ```
 
-Open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-- `bun run dev` - runs migrations, then starts Next dev server
-- `bun run build` - runs migrations, then creates production build
-- `bun run start` - starts built app
-- `bun run lint` - runs ESLint
-- `bun run type-check` - runs `tsc --noEmit`
-- `bun run test` - runs Vitest
-- `bun run db:generate` - generates Drizzle migrations
-- `bun run db:migrate` - applies SQL migrations
-- `bun run db:seed` - inserts sample content
+| Command | Description |
+|---|---|
+| `bun run dev` | Run migrations, then start Next dev server |
+| `bun run build` | Run migrations, then create production build |
+| `bun run start` | Start the built app |
+| `bun run lint` | Run ESLint |
+| `bun run type-check` | Run `tsc --noEmit` |
+| `bun run test` | Run Vitest |
+| `bun run db:generate` | Generate Drizzle migration files |
+| `bun run db:migrate` | Apply pending SQL migrations |
+| `bun run db:seed` | Insert sample blog posts |
 
-## How the app is organized
+## Project structure
 
-### App routes
+```
+src/
+  app/          # Routes and pages (Next.js App Router)
+  components/   # UI components (layout, blog, projects, admin)
+  lib/          # Shared utilities (env, auth, db, markdown, site config)
+  server/
+    queries/    # Server-only data access layer
+    actions/    # Server actions for admin mutations
+  schemas/      # Zod validation schemas
+  types/        # Shared TypeScript types
 
-- `src/app/page.tsx` - homepage
-- `src/app/blog/page.tsx` - blog index
-- `src/app/blog/[slug]/page.tsx` - blog post page
-- `src/app/projects/page.tsx` - projects index
-- `src/app/projects/[slug]/page.tsx` - project detail
-- `src/app/about/page.tsx` - about page
-- `src/app/admin/page.tsx` - admin dashboard
-- `src/app/admin/blog/new/page.tsx` - create post
-- `src/app/admin/blog/[slug]/edit/page.tsx` - edit post
-- `src/app/api/auth/[...nextauth]/route.ts` - NextAuth API route
-- `src/app/feed.xml/route.ts` - RSS feed
-- `src/app/sitemap.ts` - sitemap generation
-- `src/app/robots.ts` - robots rules
+drizzle/        # Schema, migrations, seed script
+content/        # Static project data (projects.ts)
+public/         # Static assets
+```
 
-### Key folders
+### Key routes
 
-- `src/components` - UI, layout, blog, project, and admin components
-- `src/lib` - env validation, auth config, DB client, markdown helpers, metadata helpers, utilities
-- `src/server/queries` - server-only data access layer
-- `src/server/actions` - server actions for blog mutations
-- `src/schemas` - Zod validation schemas
-- `drizzle` - schema, migration SQL, seed script
-- `content` - static project data
-- `public` - static assets actually used by the app
+| Route | Description |
+|---|---|
+| `/` | Homepage |
+| `/blog` | Blog index |
+| `/blog/[slug]` | Blog post |
+| `/projects` | Projects index |
+| `/projects/[slug]` | Project detail |
+| `/about` | About page |
+| `/admin` | Admin dashboard (protected) |
+| `/admin/blog/new` | Create post (protected) |
+| `/admin/blog/[slug]/edit` | Edit post (protected) |
+| `/feed.xml` | RSS feed |
+| `/sitemap.xml` | Sitemap |
 
-## Data flow
+## Authentication
 
-### Blog reads
+GitHub OAuth through NextAuth. Only one account has admin access, identified by numeric GitHub user ID.
 
-1. Pages call query functions in `src/server/queries/posts.ts`
-2. Queries read from the `posts` table through Drizzle
-3. Public pages only use published posts
-4. Admin pages can read both drafts and published posts
+Set `ADMIN_GITHUB_ID` to your GitHub numeric user ID. To find it:
 
-### Blog writes
+```
+https://api.github.com/users/<your-username>
+```
 
-1. Admin forms submit to server actions in `src/server/actions/blog.ts`
-2. Input is validated with Zod
-3. Admin identity is checked before any mutation
-4. Data is written through query helpers
-5. Pages are revalidated after changes
+Copy the `id` field from the response.
 
-## Authentication model
-
-This project uses GitHub OAuth through NextAuth.
-
-Only one GitHub account is treated as admin.
-
-The admin check works by comparing the authenticated GitHub user id with `ADMIN_GITHUB_ID`.
-
-Main auth files:
-
+Auth files:
 - `src/lib/auth.ts`
 - `src/app/api/auth/[...nextauth]/route.ts`
 - `src/app/admin/layout.tsx`
 
-## Database model
+## Database
 
-Current database table:
+Single `posts` table managed through Drizzle ORM and LibSQL.
 
-- `posts`
+| Field | Type |
+|---|---|
+| `id` | integer, primary key |
+| `title` | text |
+| `slug` | text, unique |
+| `content` | text (markdown) |
+| `excerpt` | text |
+| `category` | text |
+| `coverImage` | text, nullable |
+| `published` | boolean |
+| `createdAt` | text (ISO 8601) |
+| `updatedAt` | text (ISO 8601) |
 
-Fields include:
+Schema: `drizzle/schema.ts`
 
-- `title`
-- `slug`
-- `content`
-- `excerpt`
-- `category`
-- `coverImage`
-- `published`
-- `createdAt`
-- `updatedAt`
+Migrations run automatically on `bun run dev` and `bun run build`. Applied migrations are tracked in `__migrations` so re-runs are safe.
 
-Main schema file:
+## Portfolio content
 
-- `drizzle/schema.ts`
+Projects are statically defined in `content/projects.ts`. This is intentional — the project list is manually curated, and some entries intentionally omit internal URLs and configuration details for security reasons.
 
-## Markdown rendering
-
-Posts are stored as raw markdown in the database.
-
-Rendering behavior lives mainly in:
-
-- `src/components/blog/post-content.tsx`
-- `src/lib/markdown.ts`
-
-Features currently implemented:
-
-- GitHub-flavored markdown
-- syntax-highlighted code blocks using Shiki
-- copy button for code blocks
-- heading-based table of contents
-- image rendering through `next/image`
-
-## Environment variables explained
+## Environment variables
 
 ### Auth
 
-- `AUTH_SECRET` - session signing secret
-- `AUTH_GITHUB_ID` - GitHub OAuth app client id
-- `AUTH_GITHUB_SECRET` - GitHub OAuth app client secret
-- `ADMIN_GITHUB_ID` - your numeric GitHub account id
+| Variable | Description |
+|---|---|
+| `AUTH_SECRET` | Session signing secret (random string) |
+| `AUTH_GITHUB_ID` | GitHub OAuth app client ID |
+| `AUTH_GITHUB_SECRET` | GitHub OAuth app client secret |
+| `ADMIN_GITHUB_ID` | Numeric GitHub user ID for the admin account |
 
 ### Database
 
-- `DATABASE_URL` - local file path or hosted LibSQL URL
-- `DATABASE_AUTH_TOKEN` - required for hosted LibSQL/Turso if your database uses token auth
-- `TURSO_DATABASE_URL` - Vercel Turso integration variable name, supported directly by this app
-- `TURSO_AUTH_TOKEN` - Vercel Turso integration token variable name, supported directly by this app
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | SQLite file path or hosted LibSQL URL |
+| `DATABASE_AUTH_TOKEN` | Required for hosted Turso with token auth |
+| `TURSO_DATABASE_URL` | Vercel Turso integration variable (supported natively) |
+| `TURSO_AUTH_TOKEN` | Vercel Turso integration token (supported natively) |
 
 ### App
 
-- `NEXTAUTH_URL` - auth callback/base URL for NextAuth, especially important in production
-- `NEXT_PUBLIC_APP_URL` - canonical app URL for metadata and feeds
+| Variable | Description |
+|---|---|
+| `NEXTAUTH_URL` | Auth callback base URL (important in production) |
+| `NEXT_PUBLIC_APP_URL` | Canonical public URL for metadata and feeds |
 
-## Local development notes
+## Vercel deployment
 
-- `bun run dev` and `bun run build` both run migrations first
-- sample posts are only added when you run `bun run db:seed`
-- a local `local.db` file is created automatically when using SQLite-style local dev
-- `.env.local`, `local.db`, and other generated files are gitignored
+### Required setup
 
-## Vercel deployment notes
+1. Create a GitHub OAuth app with callback URL:
+   ```
+   https://your-domain.com/api/auth/callback/github
+   ```
 
-Recommended production setup:
+2. Connect Turso to your Vercel project (or set `DATABASE_URL` manually).
 
-- deploy app on Vercel
-- use hosted LibSQL/Turso for persistence
-- configure GitHub OAuth callback URL:
-  `https://your-domain.com/api/auth/callback/github`
-- set all environment variables in the Vercel dashboard
-- set both `NEXTAUTH_URL` and `NEXT_PUBLIC_APP_URL` to your real production domain
-- make sure Vercel Preview and Production environments both have the required variables if you want preview deploys to build successfully
-
-If you connected Turso through Vercel's integration, this project already supports:
-
-- `TURSO_DATABASE_URL`
-- `TURSO_AUTH_TOKEN`
-
-You do not need to duplicate them into `DATABASE_URL` and `DATABASE_AUTH_TOKEN` unless you want a provider-agnostic setup.
-
-If the integration created different names than expected, open the Vercel project settings and confirm the exact variable names under Environment Variables. The runtime 500 you saw means the app did not receive a database URL at request time.
-
-### Exact Vercel deploy steps
-
-1. Push this repo to GitHub.
-2. In Vercel, import the GitHub repo.
-3. Keep the project root as the repository root.
-4. Let Vercel use the included `vercel.json` settings.
-5. Confirm Turso is connected so `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` exist in Vercel.
-6. Add the remaining Vercel env vars manually:
+3. Add environment variables in Vercel:
    - `AUTH_SECRET`
    - `AUTH_GITHUB_ID`
    - `AUTH_GITHUB_SECRET`
-   - `ADMIN_GITHUB_ID=104575457`
+   - `ADMIN_GITHUB_ID`
    - `NEXTAUTH_URL=https://your-domain.com`
    - `NEXT_PUBLIC_APP_URL=https://your-domain.com`
-7. In GitHub OAuth app settings, add callback URL:
-   `https://your-domain.com/api/auth/callback/github`
-8. Deploy.
-9. After deploy, sign in and verify `/admin` works.
-10. If production DB is empty, run `bun run db:seed` against the hosted Turso database from your machine.
 
-Vercel build behavior:
+4. Deploy. Vercel uses `vercel.json` which sets the install command to `bun install` and build command to `bun run build`.
 
-- Vercel uses `vercel.json` and Bun for install/build
-- `bun run build` applies pending SQL migrations before running `next build`
-- migrations are tracked in the database through the `__migrations` table, so already-applied SQL files are skipped
+### If using the Vercel Turso integration
 
-Production checklist:
+The app reads `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` directly. You do not need to duplicate them as `DATABASE_URL`/`DATABASE_AUTH_TOKEN`.
 
-- `bun install`
-- `bun run type-check`
-- `bun run lint`
-- `bun run test`
-- `bun run build`
-- verify sign-in works
-- verify admin CRUD works
-- verify sitemap and RSS route output
+### Production database seeding
 
-## GitHub upload checklist
+If your production database is empty after first deploy:
 
-Before pushing this repo:
+```bash
+DATABASE_URL="libsql://your-db.turso.io" DATABASE_AUTH_TOKEN="your-token" bun run db:seed
+```
 
-- make sure `.env.local` is not committed
-- make sure `local.db` is not committed
-- make sure `.vercel/` is not committed
-- keep `bun.lock` committed
-- verify the old legacy files are intentionally removed in your commit
-- add your repo URL to the README if you want public visitors to find source quickly
+## Local development notes
 
-No secrets or auth tokens should ever be committed. This repo only contains examples and documentation.
-
-### Your current production values
-
-For your deployed domain, use:
-
-- `NEXTAUTH_URL=https://web-dev-blogsite.vercel.app`
-- `NEXT_PUBLIC_APP_URL=https://web-dev-blogsite.vercel.app`
-- `ADMIN_GITHUB_ID=104575457`
-
-`AUTH_SECRET` should be a separate random secret string, not your GitHub client secret.
+- `local.db` is created automatically and is gitignored
+- `.env.local` is gitignored — never commit real secrets
+- Development mode provides fallback env values so the app starts without all variables set
+- Production requires all variables to be present; missing values throw a validation error at startup
 
 ## Extra docs
 
-- `docs/ARCHITECTURE.md` - deeper codebase walkthrough
-- `docs/DEPLOYMENT.md` - deployment and auth/database setup details
-
-## Current status
-
-Verified locally with:
-
-- `bun run type-check`
-- `bun run test`
-- `bun run lint`
-- `bun run build`
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — detailed codebase walkthrough
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — full deployment and auth/database setup reference
