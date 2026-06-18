@@ -152,23 +152,21 @@
 - **Problem:** `next.config.ts` sets basic security headers but no Content-Security-Policy. The CSP in `proxy.ts` is dead code.
 - **Fix:** Either activate the middleware CSP or add CSP to `next.config.ts` headers. (Completed in item #1 - middleware now active)
 
-### 20. bodySizeLimit at 2mb May Be Excessive
-- **File:** `next.config.ts:57`
-- **Problem:** `serverActions.bodySizeLimit: "2mb"` is generous for a blog. A malicious admin could upload very large payloads.
-- **Fix:** Consider reducing to 512kb or 1mb unless there's a specific need.
+### 20. bodySizeLimit at 2mb May Be Excessive ✅ COMPLETED
+- **File:** `next.config.ts:57` (reduced to 1mb)
 
 ---
 
 ## Documentation Issues
 
-### 21. README Doesn't Mention proxy.ts / Middleware
-- **Problem:** README and ARCHITECTURE.md don't document the middleware layer (because it's dead code). If it's activated, docs need updating.
+### 21. README Doesn't Mention proxy.ts / Middleware ✅ COMPLETED
+- **Problem:** README and ARCHITECTURE.md don't document the middleware layer (because it's dead code). If it's activated, docs need updating. (Updated)
 
-### 22. ARCHITECTURE.md Missing Rate Limiting Documentation
-- **Problem:** The architecture doc doesn't mention rate limiting, CSP, or the proxy layer.
+### 22. ARCHITECTURE.md Missing Rate Limiting Documentation ✅ COMPLETED
+- **Problem:** The architecture doc doesn't mention rate limiting, CSP, or the proxy layer. (Updated)
 
-### 23. handoff.md References Completed Work
-- **Problem:** `handoff.md` describes "recent backend hardening" and "recent frontend changes" as if they just happened. This is stale context from a previous session.
+### 23. handoff.md References Completed Work ✅ COMPLETED
+- **Problem:** `handoff.md` describes "recent backend hardening" and "recent frontend changes" as if they just happened. This is stale context from a previous session. (File deleted in item #13)
 
 ---
 
