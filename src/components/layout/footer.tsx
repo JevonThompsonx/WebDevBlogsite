@@ -18,11 +18,13 @@ export function Footer() {
             <p className="section-eyebrow">Stay in touch</p>
             <div className="space-y-3">
               <p className="font-[family-name:var(--font-display)] text-[clamp(2rem,3vw,3rem)] leading-[0.96] text-[var(--color-foreground)]">
-                Building sturdy systems, then writing down what mattered.
+                Building things, then writing down what worked.
               </p>
               <p className="max-w-xl text-base leading-8 text-[var(--color-foreground-soft)]">
-                If you want help with infrastructure, delivery, or cleaning up a
-                messy technical story, send a note and I will gladly dig in.
+                I write about infrastructure, web delivery, and the details that
+                make systems worth maintaining. If you are working on a personal
+                project, open source tool, or something that needs a careful
+                second look, I would enjoy hearing about it.
               </p>
             </div>
             <a className="section-link" href={`mailto:${siteConfig.email}`}>
