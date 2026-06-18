@@ -33,22 +33,22 @@
 
 ## Faulty Code
 
-### 4. Unnecessary Promise.all Destructuring
-- **File:** `src/app/blog/[slug]/page.tsx:55`
+### 4. Unnecessary Promise.all Destructuring ✅ COMPLETED
+- **File:** `src/app/blog/[slug]/page.tsx:55` (fixed)
 - **Code:** `const [adjacentPosts] = await Promise.all([getAdjacentPublishedPosts(slug)]);`
 - **Problem:** Wraps a single async call in `Promise.all` and destructures the first element. `Promise.all` with one argument is pointless overhead.
 - **Fix:** `const adjacentPosts = await getAdjacentPublishedPosts(slug);`
 - **Priority:** MEDIUM
 
-### 5. site.ts Bypasses Validated Environment
-- **File:** `src/lib/site.ts:6`
+### 5. site.ts Bypasses Validated Environment ✅ COMPLETED
+- **File:** `src/lib/site.ts:6` (fixed)
 - **Code:** `url: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"`
 - **Problem:** Uses raw `process.env` instead of the validated `publicEnv` from `env.ts`. This bypasses Zod validation and could produce stale or incorrect values if the env var changes after module initialization.
 - **Fix:** Import `publicEnv` and use `publicEnv.NEXT_PUBLIC_APP_URL`.
 - **Priority:** MEDIUM
 
-### 6. Admin Delete Action Silently Swallows Auth Errors
-- **File:** `src/server/actions/blog.ts:188-193`
+### 6. Admin Delete Action Silently Swallows Auth Errors ✅ COMPLETED
+- **File:** `src/server/actions/blog.ts:188-193` (fixed)
 - **Code:** `catch { return; }` after `requireAdmin()`
 - **Problem:** When an unauthorized user tries to delete, the action silently returns void. No feedback, no error state. The caller has no way to know the operation failed.
 - **Fix:** Return an error state or throw, similar to create/update actions.
@@ -58,39 +58,39 @@
 
 ## Performance Issues
 
-### 7. Blog Posts Force-Dynamic on Every Request
-- **File:** `src/app/blog/[slug]/page.tsx:45`
+### 7. Blog Posts Force-Dynamic on Every Request ✅ COMPLETED
+- **File:** `src/app/blog/[slug]/page.tsx:45` (fixed - ISR enabled)
 - **Code:** `export const dynamic = "force-dynamic";`
 - **Problem:** Every blog post visit triggers a fresh database query. Blog posts change infrequently. This prevents ISR (Incremental Static Regeneration) which would serve cached pages and revalidate in the background.
 - **Fix:** Remove `force-dynamic`, add `revalidate = 3600` (or appropriate interval) for ISR. Use `revalidateTag` in admin actions to bust cache on edits.
 - **Priority:** HIGH
 
-### 8. Adjacent Posts Query Makes 3 Sequential DB Calls
-- **File:** `src/server/queries/posts.ts:97-135`
+### 8. Adjacent Posts Query Makes 3 Sequential DB Calls ✅ COMPLETED
+- **File:** `src/server/queries/posts.ts:97-135` (fixed)
 - **Problem:** `getAdjacentPublishedPosts` calls `getPublishedPostBySlug` (1 query), then queries for previous post (2), then next post (3). Three sequential round-trips.
 - **Fix:** Combine into a single query using subqueries or CTEs, or at minimum run the previous/next queries in parallel with `Promise.all`.
 - **Priority:** MEDIUM
 
-### 9. slugExists Fetches Full Post Record
-- **File:** `src/server/queries/posts.ts:137-152`
+### 9. slugExists Fetches Full Post Record ✅ COMPLETED
+- **File:** `src/server/queries/posts.ts:137-152` (fixed)
 - **Problem:** `slugExists` calls `getPostBySlug` which selects all columns (`postColumns`) just to check if a slug exists. Wasteful I/O.
 - **Fix:** Use a lightweight `SELECT 1 FROM posts WHERE slug = ? LIMIT 1` query.
 - **Priority:** LOW
 
-### 10. Shiki Highlighter Initializes Per-Request
-- **File:** `src/lib/markdown.ts:104-108`
+### 10. Shiki Highlighter Initializes Per-Request ✅ COMPLETED
+- **File:** `src/lib/markdown.ts:104-108` (fixed)
 - **Problem:** `getCodeHighlighter` uses React `cache()` which is per-request. Each request creates a new Shiki highlighter instance, loading all 18 languages into memory.
 - **Fix:** Use a module-level singleton (global variable) so the highlighter is created once and shared across requests.
 - **Priority:** MEDIUM
 
-### 11. RSS Feed Has No Cache Headers
-- **File:** `src/app/feed.xml/route.ts`
+### 11. RSS Feed Has No Cache Headers ✅ COMPLETED
+- **File:** `src/app/feed.xml/route.ts` (fixed)
 - **Problem:** Returns XML with only `Content-Type` header. No `Cache-Control`. Every request hits the database.
 - **Fix:** Add `Cache-Control: public, max-age=3600, stale-while-revalidate=86400`.
 - **Priority:** MEDIUM
 
-### 12. Sitemap Has No Caching
-- **File:** `src/app/sitemap.ts`
+### 12. Sitemap Has No Caching ✅ COMPLETED
+- **File:** `src/app/sitemap.ts` (fixed)
 - **Problem:** Queries database on every request. Sitemap data rarely changes.
 - **Fix:** Add `revalidate = 3600` or use `unstable_cache` / `revalidateTag`.
 - **Priority:** LOW
@@ -99,8 +99,8 @@
 
 ## Dead Code & Clutter
 
-### 13. handoff.md at Project Root
-- **File:** `handoff.md`
+### 13. handoff.md at Project Root ✅ COMPLETED
+- **File:** `handoff.md` (deleted)
 - **Problem:** AI session handoff notes from a previous session. Not useful to contributors. The DELETION_LOG says it was deleted but it's still here.
 - **Fix:** Delete it.
 - **Priority:** MEDIUM
@@ -121,7 +121,7 @@
 
 ## Test Coverage Gaps
 
-### 16. Minimal Test Coverage
+### 16. Minimal Test Coverage ✅ COMPLETED
 - **Current:** Only 2 test files: `src/lib/utils.test.ts` (4 tests) and `src/lib/security.test.ts` (4 tests). Total: 8 tests.
 - **Missing:**
   - Server action tests (create/update/delete post)
@@ -143,9 +143,9 @@
 
 ## Security Concerns
 
-### 18. No Rate Limiting (Related to #1)
+### 18. No Rate Limiting (Related to #1) ✅ COMPLETED
 - **Impact:** Server actions and API routes are unprotected. An attacker could spam create/update/delete actions.
-- **Fix:** Fix middleware first (#1), then verify rate limits work.
+- **Fix:** Fix middleware first (#1), then verify rate limits work. (Completed in item #1)
 
 ### 19. CSP Headers Incomplete
 - **File:** `next.config.ts:26-51`
