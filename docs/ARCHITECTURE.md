@@ -177,9 +177,24 @@ This codebase uses a small build-time fallback for environment variables in deve
 
 For real deployments, you still need to set the actual values.
 
+## Known issues (from assessment 2026-06-18)
+
+- ~~`src/proxy.ts` exports `proxy()` but Next.js requires `middleware()` in `middleware.ts`.~~ **Fixed:** Middleware is now active with rate limiting and CSP headers. See `docs/ASSESSMENT.md` item #1.
+- ~~Blog post pages use `force-dynamic` preventing ISR caching.~~ **Fixed:** ISR enabled with 1-hour revalidation. See assessment item #7.
+- ~~Test coverage is minimal (8 tests across 2 files).~~ **Improved:** Now 24 tests across 3 files. See assessment item #16.
+- ~~Stray agent personality files at project root and in docs/ should be deleted.~~ **Fixed:** All stray files removed. See assessment items #3, #14, #15.
+
+## Security features
+
+- **Rate limiting:** Middleware applies per-IP rate limits to server actions (40/min), auth endpoints (30/min), and general API routes (120/min)
+- **CSP headers:** Content-Security-Policy with nonce-based script loading, strict-dynamic, and upgrade-insecure-requests in production
+- **Input validation:** Zod schemas validate all user inputs at API boundaries
+- **Body size limits:** Server actions limited to 1mb payloads
+
 ## Suggested future improvements
 
 - add post pagination and category filtering
 - add richer markdown sanitization pipeline if you want fully user-generated content support
 - add integration tests for auth and admin mutations
+- add E2E tests for critical user flows
 - move static projects into a CMS or database if they become more dynamic
