@@ -104,29 +104,30 @@ export async function getAdjacentPublishedPosts(slug: string): Promise<{
     return { previous: null, next: null };
   }
 
-  const previousResults = await db
-    .select(postColumns)
-    .from(posts)
-    .where(
-      and(
-        eq(posts.published, true),
-        gt(posts.createdAt, currentPost.createdAt),
-      ),
-    )
-    .orderBy(posts.createdAt)
-    .limit(1);
-
-  const nextResults = await db
-    .select(postColumns)
-    .from(posts)
-    .where(
-      and(
-        eq(posts.published, true),
-        lt(posts.createdAt, currentPost.createdAt),
-      ),
-    )
-    .orderBy(desc(posts.createdAt))
-    .limit(1);
+  const [previousResults, nextResults] = await Promise.all([
+    db
+      .select(postColumns)
+      .from(posts)
+      .where(
+        and(
+          eq(posts.published, true),
+          gt(posts.createdAt, currentPost.createdAt),
+        ),
+      )
+      .orderBy(posts.createdAt)
+      .limit(1),
+    db
+      .select(postColumns)
+      .from(posts)
+      .where(
+        and(
+          eq(posts.published, true),
+          lt(posts.createdAt, currentPost.createdAt),
+        ),
+      )
+      .orderBy(desc(posts.createdAt))
+      .limit(1),
+  ]);
 
   return {
     previous: previousResults[0] ?? null,
