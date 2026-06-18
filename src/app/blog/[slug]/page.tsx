@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const [adjacentPosts] = await Promise.all([getAdjacentPublishedPosts(slug)]);
+  const adjacentPosts = await getAdjacentPublishedPosts(slug);
   const tableOfContents = extractTableOfContents(post.content);
 
   return (
