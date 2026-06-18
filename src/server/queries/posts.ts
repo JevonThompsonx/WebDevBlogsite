@@ -139,7 +139,13 @@ export async function slugExists(
   slug: string,
   currentSlug?: string,
 ): Promise<boolean> {
-  const record = await getPostBySlug(slug);
+  const results = await db
+    .select({ slug: posts.slug })
+    .from(posts)
+    .where(eq(posts.slug, slug))
+    .limit(1);
+
+  const record = results[0];
 
   if (!record) {
     return false;
