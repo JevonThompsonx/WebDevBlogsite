@@ -147,10 +147,10 @@
 - **Impact:** Server actions and API routes are unprotected. An attacker could spam create/update/delete actions.
 - **Fix:** Fix middleware first (#1), then verify rate limits work. (Completed in item #1)
 
-### 19. CSP Headers Incomplete
+### 19. CSP Headers Incomplete ✅ COMPLETED
 - **File:** `next.config.ts:26-51`
 - **Problem:** `next.config.ts` sets basic security headers but no Content-Security-Policy. The CSP in `proxy.ts` is dead code.
-- **Fix:** Either activate the middleware CSP or add CSP to `next.config.ts` headers.
+- **Fix:** Either activate the middleware CSP or add CSP to `next.config.ts` headers. (Completed in item #1 - middleware now active)
 
 ### 20. bodySizeLimit at 2mb May Be Excessive
 - **File:** `next.config.ts:57`
