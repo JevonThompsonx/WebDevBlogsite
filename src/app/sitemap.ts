@@ -3,6 +3,8 @@ import { publicEnv } from "@/lib/env";
 import { getPublishedPosts } from "@/server/queries/posts";
 import { getProjects } from "@/server/queries/projects";
 
+export const revalidate = 3600; // ISR: revalidate every 1 hour
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [posts, projects] = await Promise.all([
     getPublishedPosts(),
