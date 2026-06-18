@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { createHighlighter } from "shiki";
 import { slugify } from "@/lib/utils";
 import type { TableOfContentsItem } from "@/types";
@@ -101,9 +100,18 @@ export function resolveCodeLanguage(className?: string): string {
   return "plaintext";
 }
 
-export const getCodeHighlighter = cache(async () =>
-  createHighlighter({
-    themes: ["vitesse-dark"],
-    langs: [...supportedLanguages],
-  }),
-);
+let highlighterInstance: Awaited<ReturnType<typeof createHighlighter>> | null =
+  null;
+
+export async function getCodeHighlighter(): Promise<
+  Awaited<ReturnType<typeof createHighlighter>>
+> {
+  if (!highlighterInstance) {
+    highlighterInstance = await createHighlighter({
+      themes: ["vitesse-dark"],
+      langs: [...supportedLanguages],
+    });
+  }
+
+  return highlighterInstance;
+}
