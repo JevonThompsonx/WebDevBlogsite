@@ -234,6 +234,29 @@ DATABASE_URL="libsql://your-db.turso.io" DATABASE_AUTH_TOKEN="your-token" bun ru
 - Development mode provides fallback env values so the app starts without all variables set
 - Production requires all variables to be present; missing values throw a validation error at startup
 
+## Git remotes
+
+This repo is mirrored to two remotes. **Always push to both** after committing:
+
+```bash
+git push origin main    # GitHub
+git push forgejo main   # Forgejo
+```
+
+Remotes:
+
+| Remote | URL |
+|--------|-----|
+| `origin` | `https://github.com/JevonThompsonx/WebDevBlogsite.git` |
+| `forgejo` | `https://forge.jsquaredadventures.com/jevonx/WebDevBlogsite.git` |
+
+If you only push to one, the remotes will drift. Verify sync with:
+
+```bash
+git log origin/main --oneline -1
+git log forgejo/main --oneline -1
+```
+
 ## Extra docs
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — detailed codebase walkthrough
