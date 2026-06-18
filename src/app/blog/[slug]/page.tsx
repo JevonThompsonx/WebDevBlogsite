@@ -42,7 +42,7 @@ export async function generateMetadata({
   });
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // ISR: revalidate every 1 hour
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
