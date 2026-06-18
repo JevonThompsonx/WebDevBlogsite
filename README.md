@@ -14,6 +14,7 @@ A production Next.js application combining a public portfolio with a database-ba
 - GitHub OAuth — single-admin model via `ADMIN_GITHUB_ID`
 - SEO: metadata, sitemap, robots.txt, and RSS feed
 - Markdown rendering with Shiki syntax highlighting and table of contents
+- Security: rate limiting, CSP headers, and input validation via middleware
 
 ## Tech stack
 
