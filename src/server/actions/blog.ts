@@ -189,14 +189,14 @@ export async function deletePostAction(formData: FormData): Promise<void> {
   try {
     await requireAdmin();
   } catch {
-    return;
+    throw new Error(unauthorizedMessage);
   }
 
   const slug = readString(formData, "slug");
   const parsedSlug = deletePostSlugSchema.safeParse(slug);
 
   if (!parsedSlug.success) {
-    return;
+    throw new Error("Invalid post slug.");
   }
 
   const deleted = await deletePostRecord(parsedSlug.data);
