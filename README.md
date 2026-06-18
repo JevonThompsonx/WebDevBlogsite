@@ -238,3 +238,4 @@ DATABASE_URL="libsql://your-db.turso.io" DATABASE_AUTH_TOKEN="your-token" bun ru
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — detailed codebase walkthrough
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — full deployment and auth/database setup reference
+- [`docs/ASSESSMENT.md`](docs/ASSESSMENT.md) — project assessment checklist with prioritized improvements

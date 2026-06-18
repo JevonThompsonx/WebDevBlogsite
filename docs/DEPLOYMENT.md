@@ -10,7 +10,6 @@ Before your first push:
 - confirm `local.db` is not tracked
 - confirm `.vercel/` is not tracked
 - confirm `bun.lock` is tracked
-- review the deleted legacy Express files so your commit reflects the rewrite clearly
 
 Useful local checks:
 
@@ -107,24 +106,19 @@ Expected settings:
 
 If Vercel asks whether to use Bun, the answer is yes.
 
-## 7. Exact deploy values for your current setup
+## 7. Environment variables reference
 
-Because you already connected Turso in Vercel, the database side should come from:
-
-- `TURSO_DATABASE_URL`
-- `TURSO_AUTH_TOKEN`
-
-If the integration did not expose those exact names, check Vercel's Environment Variables screen and use whichever database URL/token variables actually exist there. Your runtime error indicates the server could not see a database URL variable during request execution.
-
-Set these additional Vercel variables manually:
+Set these Vercel environment variables:
 
 ```env
-ADMIN_GITHUB_ID="104575457"
-NEXTAUTH_URL="https://web-dev-blogsite.vercel.app"
-NEXT_PUBLIC_APP_URL="https://web-dev-blogsite.vercel.app"
 AUTH_SECRET="your-generated-secret"
 AUTH_GITHUB_ID="your-github-oauth-client-id"
 AUTH_GITHUB_SECRET="your-github-oauth-client-secret"
+ADMIN_GITHUB_ID="your-numeric-github-user-id"
+DATABASE_URL="libsql://your-db-name.turso.io"  # or TURSO_DATABASE_URL
+DATABASE_AUTH_TOKEN="your-token"                # or TURSO_AUTH_TOKEN
+NEXTAUTH_URL="https://your-domain.com"
+NEXT_PUBLIC_APP_URL="https://your-domain.com"
 ```
 
 Do not commit any of those values to GitHub.
@@ -132,7 +126,7 @@ Do not commit any of those values to GitHub.
 Your GitHub OAuth callback URL should be:
 
 ```text
-https://web-dev-blogsite.vercel.app/api/auth/callback/github
+https://your-domain.com/api/auth/callback/github
 ```
 
 ## 8. Deploy flow

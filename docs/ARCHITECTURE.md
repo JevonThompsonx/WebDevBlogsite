@@ -109,9 +109,12 @@ Using LibSQL/Turso means:
 
 ### Migration strategy
 
-The repo includes a simple SQL migration in `drizzle/migrations/0000_initial.sql`.
+The repo includes SQL migrations in `drizzle/migrations/`:
 
-`bun run db:migrate` runs `drizzle/migrate.ts`, which applies that SQL directly.
+- `0000_initial.sql` — creates the `posts` table
+- `0001_post_query_indexes.sql` — adds indexes for published-by-date and admin sorting
+
+`bun run db:migrate` runs `drizzle/migrate.ts`, which applies pending SQL files directly. Applied migrations are tracked in a `__migrations` table so re-runs are safe.
 
 ## Auth notes
 
