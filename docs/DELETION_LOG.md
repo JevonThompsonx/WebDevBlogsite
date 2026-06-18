@@ -64,3 +64,20 @@ New README is:
 - `bun run lint` — pass
 - `bun run test` — pass
 - `bun run build` — pass
+
+---
+
+## 2026-06-18 — Assessment-driven cleanup
+
+### Stray agent files deleted
+
+These files were AI agent persona definitions that remained in the repo despite being listed as deleted in the 2026-04-11 cleanup. Confirmed deleted today.
+
+| File | Reason |
+|---|---|
+| `engineering-backend-architect.md` | AI agent persona definition, was at project root |
+| `docs/engineering-security-engineer.md` | AI agent persona definition, was in docs/ |
+
+### Note
+
+The 2026-04-11 log incorrectly listed `engineering-backend-architect.md` as deleted. It was not actually removed until today.
