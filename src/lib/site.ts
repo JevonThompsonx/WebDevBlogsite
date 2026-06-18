@@ -1,9 +1,11 @@
+import { publicEnv } from "./env";
+
 export const siteConfig = {
   name: "Jevon Thompson",
   title: "Systems Administrator with a Web Development Background",
   description:
     "Portfolio and technical blog for Jevon Thompson, a systems administrator focused on Linux, self-hosted infrastructure, automation, and modern web delivery.",
-  url: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
+  url: publicEnv.NEXT_PUBLIC_APP_URL,
   email: "webdevjev@gmail.com",
   github: "https://github.com/JevonThompsonx",
   linkedin: "https://www.linkedin.com/in/jevon-thompson-522ab4237/",
