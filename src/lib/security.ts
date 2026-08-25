@@ -11,7 +11,9 @@ function parseUrl(value: string): URL | null {
 }
 
 function isLocalhost(hostname: string): boolean {
-  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+  return (
+    hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]"
+  );
 }
 
 export function isRelativePath(value: string): boolean {

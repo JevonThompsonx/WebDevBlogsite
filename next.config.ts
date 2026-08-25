@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const isDevelopment = process.env.NODE_ENV === "development";
-type RemotePatterns = NonNullable<NonNullable<NextConfig["images"]>["remotePatterns"]>;
+type RemotePatterns = NonNullable<
+  NonNullable<NextConfig["images"]>["remotePatterns"]
+>;
 
 function parseAllowedImageHosts(value?: string): string[] {
   return (value ?? "")
@@ -10,11 +12,15 @@ function parseAllowedImageHosts(value?: string): string[] {
     .filter((item) => item.length > 0);
 }
 
-const allowedImageHosts = parseAllowedImageHosts(process.env.ALLOWED_IMAGE_HOSTS);
-const remoteImagePatterns: RemotePatterns = allowedImageHosts.map((hostname) => ({
-  protocol: "https",
-  hostname,
-}));
+const allowedImageHosts = parseAllowedImageHosts(
+  process.env.ALLOWED_IMAGE_HOSTS,
+);
+const remoteImagePatterns: RemotePatterns = allowedImageHosts.map(
+  (hostname) => ({
+    protocol: "https",
+    hostname,
+  }),
+);
 
 if (isDevelopment && remoteImagePatterns.length === 0) {
   remoteImagePatterns.push({

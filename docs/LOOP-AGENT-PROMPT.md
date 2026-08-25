@@ -9,6 +9,7 @@ This is a Next.js 16 App Router personal portfolio/blog site. An assessment has 
 ## Loop Protocol
 
 ### Branch Strategy
+
 - Create a branch per assessment item: `fix/<item-number>-<short-slug>`
 - Example: `fix/1-activate-middleware`, `fix/7-blog-isr`, `fix/16-add-tests`
 - Each branch gets ONE focused change
@@ -39,18 +40,21 @@ This is a Next.js 16 App Router personal portfolio/blog site. An assessment has 
 ### Sub-Agent Requirements
 
 **MANDATORY sub-agents per iteration:**
+
 - `@code-reviewer` — after every implementation, before commit
 - `@security-reviewer` — for items #1, #18, #19, #20 (security-related)
 - `@tdd-guide` — for items #16, #17 (test coverage)
 - `@build-error-resolver` — if any verification step fails
 
 **Optional sub-agents:**
+
 - `@refactor-cleaner` — after items #13, #14, #15 (dead code cleanup)
 - `@doc-updater` — after items #21, #22 (documentation updates)
 
 ### Verification Gate
 
 Before merging ANY branch, ALL of these must be true:
+
 - [ ] `bun run type-check` exits 0
 - [ ] `bun run lint` exits 0
 - [ ] `bun run test` exits 0
@@ -192,6 +196,7 @@ Work through these in order. Skip only if explicitly blocked.
 ## Completion Criteria
 
 The loop is DONE when ALL items in `docs/ASSESSMENT.md` are marked `[x]` and:
+
 - All verification gates pass
 - All sub-agent findings addressed
 - `handoff.md` reflects final state
@@ -199,22 +204,24 @@ The loop is DONE when ALL items in `docs/ASSESSMENT.md` are marked `[x]` and:
 
 ## Failure Handling
 
-| Situation | Response |
-|-----------|----------|
-| Build fails | Spawn `@build-error-resolver`, fix, re-verify |
-| Test fails | Spawn `@tdd-guide`, fix test or implementation |
-| Reviewer finds CRITICAL | Fix before commit. No exceptions. |
-| Item blocked | Document why in handoff.md, skip to next |
-| 3+ items blocked | STOP. Report to user. |
+| Situation               | Response                                       |
+| ----------------------- | ---------------------------------------------- |
+| Build fails             | Spawn `@build-error-resolver`, fix, re-verify  |
+| Test fails              | Spawn `@tdd-guide`, fix test or implementation |
+| Reviewer finds CRITICAL | Fix before commit. No exceptions.              |
+| Item blocked            | Document why in handoff.md, skip to next       |
+| 3+ items blocked        | STOP. Report to user.                          |
 
 ## Branch Cleanup
 
 After ALL items complete:
+
 ```bash
 git branch --merged main | grep -v main | xargs git branch -d
 ```
 
 Verify no unmerged branches remain:
+
 ```bash
 git branch --no-merged main
 ```

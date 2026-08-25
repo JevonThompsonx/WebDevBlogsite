@@ -21,7 +21,7 @@ export function CodeBlock({ language, html, raw }: CodeBlockProps) {
 
   return (
     <div className="group my-8 overflow-hidden rounded-[1.5rem] border border-[var(--color-border)] bg-[#10131c] shadow-[0_28px_60px_rgba(3,7,18,0.32)]">
-      <div className="flex items-center justify-between border-b border-white/8 px-4 py-3 text-xs uppercase tracking-[0.24em] text-white/70">
+      <div className="flex items-center justify-between border-b border-white/8 px-4 py-3 text-xs tracking-[0.24em] text-white/70 uppercase">
         <span>{language}</span>
         <Button
           className="h-9 rounded-full border border-white/10 bg-white/5 px-3 text-xs text-white hover:bg-white/10"

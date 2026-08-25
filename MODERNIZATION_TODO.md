@@ -11,6 +11,7 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 ---
 
 ## ✅ Things already done well (verified)
+
 - [x] Zod env validation (`src/lib/env.ts`) with strict prod requirements
 - [x] XSS hardening: `react-markdown` without `rehype-raw` (raw HTML not rendered), link/image hrefs sanitized (`isSafeLinkHref`, `resolveSafeImageSource`), external links get `rel="noopener noreferrer"`
 - [x] Server-action admin guard (`requireAdmin()` → `isAdminSession()`) + admin layout redirect — **both symbols exist and compose correctly** (see Wave Status correction). `requireAdmin()` (`src/server/actions/blog.ts:37`) wraps `isAdminSession()` (`src/lib/auth.ts:85`); no rename needed.
@@ -25,10 +26,10 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 
 ## 🔴 SECURITY — blocking / needs verification
 
-- [ ] **Verify CSP `'strict-dynamic'` + nonce does not break the app.** `src/middleware.ts:145` emits `script-src 'self' 'nonce-…' 'strict-dynamic'`. Next.js framework-injected inline scripts (RSC flight, hydration, error overlay) are **not** automatically nonce'd, so a strict CSP can block hydration and throw console errors in production. Confirm the live site hydrates cleanly under this policy; if not, either thread the nonce into Next's scripts or relax `script-src`. *(Medium-high, must verify before trusting "CSP active".)*
+- [ ] **Verify CSP `'strict-dynamic'` + nonce does not break the app.** `src/middleware.ts:145` emits `script-src 'self' 'nonce-…' 'strict-dynamic'`. Next.js framework-injected inline scripts (RSC flight, hydration, error overlay) are **not** automatically nonce'd, so a strict CSP can block hydration and throw console errors in production. Confirm the live site hydrates cleanly under this policy; if not, either thread the nonce into Next's scripts or relax `script-src`. _(Medium-high, must verify before trusting "CSP active".)_
 - [ ] **Replace `getClientIp` header trust.** `src/middleware.ts:26-44` trusts `x-forwarded-for` / `x-real-ip` first. On non-Vercel/proxied hosts this is fully spoofable → rate-limit bypass. Prefer Next's `request.ip` (set on Vercel/Edge) with the header as fallback only; collapse to a shared/`"unknown"` bucket is also a DoS vector against legitimate users.
 - [ ] **Rate limit store is per-instance in-memory.** `src/middleware.ts:21-24` uses a `globalThis` Map. On Vercel/serverless each invocation may hit a different instance → limits are weak and uneven; the Map also only prunes when >2000 entries (slow memory growth). Migrate to a shared store (Upstash Ratelimit / Vercel KV) for real protection.
-- [ ] **Audit the `@auth/core` / `next-auth` split.** `package.json` ships both `@auth/core@0.34.3` *and* `next-auth@4.24.13`. v4 bundles its own core; `@auth/core` is currently **unused** (no import found in `src/`). This is dead weight and a confusion/maintenance hazard. Decide one path:
+- [ ] **Audit the `@auth/core` / `next-auth` split.** `package.json` ships both `@auth/core@0.34.3` _and_ `next-auth@4.24.13`. v4 bundles its own core; `@auth/core` is currently **unused** (no import found in `src/`). This is dead weight and a confusion/maintenance hazard. Decide one path:
   - (a) Drop `@auth/core` and stay on NextAuth v4, **or**
   - (b) Migrate to Auth.js v5 (the `@auth/*` line) — which is the modern, React 19-friendly path.
   - See Efficiency #1 and QoL #2.
@@ -41,7 +42,7 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 
 ## 🟡 SECURITY — medium
 
-- [ ] **`dangerouslySetInnerHTML` for Shiki HTML** (`src/components/blog/code-block.tsx:44`) is acceptable *only* because Shiki escapes output — keep it that way; never pipe unsanitized content through it. Add a comment/test asserting Shiki output is the sole source.
+- [ ] **`dangerouslySetInnerHTML` for Shiki HTML** (`src/components/blog/code-block.tsx:44`) is acceptable _only_ because Shiki escapes output — keep it that way; never pipe unsanitized content through it. Add a comment/test asserting Shiki output is the sole source.
 - [ ] **`experimental.serverActions` is deprecated in Next 16.** `next.config.ts:55-59` nests `serverActions.bodySizeLimit` under `experimental`. In Next 15+ `serverActions` is stable and should be top-level (`serverActions: { bodySizeLimit: "1mb" }`); the current form may be ignored with a warning, silently raising the effective body limit. Move it.
 - [ ] **`vercel.json` lacks a `framework`/region/headers note** — fine as-is, but document that security headers come from `next.config.ts` (not vercel.json) so future edits don't get lost.
 
@@ -68,7 +69,7 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 
 ## 🧰 QoL / DX
 
-- [ ] 🟠 **Rename `src/middleware.ts` → `src/proxy.ts`** (Next 16 deprecation — build warns `"middleware" file convention is deprecated. Please use "proxy" instead`). Bundle with the §SEC-1.1–1.3 security fixes since they all live in this file. *(NEW — found in second audit; not previously in TODO.)*
+- [ ] 🟠 **Rename `src/middleware.ts` → `src/proxy.ts`** (Next 16 deprecation — build warns `"middleware" file convention is deprecated. Please use "proxy" instead`). Bundle with the §SEC-1.1–1.3 security fixes since they all live in this file. _(NEW — found in second audit; not previously in TODO.)_
 - [ ] 🟠 **Add a Prettier config.** `prettier` + `prettier-plugin-tailwindcss` are devDeps but there is **no `.prettierrc` / config file and no `format` script**. Add `.prettierrc` (with the tailwind plugin) and a `format`/`format:check` script so CI can enforce formatting.
 - [ ] 🟡 **Close the `@auth/core` vs `next-auth` decision** (Security) — pick v4-only or v5 migration and update `README.md`/docs accordingly.
 - [ ] 🟡 **Add admin `error.tsx` and `loading.tsx`** (`src/app/admin/`). Only root `error.tsx` exists; admin mutations have no dedicated boundary or loading UI.
@@ -80,12 +81,13 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 ---
 
 ## Priority snapshot
-| Area | 🔴 | 🟠 | 🟡 | 🟢 |
-|------|----|----|----|----|
-| Security | 3 (CSP verify, IP trust, RL store) | 3 | 3 | — |
-| Efficiency | — | 1 | 2 | 2 |
-| Speed | — | 1 | — | 3 |
-| QoL/DX | — | 1 | 3 | 4 |
+
+| Area       | 🔴                                 | 🟠  | 🟡  | 🟢  |
+| ---------- | ---------------------------------- | --- | --- | --- |
+| Security   | 3 (CSP verify, IP trust, RL store) | 3   | 3   | —   |
+| Efficiency | —                                  | 1   | 2   | 2   |
+| Speed      | —                                  | 1   | —   | 3   |
+| QoL/DX     | —                                  | 1   | 3   | 4   |
 
 **Top 3 to do first:** (1) verify/fix the CSP nonce interaction, (2) decide the auth library direction (drop `@auth/core` or migrate to Auth.js v5) and remove the dead dep, (3) stop fetching full `content` in list queries.
 
@@ -96,9 +98,11 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 **Current branch / SHA:** `main` @ `fd0907235580255d68a564f3ec277a6c572f602b` (clean working tree; `MODERNIZATION_TODO.md` itself is untracked).
 
 ### ✅ Wave 1 completions
-- **None committed in this repo for the audit items.** The WebDevBlogsite audit items remain open — Wave 1 here was the *audit + TODO reconciliation* (Phase 1 baseline → Phase 2 second audit), which produced the corrections below. No source modernization was merged on this branch during the wave.
+
+- **None committed in this repo for the audit items.** The WebDevBlogsite audit items remain open — Wave 1 here was the _audit + TODO reconciliation_ (Phase 1 baseline → Phase 2 second audit), which produced the corrections below. No source modernization was merged on this branch during the wave.
 
 ### 🔧 Corrections found (second audit supersedes Phase-1 baseline)
+
 - **`requireAdmin()` / `isAdminSession()` is NOT a stale-name bug.** The Phase-1 baseline row "No `requireAdmin` symbol found — audit text stale" was **itself wrong**. `requireAdmin()` exists at `src/server/actions/blog.ts:37` and wraps `isAdminSession()` (`src/lib/auth.ts:85`); both are real and compose correctly. The ✅ entry above now states this explicitly — **do not "fix" a non-existent inconsistency.**
 - **`@auth/core@0.34.3` provably unused** — grep of `src/` returns zero imports. Remove it now (Security #4 / Efficiency #1); it is dead weight regardless of the v4-stay vs v5 decision.
 - **1.3 CSP `strict-dynamic` hydration risk remains UNVERIFIED** — needs a live running instance to confirm hydration doesn't break. Keep as the top must-verify item.
@@ -106,6 +110,7 @@ Legend: 🔴 blocking/likely-broken · 🟠 high · 🟡 medium · 🟢 low/clea
 - **`middleware.ts` → `proxy.ts` rename** is a NEW Phase-2 finding (Next 16 deprecation warning). Added as a QoL item above and should be bundled with the §SEC-1.1–1.3 security fixes (all live in that file).
 
 ### 📋 Wave 2 queue (remaining — all need code changes)
+
 - **SECURITY:** verify CSP `strict-dynamic`+nonce vs live hydration; stop trusting raw `x-forwarded-for`/`x-real-ip` (use `request.ip`); migrate rate-limit store off `globalThis` to Upstash/KV + TTL; remove `@auth/core` + decide v4-stay vs Auth.js v5; add Shiki-sink comment/test.
 - **RELIABILITY/PERF:** collapse list queries to a `content`-less projection (Efficiency #2); collapse `getAdjacentPublishedPosts` to 1 query (Efficiency #3); add `generateStaticParams` to `blog/[slug]` (Speed #1); add admin `error.tsx`/`loading.tsx` (QoL #3).
 - **QoL/DX:** rename `middleware.ts`→`proxy.ts`; add `.prettierrc` + `format`/`format:check` scripts (CI); bump `@types/node` to 22; document `next.config.ts` (not `vercel.json`) as the security-header source; expand test coverage + Playwright admin-CRUD E2E; keep `docs/ASSESSMENT.md` synced.

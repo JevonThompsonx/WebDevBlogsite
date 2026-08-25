@@ -13,7 +13,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <aside className="surface-panel p-5 lg:sticky lg:top-28">
-      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-muted)]">
+      <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-[var(--color-muted)] uppercase">
         On this page
       </p>
       <nav aria-label="Table of contents">

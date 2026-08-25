@@ -35,7 +35,11 @@ import {
 import { redirect } from "next/navigation";
 
 describe("createPostAction", () => {
-  const initialState = { status: "idle" as const, message: "", fieldErrors: {} };
+  const initialState = {
+    status: "idle" as const,
+    message: "",
+    fieldErrors: {},
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -114,14 +118,20 @@ describe("createPostAction", () => {
     formData.set("content", "Test content");
     formData.set("published", "on");
 
-    await expect(createPostAction(initialState, formData)).rejects.toThrow("Redirect");
+    await expect(createPostAction(initialState, formData)).rejects.toThrow(
+      "Redirect",
+    );
     expect(insertPost).toHaveBeenCalled();
     expect(redirect).toHaveBeenCalledWith("/admin");
   });
 });
 
 describe("updatePostAction", () => {
-  const initialState = { status: "idle" as const, message: "", fieldErrors: {} };
+  const initialState = {
+    status: "idle" as const,
+    message: "",
+    fieldErrors: {},
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -201,7 +211,9 @@ describe("updatePostAction", () => {
     formData.set("content", "Updated content");
     formData.set("published", "on");
 
-    await expect(updatePostAction(initialState, formData)).rejects.toThrow("Redirect");
+    await expect(updatePostAction(initialState, formData)).rejects.toThrow(
+      "Redirect",
+    );
     expect(updatePostRecord).toHaveBeenCalled();
     expect(redirect).toHaveBeenCalledWith("/admin");
   });
@@ -220,7 +232,7 @@ describe("deletePostAction", () => {
     formData.set("slug", "test-post");
 
     await expect(deletePostAction(formData)).rejects.toThrow(
-      "You are not authorized to manage posts."
+      "You are not authorized to manage posts.",
     );
   });
 
@@ -234,7 +246,9 @@ describe("deletePostAction", () => {
     const formData = new FormData();
     formData.set("slug", "Invalid Slug!");
 
-    await expect(deletePostAction(formData)).rejects.toThrow("Invalid post slug.");
+    await expect(deletePostAction(formData)).rejects.toThrow(
+      "Invalid post slug.",
+    );
   });
 
   it("deletes post successfully", async () => {

@@ -41,7 +41,7 @@ export function ThemePortrait({
   return (
     <div
       className={cn(
-        "relative mx-auto w-full px-3 pb-4 pt-5 sm:px-4 sm:pb-5 sm:pt-6",
+        "relative mx-auto w-full px-3 pt-5 pb-4 sm:px-4 sm:pt-6 sm:pb-5",
         className,
       )}
     >
@@ -52,13 +52,13 @@ export function ThemePortrait({
       />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute left-1 top-[17%] z-20 hidden whitespace-nowrap rounded-full border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-foreground-soft)] shadow-[var(--shadow-soft)] sm:inline-flex sm:animate-[float_9s_ease-in-out_infinite]"
+        className="pointer-events-none absolute top-[17%] left-1 z-20 hidden rounded-full border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] px-4 py-2 text-[0.68rem] font-semibold tracking-[0.24em] whitespace-nowrap text-[var(--color-foreground-soft)] uppercase shadow-[var(--shadow-soft)] sm:inline-flex sm:animate-[float_9s_ease-in-out_infinite]"
       >
         linux + infra
       </span>
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[15%] right-1 z-20 hidden whitespace-nowrap rounded-full border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-foreground-soft)] shadow-[var(--shadow-soft)] sm:inline-flex sm:animate-[float_10s_ease-in-out_infinite]"
+        className="pointer-events-none absolute right-1 bottom-[15%] z-20 hidden rounded-full border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_82%,white_18%)] px-4 py-2 text-[0.68rem] font-semibold tracking-[0.24em] whitespace-nowrap text-[var(--color-foreground-soft)] uppercase shadow-[var(--shadow-soft)] sm:inline-flex sm:animate-[float_10s_ease-in-out_infinite]"
       >
         docs + delivery
       </span>

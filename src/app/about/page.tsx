@@ -55,7 +55,7 @@ export default function AboutPage() {
 
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="surface-tile p-5 sm:col-span-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 What I value
               </p>
               <p className="mt-3 text-sm leading-7 text-[var(--color-foreground-soft)]">
@@ -65,7 +65,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="surface-tile p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 Current focus
               </p>
               <p className="mt-3 font-[family-name:var(--font-display)] text-2xl text-[var(--color-foreground)]">
@@ -183,7 +183,7 @@ export default function AboutPage() {
                   <Icon className="h-5 w-5" />
                 </span>
                 <span>
-                  <span className="block text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+                  <span className="block text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                     {item.label}
                   </span>
                   <span className="mt-1 block text-sm font-medium text-[var(--color-foreground)]">

@@ -152,7 +152,7 @@ export function PostForm({ post, action }: PostFormProps) {
         </div>
 
         <div className="rounded-[2rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_88%,white_12%)] p-6 shadow-[var(--shadow-soft)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
+          <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-muted)] uppercase">
             Markdown tips
           </p>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-[var(--color-foreground-soft)]">

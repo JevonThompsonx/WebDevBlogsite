@@ -134,7 +134,7 @@ export const projects: Project[] = [
       "A polished React and TypeScript single-page app with AI difficulty modes, score tracking, and theme persistence.",
     longDescription:
       "Sunline Tic Tac Toe is a modern frontend project focused on interaction design and state management. It supports player-versus-player and player-versus-AI modes, tracks scores across rounds, preserves the selected theme, and detects drawn games early when no future win path remains.",
-    techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vitest","AI",],
+    techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vitest", "AI"],
     highlights: [
       "Built both player-versus-player and player-versus-AI game flows.",
       "Added easy, medium, and hard AI difficulties with score tracking across rounds.",

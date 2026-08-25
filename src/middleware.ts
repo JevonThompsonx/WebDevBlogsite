@@ -21,7 +21,10 @@ type GlobalWithRateLimitStore = typeof globalThis & {
 const globalWithRateLimitStore = globalThis as GlobalWithRateLimitStore;
 const rateLimitStore =
   globalWithRateLimitStore.__rateLimitStore ??
-  (globalWithRateLimitStore.__rateLimitStore = new Map<string, RateLimitEntry>());
+  (globalWithRateLimitStore.__rateLimitStore = new Map<
+    string,
+    RateLimitEntry
+  >());
 
 function getClientIp(request: NextRequest): string {
   // SECURITY: trust the rightmost X-Forwarded-For (appended by the last trusted proxy),
@@ -31,7 +34,10 @@ function getClientIp(request: NextRequest): string {
   const forwardedFor = request.headers.get("x-forwarded-for");
 
   if (forwardedFor) {
-    const addresses = forwardedFor.split(",").map(a => a.trim()).filter(a => a.length > 0);
+    const addresses = forwardedFor
+      .split(",")
+      .map((a) => a.trim())
+      .filter((a) => a.length > 0);
     if (addresses.length > 0) {
       return addresses[addresses.length - 1];
     }
@@ -115,7 +121,10 @@ function consumeRateLimit(
   if (existing.count >= limit) {
     return {
       allowed: false,
-      retryAfterSeconds: Math.max(1, Math.ceil((existing.resetAt - now) / 1000)),
+      retryAfterSeconds: Math.max(
+        1,
+        Math.ceil((existing.resetAt - now) / 1000),
+      ),
     };
   }
 
@@ -163,7 +172,11 @@ export function middleware(request: NextRequest) {
 
   if (policy) {
     const key = `${policy.bucket}:${getClientIp(request)}`;
-    const rateLimitResult = consumeRateLimit(key, policy.limit, policy.windowMs);
+    const rateLimitResult = consumeRateLimit(
+      key,
+      policy.limit,
+      policy.windowMs,
+    );
 
     if (!rateLimitResult.allowed) {
       return new NextResponse("Too Many Requests", {
@@ -186,7 +199,10 @@ export function middleware(request: NextRequest) {
     },
   });
 
-  response.headers.set("Content-Security-Policy", buildContentSecurityPolicy(nonce));
+  response.headers.set(
+    "Content-Security-Policy",
+    buildContentSecurityPolicy(nonce),
+  );
   response.headers.set("x-nonce", nonce);
 
   return response;

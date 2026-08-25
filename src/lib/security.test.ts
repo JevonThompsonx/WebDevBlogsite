@@ -44,7 +44,9 @@ describe("isExternalHttpLink", () => {
 
 describe("resolveSafeImageSource", () => {
   it("accepts relative paths and https URLs", () => {
-    expect(resolveSafeImageSource("/images/post.webp")).toBe("/images/post.webp");
+    expect(resolveSafeImageSource("/images/post.webp")).toBe(
+      "/images/post.webp",
+    );
     expect(resolveSafeImageSource("https://images.example.com/post.webp")).toBe(
       "https://images.example.com/post.webp",
     );

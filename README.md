@@ -18,17 +18,17 @@ A production Next.js application combining a public portfolio with a database-ba
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js `16.1.6` (App Router) |
-| Language | TypeScript `5.9.3` |
-| Styles | Tailwind CSS `4.2.1` |
-| ORM | Drizzle ORM `0.45.1` |
-| Database | LibSQL / Turso |
-| Auth | NextAuth `4.24.13` + GitHub OAuth |
-| Validation | Zod `4.3.6` |
-| Runtime | Bun `1.3.10` |
-| Hosting | Vercel |
+| Layer      | Technology                        |
+| ---------- | --------------------------------- |
+| Framework  | Next.js `16.1.6` (App Router)     |
+| Language   | TypeScript `5.9.3`                |
+| Styles     | Tailwind CSS `4.2.1`              |
+| ORM        | Drizzle ORM `0.45.1`              |
+| Database   | LibSQL / Turso                    |
+| Auth       | NextAuth `4.24.13` + GitHub OAuth |
+| Validation | Zod `4.3.6`                       |
+| Runtime    | Bun `1.3.10`                      |
+| Hosting    | Vercel                            |
 
 ## Quick start
 
@@ -79,17 +79,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `bun run dev` | Run migrations, then start Next dev server |
-| `bun run build` | Run migrations, then create production build |
-| `bun run start` | Start the built app |
-| `bun run lint` | Run ESLint |
-| `bun run type-check` | Run `tsc --noEmit` |
-| `bun run test` | Run Vitest |
-| `bun run db:generate` | Generate Drizzle migration files |
-| `bun run db:migrate` | Apply pending SQL migrations |
-| `bun run db:seed` | Insert sample blog posts |
+| Command               | Description                                  |
+| --------------------- | -------------------------------------------- |
+| `bun run dev`         | Run migrations, then start Next dev server   |
+| `bun run build`       | Run migrations, then create production build |
+| `bun run start`       | Start the built app                          |
+| `bun run lint`        | Run ESLint                                   |
+| `bun run type-check`  | Run `tsc --noEmit`                           |
+| `bun run test`        | Run Vitest                                   |
+| `bun run db:generate` | Generate Drizzle migration files             |
+| `bun run db:migrate`  | Apply pending SQL migrations                 |
+| `bun run db:seed`     | Insert sample blog posts                     |
 
 ## Project structure
 
@@ -111,19 +111,19 @@ public/         # Static assets
 
 ### Key routes
 
-| Route | Description |
-|---|---|
-| `/` | Homepage |
-| `/blog` | Blog index |
-| `/blog/[slug]` | Blog post |
-| `/projects` | Projects index |
-| `/projects/[slug]` | Project detail |
-| `/about` | About page |
-| `/admin` | Admin dashboard (protected) |
-| `/admin/blog/new` | Create post (protected) |
-| `/admin/blog/[slug]/edit` | Edit post (protected) |
-| `/feed.xml` | RSS feed |
-| `/sitemap.xml` | Sitemap |
+| Route                     | Description                 |
+| ------------------------- | --------------------------- |
+| `/`                       | Homepage                    |
+| `/blog`                   | Blog index                  |
+| `/blog/[slug]`            | Blog post                   |
+| `/projects`               | Projects index              |
+| `/projects/[slug]`        | Project detail              |
+| `/about`                  | About page                  |
+| `/admin`                  | Admin dashboard (protected) |
+| `/admin/blog/new`         | Create post (protected)     |
+| `/admin/blog/[slug]/edit` | Edit post (protected)       |
+| `/feed.xml`               | RSS feed                    |
+| `/sitemap.xml`            | Sitemap                     |
 
 ## Authentication
 
@@ -138,6 +138,7 @@ https://api.github.com/users/<your-username>
 Copy the `id` field from the response.
 
 Auth files:
+
 - `src/lib/auth.ts`
 - `src/app/api/auth/[...nextauth]/route.ts`
 - `src/app/admin/layout.tsx`
@@ -146,18 +147,18 @@ Auth files:
 
 Single `posts` table managed through Drizzle ORM and LibSQL.
 
-| Field | Type |
-|---|---|
-| `id` | integer, primary key |
-| `title` | text |
-| `slug` | text, unique |
-| `content` | text (markdown) |
-| `excerpt` | text |
-| `category` | text |
-| `coverImage` | text, nullable |
-| `published` | boolean |
-| `createdAt` | text (ISO 8601) |
-| `updatedAt` | text (ISO 8601) |
+| Field        | Type                 |
+| ------------ | -------------------- |
+| `id`         | integer, primary key |
+| `title`      | text                 |
+| `slug`       | text, unique         |
+| `content`    | text (markdown)      |
+| `excerpt`    | text                 |
+| `category`   | text                 |
+| `coverImage` | text, nullable       |
+| `published`  | boolean              |
+| `createdAt`  | text (ISO 8601)      |
+| `updatedAt`  | text (ISO 8601)      |
 
 Schema: `drizzle/schema.ts`
 
@@ -171,34 +172,35 @@ Projects are statically defined in `content/projects.ts`. This is intentional â€
 
 ### Auth
 
-| Variable | Description |
-|---|---|
-| `AUTH_SECRET` | Session signing secret (random string) |
-| `AUTH_GITHUB_ID` | GitHub OAuth app client ID |
-| `AUTH_GITHUB_SECRET` | GitHub OAuth app client secret |
-| `ADMIN_GITHUB_ID` | Numeric GitHub user ID for the admin account |
+| Variable             | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `AUTH_SECRET`        | Session signing secret (random string)       |
+| `AUTH_GITHUB_ID`     | GitHub OAuth app client ID                   |
+| `AUTH_GITHUB_SECRET` | GitHub OAuth app client secret               |
+| `ADMIN_GITHUB_ID`    | Numeric GitHub user ID for the admin account |
 
 ### Database
 
-| Variable | Description |
-|---|---|
-| `DATABASE_URL` | SQLite file path or hosted LibSQL URL |
-| `DATABASE_AUTH_TOKEN` | Required for hosted Turso with token auth |
-| `TURSO_DATABASE_URL` | Vercel Turso integration variable (supported natively) |
-| `TURSO_AUTH_TOKEN` | Vercel Turso integration token (supported natively) |
+| Variable              | Description                                            |
+| --------------------- | ------------------------------------------------------ |
+| `DATABASE_URL`        | SQLite file path or hosted LibSQL URL                  |
+| `DATABASE_AUTH_TOKEN` | Required for hosted Turso with token auth              |
+| `TURSO_DATABASE_URL`  | Vercel Turso integration variable (supported natively) |
+| `TURSO_AUTH_TOKEN`    | Vercel Turso integration token (supported natively)    |
 
 ### App
 
-| Variable | Description |
-|---|---|
-| `NEXTAUTH_URL` | Auth callback base URL (important in production) |
-| `NEXT_PUBLIC_APP_URL` | Canonical public URL for metadata and feeds |
+| Variable              | Description                                      |
+| --------------------- | ------------------------------------------------ |
+| `NEXTAUTH_URL`        | Auth callback base URL (important in production) |
+| `NEXT_PUBLIC_APP_URL` | Canonical public URL for metadata and feeds      |
 
 ## Vercel deployment
 
 ### Required setup
 
 1. Create a GitHub OAuth app with callback URL:
+
    ```
    https://your-domain.com/api/auth/callback/github
    ```
@@ -245,9 +247,9 @@ git push forgejo main   # Forgejo
 
 Remotes:
 
-| Remote | URL |
-|--------|-----|
-| `origin` | `https://github.com/JevonThompsonx/WebDevBlogsite.git` |
+| Remote    | URL                                                              |
+| --------- | ---------------------------------------------------------------- |
+| `origin`  | `https://github.com/JevonThompsonx/WebDevBlogsite.git`           |
 | `forgejo` | `https://forge.jsquaredadventures.com/jevonx/WebDevBlogsite.git` |
 
 If you only push to one, the remotes will drift. Verify sync with:

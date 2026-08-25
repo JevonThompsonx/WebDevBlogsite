@@ -11,7 +11,7 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="pb-8 pt-16 sm:pt-20">
+    <footer className="pt-16 pb-8 sm:pt-20">
       <div className="site-container">
         <div className="surface-panel flex flex-col gap-8 px-6 py-8 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl space-y-4">
@@ -33,7 +33,7 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
+            <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-muted)] uppercase">
               Around the site
             </p>
             <div className="flex flex-wrap gap-3 text-sm text-[var(--color-muted)]">

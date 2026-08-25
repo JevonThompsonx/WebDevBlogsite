@@ -1,0 +1,21 @@
+# Build / cache artifacts
+.next/
+out/
+build/
+coverage/
+node_modules/
+*.tsbuildinfo
+
+# Generated types
+next-env.d.ts
+
+# DB
+local.db
+*.db
+
+# Lockfiles (not formatted by prettier)
+bun.lock
+package-lock.json
+
+# Vendored migrations
+drizzle/migrations/

@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="surface-tile p-5 sm:p-6"
               href={`/blog/${adjacentPosts.previous.slug}`}
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="text-xs tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 Previous post
               </p>
               <p className="mt-3 font-[family-name:var(--font-display)] text-2xl leading-[1.04] text-[var(--color-foreground)]">
@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="surface-tile p-5 text-right sm:p-6"
               href={`/blog/${adjacentPosts.next.slug}`}
             >
-              <p className="inline-flex items-center justify-end gap-2 text-xs uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="inline-flex items-center justify-end gap-2 text-xs tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 Next post
                 <ArrowRight className="h-4 w-4" />
               </p>

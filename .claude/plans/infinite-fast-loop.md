@@ -8,12 +8,12 @@
 
 ## Pre-Execution Validation
 
-| Check | Status |
-|-------|--------|
-| Quality gates active | ✅ type-check, lint, test all pass |
+| Check                | Status                                 |
+| -------------------- | -------------------------------------- |
+| Quality gates active | ✅ type-check, lint, test all pass     |
 | Eval baseline exists | ✅ 12 tests passing (security + utils) |
-| Rollback path | ✅ git reflog available |
-| Branch isolation | ✅ Per-item branch strategy |
+| Rollback path        | ✅ git reflog available                |
+| Branch isolation     | ✅ Per-item branch strategy            |
 
 ## Loop Config
 
@@ -25,43 +25,43 @@
 
 ## Iteration Queue
 
-| # | Item | Branch | Priority | Status |
-|---|------|--------|----------|--------|
-| 1 | Activate Middleware | fix/1-activate-middleware | CRITICAL | ✅ |
-| 2 | Fix Deletion Log | fix/2-fix-deletion-log | HIGH | ✅ |
-| 3 | Delete Stray Files | fix/3-delete-stray-files | HIGH | ✅ |
-| 4 | Fix Promise.all | fix/4-fix-promise-all | MEDIUM | ✅ |
-| 5 | Fix site.ts Env | fix/5-fix-site-env | MEDIUM | ✅ |
-| 6 | Fix Delete Error | fix/6-fix-delete-error-handling | MEDIUM | ✅ |
-| 7 | Enable ISR | fix/7-blog-isr | HIGH | ✅ |
-| 8 | Parallel Adjacent | fix/8-parallel-adjacent-queries | MEDIUM | ✅ |
-| 9 | Lightweight slug | fix/9-lightweight-slug-check | LOW | ✅ |
-| 10 | Singleton Highlighter | fix/10-singleton-highlighter | MEDIUM | ✅ |
-| 11 | RSS Cache Headers | fix/11-rss-cache-headers | MEDIUM | ✅ |
-| 12 | Sitemap Cache | fix/12-sitemap-cache | LOW | ✅ |
-| 13 | Delete handoff.md | fix/13-delete-handoff | MEDIUM | ✅ |
-| 14-15 | Cleanup Stray | fix/14-15-cleanup-stray | MEDIUM | ✅ |
-| 16 | Server Action Tests | fix/16-server-action-tests | HIGH | ✅ |
-| 17 | Query Tests | fix/17-query-tests | HIGH | ⏳ |
-| 18 | Rate Limiting | fix/18-verify-rate-limiting | MEDIUM | ✅ |
-| 19 | CSP Headers | fix/19-csp-headers | MEDIUM | ✅ |
-| 20 | Body Size Limit | fix/20-body-size-limit | MEDIUM | ✅ |
-| 21 | README Update | fix/21-readme-middleware | MEDIUM | ✅ |
-| 22 | ARCHITECTURE.md | fix/22-architecture-docs | MEDIUM | ✅ |
-| 23 | handoff.md Refs | fix/23-handoff-references | MEDIUM | ✅ |
+| #     | Item                  | Branch                          | Priority | Status |
+| ----- | --------------------- | ------------------------------- | -------- | ------ |
+| 1     | Activate Middleware   | fix/1-activate-middleware       | CRITICAL | ✅     |
+| 2     | Fix Deletion Log      | fix/2-fix-deletion-log          | HIGH     | ✅     |
+| 3     | Delete Stray Files    | fix/3-delete-stray-files        | HIGH     | ✅     |
+| 4     | Fix Promise.all       | fix/4-fix-promise-all           | MEDIUM   | ✅     |
+| 5     | Fix site.ts Env       | fix/5-fix-site-env              | MEDIUM   | ✅     |
+| 6     | Fix Delete Error      | fix/6-fix-delete-error-handling | MEDIUM   | ✅     |
+| 7     | Enable ISR            | fix/7-blog-isr                  | HIGH     | ✅     |
+| 8     | Parallel Adjacent     | fix/8-parallel-adjacent-queries | MEDIUM   | ✅     |
+| 9     | Lightweight slug      | fix/9-lightweight-slug-check    | LOW      | ✅     |
+| 10    | Singleton Highlighter | fix/10-singleton-highlighter    | MEDIUM   | ✅     |
+| 11    | RSS Cache Headers     | fix/11-rss-cache-headers        | MEDIUM   | ✅     |
+| 12    | Sitemap Cache         | fix/12-sitemap-cache            | LOW      | ✅     |
+| 13    | Delete handoff.md     | fix/13-delete-handoff           | MEDIUM   | ✅     |
+| 14-15 | Cleanup Stray         | fix/14-15-cleanup-stray         | MEDIUM   | ✅     |
+| 16    | Server Action Tests   | fix/16-server-action-tests      | HIGH     | ✅     |
+| 17    | Query Tests           | fix/17-query-tests              | HIGH     | ⏳     |
+| 18    | Rate Limiting         | fix/18-verify-rate-limiting     | MEDIUM   | ✅     |
+| 19    | CSP Headers           | fix/19-csp-headers              | MEDIUM   | ✅     |
+| 20    | Body Size Limit       | fix/20-body-size-limit          | MEDIUM   | ✅     |
+| 21    | README Update         | fix/21-readme-middleware        | MEDIUM   | ✅     |
+| 22    | ARCHITECTURE.md       | fix/22-architecture-docs        | MEDIUM   | ✅     |
+| 23    | handoff.md Refs       | fix/23-handoff-references       | MEDIUM   | ✅     |
 
 ## Remaining Items (Feature Requests)
 
-| # | Item | Priority | Status |
-|---|------|----------|--------|
-| 17 | No E2E Tests | HIGH | ⏳ (requires Playwright setup) |
-| 24 | Add Blog Pagination | MEDIUM | ⏳ |
-| 25 | Add Category Filtering | MEDIUM | ⏳ |
-| 26 | Add Search Functionality | MEDIUM | ⏳ |
-| 27 | Add Loading States | MEDIUM | ⏳ |
-| 28 | Add Error Boundaries | MEDIUM | ⏳ |
-| 29 | Optimize Image Imports | LOW | ⏳ |
-| 30 | Add Open Graph Images | LOW | ⏳ |
+| #   | Item                     | Priority | Status                         |
+| --- | ------------------------ | -------- | ------------------------------ |
+| 17  | No E2E Tests             | HIGH     | ⏳ (requires Playwright setup) |
+| 24  | Add Blog Pagination      | MEDIUM   | ⏳                             |
+| 25  | Add Category Filtering   | MEDIUM   | ⏳                             |
+| 26  | Add Search Functionality | MEDIUM   | ⏳                             |
+| 27  | Add Loading States       | MEDIUM   | ⏳                             |
+| 28  | Add Error Boundaries     | MEDIUM   | ⏳                             |
+| 29  | Optimize Image Imports   | LOW      | ⏳                             |
+| 30  | Add Open Graph Images    | LOW      | ⏳                             |
 
 ## Summary
 

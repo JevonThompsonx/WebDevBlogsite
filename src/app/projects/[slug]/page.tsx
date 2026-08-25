@@ -83,7 +83,7 @@ export default async function ProjectDetailPage({
           <div>
             <div className="flex items-center gap-3">
               <Layers3 className="h-4 w-4 text-[var(--color-accent)]" />
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-muted)] uppercase">
                 Stack
               </p>
             </div>
@@ -96,7 +96,7 @@ export default async function ProjectDetailPage({
 
           {project.highlights && project.highlights.length > 0 ? (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-muted)] uppercase">
                 Highlights
               </p>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-[var(--color-foreground-soft)]">

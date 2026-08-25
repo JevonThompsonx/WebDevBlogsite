@@ -47,10 +47,10 @@ export function MobileMenu({
             onClick={() => setOpen(false)}
           />
 
-          <div className="fixed left-1/2 top-[5.25rem] z-50 w-[min(calc(100vw-2rem),28rem)] -translate-x-1/2 lg:hidden">
+          <div className="fixed top-[5.25rem] left-1/2 z-50 w-[min(calc(100vw-2rem),28rem)] -translate-x-1/2 lg:hidden">
             <div className="max-h-[calc(100vh-6.25rem)] overflow-y-auto rounded-[2rem] border border-[color-mix(in_srgb,var(--color-border)_88%,transparent)] bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-surface)_94%,white_6%),color-mix(in_srgb,var(--color-background-elevated)_90%,transparent))] p-5 shadow-[var(--shadow-panel)] backdrop-blur-xl">
               <div className="mb-4 flex items-center justify-between rounded-[1.4rem] border border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-surface)_76%,white_24%)] px-4 py-3">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+                <span className="text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                   Navigation
                 </span>
                 <span className="text-xs text-[var(--color-foreground-soft)]">

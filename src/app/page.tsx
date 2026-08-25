@@ -109,7 +109,7 @@ export default async function HomePage() {
 
           <div className="grid gap-4 sm:auto-rows-fr sm:grid-cols-3">
             <div className="surface-tile h-full p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 Featured work
               </p>
               <p className="mt-3 font-[family-name:var(--font-display)] text-3xl text-[var(--color-foreground)]">
@@ -122,7 +122,7 @@ export default async function HomePage() {
             </div>
 
             <div className="surface-tile h-full p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 Fresh notes
               </p>
               <p className="mt-3 font-[family-name:var(--font-display)] text-3xl text-[var(--color-foreground)]">
@@ -135,7 +135,7 @@ export default async function HomePage() {
             </div>
 
             <div className="surface-tile h-full p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              <p className="text-xs font-semibold tracking-[0.24em] text-[var(--color-muted)] uppercase">
                 Current mode
               </p>
               <p className="mt-3 font-[family-name:var(--font-display)] text-2xl text-[var(--color-foreground)]">
