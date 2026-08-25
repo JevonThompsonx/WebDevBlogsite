@@ -167,7 +167,7 @@ function buildContentSecurityPolicy(nonce: string): string {
     .trim();
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const policy = getRateLimitPolicy(request);
 
   if (policy) {
