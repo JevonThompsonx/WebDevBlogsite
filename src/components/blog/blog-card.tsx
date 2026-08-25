@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { estimateReadingTime, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import type { PostRecord } from "@/types";
 
 interface BlogCardProps {
@@ -37,7 +37,7 @@ export function BlogCard({ post }: BlogCardProps) {
           <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-muted)]">
             <Badge>{post.category}</Badge>
             <span>{formatDate(post.createdAt)}</span>
-            <span>{estimateReadingTime(post.content)} min read</span>
+            <span>{post.readingTime} min read</span>
           </div>
 
           <div className="space-y-3">

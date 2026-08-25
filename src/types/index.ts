@@ -32,6 +32,8 @@ export interface PostRecord {
   category: string;
   coverImage: string | null;
   published: boolean;
+  toc: TableOfContentsItem[];
+  readingTime: number;
   createdAt: string;
   updatedAt: string;
 }

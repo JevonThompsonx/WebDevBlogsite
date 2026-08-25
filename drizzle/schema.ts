@@ -1,4 +1,5 @@
 import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import type { TableOfContentsItem } from "@/types";
 
 export const posts = sqliteTable(
   "posts",
@@ -13,6 +14,9 @@ export const posts = sqliteTable(
     published: integer("published", { mode: "boolean" })
       .notNull()
       .default(false),
+    // Precomputed at write-time so render paths don't re-parse markdown.
+    toc: text("toc", { mode: "json" }).$type<TableOfContentsItem[]>().notNull(),
+    readingTime: integer("reading_time").notNull().default(1),
     createdAt: text("created_at").notNull(),
     updatedAt: text("updated_at").notNull(),
   },
@@ -34,6 +38,8 @@ export const postColumns = {
   category: posts.category,
   coverImage: posts.coverImage,
   published: posts.published,
+  toc: posts.toc,
+  readingTime: posts.readingTime,
   createdAt: posts.createdAt,
   updatedAt: posts.updatedAt,
 };

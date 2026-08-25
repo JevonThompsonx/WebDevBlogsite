@@ -1,6 +1,8 @@
 import { count, eq } from "drizzle-orm";
 import { db } from "../src/lib/db";
 import { posts } from "./schema";
+import { extractTableOfContents } from "../src/lib/markdown";
+import { estimateReadingTime } from "../src/lib/utils";
 
 const now = new Date().toISOString();
 
@@ -29,7 +31,11 @@ const examplePosts = [
     coverImage: "/images/proj-dict.webp",
     content: `# Writing in drafts\n\nDrafts help me think in public without publishing too early.\n\n## Why drafts matter\n\nThey make it easier to refine structure, examples, and tone before a post goes live.`,
   },
-];
+].map((post) => ({
+  ...post,
+  toc: extractTableOfContents(post.content),
+  readingTime: estimateReadingTime(post.content),
+}));
 
 async function seed(): Promise<void> {
   const existing = await db.select({ value: count() }).from(posts);

@@ -7,8 +7,7 @@ import { PostContent } from "@/components/blog/post-content";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { Badge } from "@/components/ui/badge";
 import { buildMetadata } from "@/lib/metadata";
-import { extractTableOfContents } from "@/lib/markdown";
-import { estimateReadingTime, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import {
   getAdjacentPublishedPosts,
   getPublishedPostBySlug,
@@ -53,7 +52,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const adjacentPosts = await getAdjacentPublishedPosts(slug);
-  const tableOfContents = extractTableOfContents(post.content);
+  const tableOfContents = post.toc;
 
   return (
     <div className="site-container grid w-full gap-8 py-8 pb-16 sm:py-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-10 lg:pb-20">
@@ -69,7 +68,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <span>{formatDate(post.createdAt)}</span>
             <span className="info-chip px-3 py-2">
               <Clock3 className="h-3.5 w-3.5" />
-              {estimateReadingTime(post.content)} min read
+              {post.readingTime} min read
             </span>
           </div>
 

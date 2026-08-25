@@ -5,6 +5,8 @@ import { db } from "@/lib/db";
 import { postColumns, posts } from "../../../drizzle/schema";
 import type { CreatePostInput, UpdatePostInput } from "@/schemas/blog";
 import { truncate } from "@/lib/utils";
+import { estimateReadingTime } from "@/lib/utils";
+import { extractTableOfContents } from "@/lib/markdown";
 import type { PostRecord } from "@/types";
 
 export class PostConflictError extends Error {
@@ -177,6 +179,8 @@ export async function insertPost(input: CreatePostInput): Promise<void> {
             ? input.coverImage
             : null,
         published: input.published,
+        toc: extractTableOfContents(input.content),
+        readingTime: estimateReadingTime(input.content),
         createdAt: now,
         updatedAt: now,
       })
@@ -212,6 +216,8 @@ export async function updatePostRecord(input: UpdatePostInput): Promise<void> {
             ? input.coverImage
             : null,
         published: input.published,
+        toc: extractTableOfContents(input.content),
+        readingTime: estimateReadingTime(input.content),
         updatedAt: new Date().toISOString(),
       })
       .where(eq(posts.slug, input.currentSlug))
