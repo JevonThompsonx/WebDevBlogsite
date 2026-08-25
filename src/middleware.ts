@@ -24,13 +24,16 @@ const rateLimitStore =
   (globalWithRateLimitStore.__rateLimitStore = new Map<string, RateLimitEntry>());
 
 function getClientIp(request: NextRequest): string {
+  // SECURITY: trust the rightmost X-Forwarded-For (appended by the last trusted proxy),
+  // not the leftmost which is trivially spoofable by the client.
+  // header shape: "client, proxy1, proxy2" — the rightmost untrusted address is the
+  // client-facing hop added by our edge proxy.
   const forwardedFor = request.headers.get("x-forwarded-for");
 
   if (forwardedFor) {
-    const firstAddress = forwardedFor.split(",")[0]?.trim();
-
-    if (firstAddress && firstAddress.length > 0) {
-      return firstAddress;
+    const addresses = forwardedFor.split(",").map(a => a.trim()).filter(a => a.length > 0);
+    if (addresses.length > 0) {
+      return addresses[addresses.length - 1];
     }
   }
 
