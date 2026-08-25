@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, desc, eq, gt, lt } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { postColumns, posts } from "../../../drizzle/schema";
 import type { CreatePostInput, UpdatePostInput } from "@/schemas/blog";
@@ -94,44 +94,43 @@ export async function getAllPostSlugs(): Promise<string[]> {
   return results.map((post) => post.slug);
 }
 
-export async function getAdjacentPublishedPosts(slug: string): Promise<{
-  previous: PostRecord | null;
-  next: PostRecord | null;
-}> {
-  const currentPost = await getPublishedPostBySlug(slug);
+export interface AdjacentPostLink {
+  slug: string;
+  title: string;
+}
 
-  if (!currentPost) {
+export async function getAdjacentPublishedPosts(slug: string): Promise<{
+  previous: AdjacentPostLink | null;
+  next: AdjacentPostLink | null;
+}> {
+  // Single round-trip: walk the published posts ordered by createdAt and use
+  // lead/lag window functions to pull the chronologically newer ("previous")
+  // and older ("next") neighbours for every row at once.
+  const rows = await db
+    .select({
+      slug: posts.slug,
+      title: posts.title,
+      previousSlug: sql<string>`lead(${posts.slug}) OVER (ORDER BY ${posts.createdAt})`,
+      previousTitle: sql<string>`lead(${posts.title}) OVER (ORDER BY ${posts.createdAt})`,
+      nextSlug: sql<string>`lag(${posts.slug}) OVER (ORDER BY ${posts.createdAt})`,
+      nextTitle: sql<string>`lag(${posts.title}) OVER (ORDER BY ${posts.createdAt})`,
+    })
+    .from(posts)
+    .where(eq(posts.published, true));
+
+  const current = rows.find((row) => row.slug === slug);
+
+  if (!current) {
     return { previous: null, next: null };
   }
 
-  const [previousResults, nextResults] = await Promise.all([
-    db
-      .select(postColumns)
-      .from(posts)
-      .where(
-        and(
-          eq(posts.published, true),
-          gt(posts.createdAt, currentPost.createdAt),
-        ),
-      )
-      .orderBy(posts.createdAt)
-      .limit(1),
-    db
-      .select(postColumns)
-      .from(posts)
-      .where(
-        and(
-          eq(posts.published, true),
-          lt(posts.createdAt, currentPost.createdAt),
-        ),
-      )
-      .orderBy(desc(posts.createdAt))
-      .limit(1),
-  ]);
-
   return {
-    previous: previousResults[0] ?? null,
-    next: nextResults[0] ?? null,
+    previous: current.previousSlug
+      ? { slug: current.previousSlug, title: current.previousTitle }
+      : null,
+    next: current.nextSlug
+      ? { slug: current.nextSlug, title: current.nextTitle }
+      : null,
   };
 }
 
