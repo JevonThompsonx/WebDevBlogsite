@@ -7,6 +7,7 @@ import { PostContent } from "@/components/blog/post-content";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { Badge } from "@/components/ui/badge";
 import { buildMetadata } from "@/lib/metadata";
+import { coverImageUrl, isCloudinaryUrl } from "@/lib/cloudinary/transform";
 import { formatDate } from "@/lib/utils";
 import {
   getAdjacentPublishedPosts,
@@ -59,6 +60,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const adjacentPosts = await getAdjacentPublishedPosts(slug);
   const tableOfContents = post.toc;
+  const optimizedCoverImage = coverImageUrl(post.coverImage);
 
   return (
     <div className="site-container grid w-full gap-8 py-8 pb-16 sm:py-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-10 lg:pb-20">
@@ -85,14 +87,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <p className="section-copy">{post.excerpt}</p>
           </div>
 
-          {post.coverImage ? (
+          {optimizedCoverImage ? (
             <div className="overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-soft)]">
               <Image
                 alt={post.title}
                 className="h-auto w-full object-cover"
                 height={720}
                 priority
-                src={post.coverImage}
+                src={optimizedCoverImage}
+                unoptimized={isCloudinaryUrl(optimizedCoverImage)}
                 width={1280}
               />
             </div>

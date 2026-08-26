@@ -1,7 +1,7 @@
 "use server";
 
 import { z, ZodError } from "zod";
-import { revalidatePath } from "next/cache";
+import { revalidatePostPages } from "@/lib/revalidation";
 import { redirect } from "next/navigation";
 import { getCurrentSession, isAdminSession } from "@/lib/auth";
 import { createPostSchema, updatePostSchema } from "@/schemas/blog";
@@ -62,22 +62,6 @@ function buildFieldErrors(error: ZodError): Record<string, string> {
   }
 
   return nextFieldErrors;
-}
-
-function revalidatePostPages(slug: string, currentSlug?: string): void {
-  revalidatePath("/");
-  revalidatePath("/blog");
-  revalidatePath("/admin");
-  revalidatePath("/feed.xml");
-  revalidatePath("/sitemap.xml");
-
-  if (slug.length > 0) {
-    revalidatePath(`/blog/${slug}`);
-  }
-
-  if (currentSlug && currentSlug.length > 0 && currentSlug !== slug) {
-    revalidatePath(`/blog/${currentSlug}`);
-  }
 }
 
 export async function createPostAction(

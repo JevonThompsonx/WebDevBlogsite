@@ -10,5 +10,11 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["src/**/*.test.ts"],
+    testTimeout: 30_000,
+    setupFiles: [
+      fileURLToPath(
+        new URL("./src/__tests__/vitest-setup.ts", import.meta.url),
+      ),
+    ],
   },
 });

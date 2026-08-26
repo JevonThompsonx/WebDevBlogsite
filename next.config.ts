@@ -22,6 +22,11 @@ const remoteImagePatterns: RemotePatterns = allowedImageHosts.map(
   }),
 );
 
+remoteImagePatterns.push({
+  protocol: "https",
+  hostname: "res.cloudinary.com",
+});
+
 if (isDevelopment && remoteImagePatterns.length === 0) {
   remoteImagePatterns.push({
     protocol: "https",

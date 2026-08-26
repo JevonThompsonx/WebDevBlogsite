@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
+import { coverImageUrl, isCloudinaryUrl } from "@/lib/cloudinary/transform";
 import type { PostRecord } from "@/types";
 
 interface BlogCardProps {
@@ -11,18 +12,23 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post }: BlogCardProps) {
+  const optimizedSrc = post.coverImage
+    ? (coverImageUrl(post.coverImage) ?? post.coverImage)
+    : null;
+
   return (
     <Card className="group overflow-hidden">
       <Link className="block h-full" href={`/blog/${post.slug}`}>
         <div className="relative aspect-[16/10] overflow-hidden bg-[color-mix(in_srgb,var(--color-surface)_75%,black_25%)]">
           <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,transparent_18%,rgba(17,0,28,0.2)_100%)] opacity-80" />
-          {post.coverImage ? (
+          {optimizedSrc ? (
             <Image
               alt={post.title}
               className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              src={post.coverImage}
+              src={optimizedSrc}
+              unoptimized={isCloudinaryUrl(optimizedSrc)}
             />
           ) : (
             <div className="flex h-full items-end bg-[radial-gradient(circle_at_top,rgba(237,117,74,0.22),transparent_52%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(0,0,0,0.18))] p-6">
