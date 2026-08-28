@@ -17,6 +17,16 @@ concurrency:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    # Dummy env for build — satisfies Zod schema so next build can statically generate.
+    # These are CI-only placeholders, NOT production secrets. Real secrets are in Vercel env.
+    env:
+      AUTH_SECRET: "ci-dummy-secret-for-build-only-not-real"
+      AUTH_GITHUB_ID: "ci-dummy-github-id"
+      AUTH_GITHUB_SECRET: "ci-dummy-github-secret"
+      ADMIN_GITHUB_ID: "104575457"
+      DATABASE_URL: "file:./local.db"
+      NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+      ALLOWED_IMAGE_HOSTS: "images.unsplash.com"
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -52,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           scan-type: fs
           severity: CRITICAL,HIGH

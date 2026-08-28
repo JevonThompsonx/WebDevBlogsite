@@ -23,9 +23,10 @@
 
 - **Main is green and push-safe.** Verification above — all gates pass. Safe to `git push origin main` (already at ff5998e, up to date). Next work must be on a new branch (e.g., `fix/rate-limit-upstash` or `perf/lighten-list-queries`).
 - **Recently merged (main@ff5998e):** 5688ea5 remove @auth/core + useThemeToggle, dbe4087 Cloudinary publish, ae36864 generateStaticParams, 363c4d6 TOC precompute, 37e3c0a proxy.ts rename, 1d11fb9 adjacentPosts single query, 0422b54 rightmost-XFF fix, bb1c0db husky+lint-staged.
+- **CI status (2026-08-28):** `main` previously failed on Zod env + trivy 0.33.1 (see `docs/CI_FIX.md:1`). Honest fix applied: `ci` job dummy env + `0.36.0` bump; local TDD `next build` 23/23 green — awaiting CI run after push.
 - **Open blockers (from MODERNIZATION_TODO, now tracked in PROJECT_STATUS T1–T12):**
   - P0 CSP `strict-dynamic`+nonce hydration unverified (live smoke test needed)
-  - P0 rate-limit in-memory only (this doc proposes Upstash, awaiting approval)
+  - P0 rate-limit in-memory only (deferred per operator 2026-08-28 — see `docs/RATE_LIMIT.md:1`)
   - P1 list queries fetch full `content` blobs (needs projection)
   - P1 `experimental.serverActions` deprecated → move to top-level
 - **Other repos:** See PROJECT_STATUS §4 — farmers-market 62 (P0 auth gaps), jsquared_blog 74, audioTransfer 80, proxmox 76, rog 75, Roms 73, TODO.tsx 64, searxng 60, audiobook 68, ventoy 100. Approved order: farmers-market → audioTransfer/rog → jsquared_blog → proxmox/Roms → TODO.tsx last. Pushing modernization branches to origin + PRs is APPROVED (T9).
@@ -45,7 +46,7 @@
 - [ ] T4 rate-limit Upstash (P0, awaiting your approval — see RATE_LIMIT.md)
 - [ ] T7 lighten list queries (P1)
 - [ ] T8 run TDD gates on all modernization branches before PRs (P0)
-- [ ] T9 push branches + open PRs (APPROVED)
+- [x] T9 push branches + open PRs — DONE 2026-08-28 19:46 UTC: 7 PRs farmers#15, audio#1, jsquared#63, rog#1, Roms#1, proxmox#1, TODO#30 + Add-Non-Steam master pushed (see PROJECT_STATUS evidence)
 
 ## Quick Commands
 
