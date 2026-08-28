@@ -22,7 +22,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@libsql/client": "0.17.0",
+    "@libsql/client": "0.17.4",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
     "drizzle-orm": "0.45.1",
