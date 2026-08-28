@@ -1,25 +1,18 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { MoonStar, SunMedium } from "lucide-react";
-import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { useThemeToggle } from "@/hooks/useThemeToggle";
 
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    () => () => undefined,
-    () => true,
-    () => false,
-  );
-  const isDark = mounted ? resolvedTheme !== "light" : true;
+  const { isDark, toggle } = useThemeToggle();
 
   return (
     <Button
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className="h-11 w-11 rounded-full px-0"
       variant="secondary"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={toggle}
     >
       {isDark ? (
         <SunMedium className="h-4 w-4" />
