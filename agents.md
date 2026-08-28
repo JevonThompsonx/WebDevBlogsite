@@ -8,6 +8,7 @@
 - [2026-08-28T20:00:00Z] Always apply Dependabot fixes by adopting suggestions, then close the PR — never merge.
 
 ## References
+
 - Canonical hub: ./AGENTS.md
 - Project status: /home/hermes/PROJECT_STATUS.md
 - Rate limit: ./docs/RATE_LIMIT.md
