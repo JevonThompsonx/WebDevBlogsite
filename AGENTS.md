@@ -19,6 +19,10 @@
 | Plan (legacy)         | docs/PLAN.md:1                                                                                        | Old plan, now superseded by PROJECT_STATUS                                                    |
 | Plan / AGENTS at host | /home/hermes/AGENTS.md:1                                                                              | Hermes orchestration workflow (delegation, TDD, gates)                                        |
 
+## Persistent Rules
+
+- [2026-08-28T20:00:00Z] Always apply Dependabot fixes by adopting suggestions, then close the PR — never merge. (also in ./agents.md)
+
 ## Current State (2026-08-28)
 
 - **Main is green and push-safe.** Verification above — all gates pass. Safe to `git push origin main` (already at ff5998e, up to date). Next work must be on a new branch (e.g., `fix/rate-limit-upstash` or `perf/lighten-list-queries`).
