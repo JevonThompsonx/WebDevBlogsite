@@ -17,6 +17,7 @@
 | Deletion log          | docs/DELETION_LOG.md:1                                                                                | Why files were removed                                                                        |
 | Loop Agent Prompt     | docs/LOOP-AGENT-PROMPT.md:1                                                                           | Agent execution template                                                                      |
 | Plan (legacy)         | docs/PLAN.md:1                                                                                        | Old plan, now superseded by PROJECT_STATUS                                                    |
+| agents.md (lowercase) | ./agents.md:1                                                                                         | Local per-repo Persistent Rules (mirrors AGENTS.md)                                           |
 | Plan / AGENTS at host | /home/hermes/AGENTS.md:1                                                                              | Hermes orchestration workflow (delegation, TDD, gates)                                        |
 
 ## Persistent Rules
@@ -33,6 +34,7 @@
   - P0 rate-limit in-memory only (deferred per operator 2026-08-28 — see `docs/RATE_LIMIT.md:1`)
   - P1 list queries fetch full `content` blobs (needs projection)
   - P1 `experimental.serverActions` deprecated → move to top-level
+- **Dependabot (2026-08-28):** Processed 12 open Dependabot PRs on `main` — 10 adopted, 2 reverted (see below). All adopted passed gates: type-check 0, lint 0, prettier pass, vitest 89/89, build 23/23. Persistent Rules in ./agents.md + ~/.opencode/agents.md. PR #19 (vuln next/drizzle) still open for next/drizzle-orm remaining vulns.
 - **Other repos:** See PROJECT_STATUS §4 — farmers-market 62 (P0 auth gaps), jsquared_blog 74, audioTransfer 80, proxmox 76, rog 75, Roms 73, TODO.tsx 64, searxng 60, audiobook 68, ventoy 100. Approved order: farmers-market → audioTransfer/rog → jsquared_blog → proxmox/Roms → TODO.tsx last. Pushing modernization branches to origin + PRs is APPROVED (T9).
 
 ## How to Work Here (TDD + Orchestrator)
