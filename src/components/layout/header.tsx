@@ -63,7 +63,9 @@ export async function Header() {
           </div>
 
           <div className="flex items-center gap-3 lg:hidden">
-            <ThemeToggle />
+            <div className="relative z-[60]">
+              <ThemeToggle />
+            </div>
             <div className="relative">
               <MobileMenu
                 isAdmin={isAdmin}

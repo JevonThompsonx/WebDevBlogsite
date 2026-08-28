@@ -22,7 +22,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@auth/core": "0.34.3",
     "@libsql/client": "0.17.0",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
