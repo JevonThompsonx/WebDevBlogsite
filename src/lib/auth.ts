@@ -78,8 +78,8 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export const getCurrentSession = cache(
-  async (): Promise<Session | null> => getServerSession(authOptions),
+export const getCurrentSession = cache(async (): Promise<Session | null> =>
+  getServerSession(authOptions),
 );
 
 export async function isAdminSession(
