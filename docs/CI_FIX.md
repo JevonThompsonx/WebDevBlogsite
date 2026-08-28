@@ -6,12 +6,12 @@
 
 1. **`ci` job — `bun run build` ZodError** — `Error [ZodError]: Invalid input for AUTH_SECRET, AUTH_GITHUB_ID, AUTH_GITHUB_SECRET, ADMIN_GITHUB_ID, DATABASE_URL, NEXT_PUBLIC_APP_URL` (see log `_not-found` collecting). `src/lib/env.ts` provides dev defaults only when `NODE_ENV=development|test`. CI `next build` runs as `production` (no `.env` secrets) → requires real env, crashes. Local passed because `.env` had values and fallback. **Honest fix:** Provide Zod-valid dummy env in `ci` job (CI placeholders, not secrets — real secrets in Vercel). Verified locally: dummy env → `next build` 23/23 pages OK; without → ZodError.
 
-2. **`dependency-scan` — `Unable to resolve action aquasecurity/trivy-action@0.33.1`** — version does not exist. Latest verified via `gh api repos/aquasecurity/trivy-action/releases` is `0.36.0`. **Honest fix:** bump `0.33.1 → 0.36.0` (not pin to fake or disable scan). Dependabot already suggested 0.36.0 in PR #32929053077.
+2. **`dependency-scan` — `Unable to resolve action aquasecurity/trivy-action@0.33.1`** — version does not exist. Latest verified via `gh api repos/aquasecurity/trivy-action/releases` is `0.36.0`. **Honest fix:** bump `0.33.1 → v0.36.0` (tags use v prefix) (not pin to fake or disable scan). Dependabot already suggested 0.36.0 in PR #32929053077.
 
 **Changes:**
 
 - `.github/workflows/ci.yml:17` add `env:` with 7 dummy vars for `ci` job
-- `.github/workflows/ci.yml:62` bump trivy to `0.36.0`
+- `.github/workflows/ci.yml:62` bump trivy to v0.36.0 (v prefix required; tags are v0.x)`
 
 **TDD verification:**
 
