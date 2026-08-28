@@ -23,7 +23,7 @@
 
 - **Main is green and push-safe.** Verification above — all gates pass. Safe to `git push origin main` (already at ff5998e, up to date). Next work must be on a new branch (e.g., `fix/rate-limit-upstash` or `perf/lighten-list-queries`).
 - **Recently merged (main@ff5998e):** 5688ea5 remove @auth/core + useThemeToggle, dbe4087 Cloudinary publish, ae36864 generateStaticParams, 363c4d6 TOC precompute, 37e3c0a proxy.ts rename, 1d11fb9 adjacentPosts single query, 0422b54 rightmost-XFF fix, bb1c0db husky+lint-staged.
-- **CI status (2026-08-28):** `main` previously failed on Zod env + trivy 0.33.1 (see `docs/CI_FIX.md:1`). Honest fix applied: `ci` job dummy env + `0.36.0` bump; local TDD `next build` 23/23 green — awaiting CI run after push.
+- **CI status (2026-08-28):** `main@2046b5e` `ci` fixed (dummy env + `v0.36.0`) → `ci` green, but `dependency-scan` 15 vulns remain (see `docs/VULN_FIX.md:1`). Branch `chore/bump-vuln-fixes-2026-08-28` bumps next/drizzle/next-auth to fixed versions, TDD 89/89 + 23/23 green — PR pending.
 - **Open blockers (from MODERNIZATION_TODO, now tracked in PROJECT_STATUS T1–T12):**
   - P0 CSP `strict-dynamic`+nonce hydration unverified (live smoke test needed)
   - P0 rate-limit in-memory only (deferred per operator 2026-08-28 — see `docs/RATE_LIMIT.md:1`)
