@@ -24,7 +24,7 @@
   "dependencies": {
     "@libsql/client": "0.17.4",
     "clsx": "2.1.1",
-    "date-fns": "4.1.0",
+    "date-fns": "4.4.0",
     "drizzle-orm": "0.45.2",
     "lucide-react": "0.577.0",
     "next": "16.3.3",
@@ -36,25 +36,25 @@
     "remark-gfm": "4.0.1",
     "server-only": "0.0.1",
     "shiki": "4.4.3",
-    "tailwind-merge": "3.5.0",
-    "zod": "4.3.6"
+    "tailwind-merge": "3.6.0",
+    "zod": "4.5.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.2.1",
-    "@tailwindcss/typography": "0.5.19",
-    "@types/node": "26.2.0",
-    "@types/react": "19.2.14",
+    "@tailwindcss/postcss": "4.3.3",
+    "@tailwindcss/typography": "0.5.20",
+    "@types/node": "26.4.0",
+    "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.3",
     "husky": "^9.1.7",
-    "lint-staged": "^17.3.0",
+    "lint-staged": "17.4.1",
     "prettier": "3.9.6",
-    "prettier-plugin-tailwindcss": "0.7.2",
-    "tailwindcss": "4.2.1",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
-    "vitest": "4.0.18"
+    "vitest": "4.1.11"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs,json,md,mdx,yml,yaml}": [
