@@ -20,7 +20,7 @@ A production Next.js application combining a public portfolio with a database-ba
 
 | Layer      | Technology                        |
 | ---------- | --------------------------------- |
-| Framework  | Next.js `16.1.6` (App Router)     |
+| Framework  | Next.js `16.3.3` (App Router)     |
 | Language   | TypeScript `5.9.3`                |
 | Styles     | Tailwind CSS `4.2.1`              |
 | ORM        | Drizzle ORM `0.45.1`              |
@@ -79,17 +79,19 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command               | Description                                  |
-| --------------------- | -------------------------------------------- |
-| `bun run dev`         | Run migrations, then start Next dev server   |
-| `bun run build`       | Run migrations, then create production build |
-| `bun run start`       | Start the built app                          |
-| `bun run lint`        | Run ESLint                                   |
-| `bun run type-check`  | Run `tsc --noEmit`                           |
-| `bun run test`        | Run Vitest                                   |
-| `bun run db:generate` | Generate Drizzle migration files             |
-| `bun run db:migrate`  | Apply pending SQL migrations                 |
-| `bun run db:seed`     | Insert sample blog posts                     |
+| Command                | Description                                  |
+| ---------------------- | -------------------------------------------- |
+| `bun run dev`          | Run migrations, then start Next dev server   |
+| `bun run build`        | Run migrations, then create production build |
+| `bun run start`        | Start the built app                          |
+| `bun run lint`         | Run ESLint                                   |
+| `bun run format`       | Format with Prettier (write)                 |
+| `bun run format:check` | Check Prettier formatting                    |
+| `bun run type-check`   | Run `tsc --noEmit`                           |
+| `bun run test`         | Run Vitest                                   |
+| `bun run db:generate`  | Generate Drizzle migration files             |
+| `bun run db:migrate`   | Apply pending SQL migrations                 |
+| `bun run db:seed`      | Insert sample blog posts                     |
 
 ## Project structure
 
