@@ -1,5 +1,10 @@
 # Implementation Plan — Repository Audit & Roadmap
 
+> ⚠️ **HISTORICAL (2026-08-25) — SUPERSEDED.** This plan predates the Next.js 16 `proxy.ts`
+> convention and the Cloudinary/publish work it describes is now committed. The "Dead Middleware"
+> finding below is **resolved**: `src/proxy.ts` exporting `proxy()` is the correct Next.js 16 form
+> (Next deprecated `middleware.ts`). Kept for context; verify against source before acting.
+
 **Date:** 2026-08-25
 **Project:** WebDevBlogsite (Next.js 16 App Router, TypeScript, Drizzle ORM, LibSQL/Turso)
 **Status:** Active development — Cloudinary integration + Publish API in progress

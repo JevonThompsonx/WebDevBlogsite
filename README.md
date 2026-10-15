@@ -14,19 +14,20 @@ A production Next.js application combining a public portfolio with a database-ba
 - GitHub OAuth — single-admin model via `ADMIN_GITHUB_ID`
 - SEO: metadata, sitemap, robots.txt, and RSS feed
 - Markdown rendering with Shiki syntax highlighting and table of contents
-- Security: rate limiting, CSP headers, and input validation via middleware
+- Security: rate limiting, CSP headers, and input validation via `src/proxy.ts`
 
 ## Tech stack
 
 | Layer      | Technology                        |
 | ---------- | --------------------------------- |
-| Framework  | Next.js `16.3.3` (App Router)     |
+| Framework  | Next.js `16.3.4` (App Router)     |
 | Language   | TypeScript `5.9.3`                |
-| Styles     | Tailwind CSS `4.2.1`              |
-| ORM        | Drizzle ORM `0.45.1`              |
-| Database   | LibSQL / Turso                    |
-| Auth       | NextAuth `4.24.13` + GitHub OAuth |
-| Validation | Zod `4.3.6`                       |
+| Styles     | Tailwind CSS `4.3.3`              |
+| ORM        | Drizzle ORM `0.45.2`              |
+| Database   | LibSQL `0.18.0` / Turso           |
+| Auth       | NextAuth `4.24.15` + GitHub OAuth |
+| Validation | Zod `4.5.4`                       |
+| Testing    | Vitest `5.0.0`                    |
 | Runtime    | Bun `1.3.10`                      |
 | Hosting    | Vercel                            |
 
@@ -41,12 +42,10 @@ bun install
 ### 2. Create your local env file
 
 ```bash
-# Mac/Linux
-cp .env.example .env.local
-
-# PowerShell
-Copy-Item .env.example .env.local
+cp .env.example .env
 ```
+
+(Next.js loads `.env` automatically. `.env.local` is gitignored too if you prefer it.)
 
 ### 3. Fill in environment variables
 
@@ -113,19 +112,22 @@ public/         # Static assets
 
 ### Key routes
 
-| Route                     | Description                 |
-| ------------------------- | --------------------------- |
-| `/`                       | Homepage                    |
-| `/blog`                   | Blog index                  |
-| `/blog/[slug]`            | Blog post                   |
-| `/projects`               | Projects index              |
-| `/projects/[slug]`        | Project detail              |
-| `/about`                  | About page                  |
-| `/admin`                  | Admin dashboard (protected) |
-| `/admin/blog/new`         | Create post (protected)     |
-| `/admin/blog/[slug]/edit` | Edit post (protected)       |
-| `/feed.xml`               | RSS feed                    |
-| `/sitemap.xml`            | Sitemap                     |
+| Route                     | Description                                          |
+| ------------------------- | ---------------------------------------------------- |
+| `/`                       | Homepage                                             |
+| `/blog`                   | Blog index                                           |
+| `/blog/[slug]`            | Blog post                                            |
+| `/projects`               | Projects index                                       |
+| `/projects/[slug]`        | Project detail                                       |
+| `/about`                  | About page                                           |
+| `/admin`                  | Admin dashboard (protected)                          |
+| `/admin/blog/new`         | Create post (protected)                              |
+| `/admin/blog/[slug]/edit` | Edit post (protected)                                |
+| `/feed.xml`               | RSS feed                                             |
+| `/sitemap.xml`            | Sitemap                                              |
+| `/api/publish`            | Programmatic post creation (bearer token, protected) |
+
+> **Note:** In Next.js 16 the `middleware.ts` file convention is deprecated in favor of `proxy.ts` exporting `proxy()`. This repo uses `src/proxy.ts` (rate limiting + CSP nonce). Do not rename it back — see `docs/RATE_LIMIT.md`.
 
 ## Authentication
 
@@ -149,20 +151,22 @@ Auth files:
 
 Single `posts` table managed through Drizzle ORM and LibSQL.
 
-| Field        | Type                 |
-| ------------ | -------------------- |
-| `id`         | integer, primary key |
-| `title`      | text                 |
-| `slug`       | text, unique         |
-| `content`    | text (markdown)      |
-| `excerpt`    | text                 |
-| `category`   | text                 |
-| `coverImage` | text, nullable       |
-| `published`  | boolean              |
-| `createdAt`  | text (ISO 8601)      |
-| `updatedAt`  | text (ISO 8601)      |
+| Field         | Type                                      |
+| ------------- | ----------------------------------------- |
+| `id`          | integer, primary key                      |
+| `title`       | text                                      |
+| `slug`        | text, unique                              |
+| `content`     | text (markdown)                           |
+| `excerpt`     | text                                      |
+| `category`    | text                                      |
+| `coverImage`  | text, nullable                            |
+| `published`   | boolean                                   |
+| `toc`         | json text (precomputed table of contents) |
+| `readingTime` | integer (minutes)                         |
+| `createdAt`   | text (ISO 8601)                           |
+| `updatedAt`   | text (ISO 8601)                           |
 
-Schema: `drizzle/schema.ts`
+Schema: `drizzle/schema.ts` (migrations `0000_initial`, `0001_post_query_indexes`, `0002_post_toc_reading_time` in `drizzle/migrations/`)
 
 Migrations run automatically on `bun run dev` and `bun run build`. Applied migrations are tracked in `__migrations` so re-runs are safe.
 
@@ -183,12 +187,22 @@ Projects are statically defined in `content/projects.ts`. This is intentional �
 
 ### Database
 
-| Variable              | Description                                            |
-| --------------------- | ------------------------------------------------------ |
-| `DATABASE_URL`        | SQLite file path or hosted LibSQL URL                  |
-| `DATABASE_AUTH_TOKEN` | Required for hosted Turso with token auth              |
-| `TURSO_DATABASE_URL`  | Vercel Turso integration variable (supported natively) |
-| `TURSO_AUTH_TOKEN`    | Vercel Turso integration token (supported natively)    |
+| Variable              | Description                                             |
+| --------------------- | ------------------------------------------------------- |
+| `DATABASE_URL`        | SQLite file path or hosted LibSQL URL                   |
+| `DATABASE_AUTH_TOKEN` | Required for hosted Turso with token auth               |
+| `TURSO_DATABASE_URL`  | Vercel Turso integration variable (supported natively)  |
+| `TURSO_AUTH_TOKEN`    | Vercel Turso integration token (supported natively)     |
+| `ALLOWED_IMAGE_HOSTS` | Comma-separated allowlist for `next/image` remote hosts |
+
+### Media & API
+
+| Variable                | Description                                  |
+| ----------------------- | -------------------------------------------- |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name (image CDN)            |
+| `CLOUDINARY_API_KEY`    | Cloudinary API key                           |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret                        |
+| `PUBLISH_TOKEN`         | Bearer token required by `POST /api/publish` |
 
 ### App
 
@@ -234,9 +248,10 @@ DATABASE_URL="libsql://your-db.turso.io" DATABASE_AUTH_TOKEN="your-token" bun ru
 ## Local development notes
 
 - `local.db` is created automatically and is gitignored
-- `.env.local` is gitignored — never commit real secrets
+- `.env` / `.env.local` are gitignored — never commit real secrets
 - Development mode provides fallback env values so the app starts without all variables set
 - Production requires all variables to be present; missing values throw a validation error at startup
+- Rate limiting + CSP nonce run from `src/proxy.ts` (Next.js 16 proxy convention)
 
 ## Git remotes
 
@@ -260,6 +275,10 @@ git log origin/main --oneline -1
 
 ## Extra docs
 
+- [`docs/INDEX.md`](docs/INDEX.md) — full documentation index
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — detailed codebase walkthrough
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — full deployment and auth/database setup reference
 - [`docs/ASSESSMENT.md`](docs/ASSESSMENT.md) — project assessment checklist with prioritized improvements
+- [`docs/RATE_LIMIT.md`](docs/RATE_LIMIT.md) — rate limiting design and Upstash proposal
+- [`docs/PLAN.md`](docs/PLAN.md) — historical implementation plan (superseded; see banner)
+- [`MODERNIZATION_TODO.md`](MODERNIZATION_TODO.md) — point-in-time audit checklist (historical; see banner)
