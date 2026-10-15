@@ -240,25 +240,22 @@ DATABASE_URL="libsql://your-db.turso.io" DATABASE_AUTH_TOKEN="your-token" bun ru
 
 ## Git remotes
 
-This repo is mirrored to two remotes. **Always push to both** after committing:
+This repo uses a single remote `origin` (GitHub). Push to `origin` after committing:
 
 ```bash
 git push origin main    # GitHub
-git push forgejo main   # Forgejo
 ```
 
 Remotes:
 
-| Remote    | URL                                                              |
-| --------- | ---------------------------------------------------------------- |
-| `origin`  | `https://github.com/JevonThompsonx/WebDevBlogsite.git`           |
-| `forgejo` | `https://forge.jsquaredadventures.com/jevonx/WebDevBlogsite.git` |
+| Remote   | URL                                                    |
+| -------- | ------------------------------------------------------ |
+| `origin` | `https://github.com/JevonThompsonx/WebDevBlogsite.git` |
 
-If you only push to one, the remotes will drift. Verify sync with:
+Verify sync with:
 
 ```bash
 git log origin/main --oneline -1
-git log forgejo/main --oneline -1
 ```
 
 ## Extra docs
