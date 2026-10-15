@@ -1,5 +1,10 @@
 # WebDevBlogsite — Modernization Todo List
 
+> ⚠️ **HISTORICAL (audit date 2026-08-24) — PARTIALLY RESOLVED.** Changes verified against current source:
+> `.prettierrc` + `format`/`format:check` scripts exist; `@auth/core` no longer in `package.json` (NextAuth v4 only);
+> `getClientIp` now takes the **rightmost** `X-Forwarded-For` hop (`src/proxy.ts`); `@types/node@26` matches `engines.node 26.x`.
+> Other items below were never resolved — verify each against current source before acting. See `AGENTS.md` §Gotchas.
+
 **Project:** Next.js 16.1.6 App Router blog/portfolio · Bun 1.3.10 · Drizzle ORM · LibSQL/Turso · NextAuth v4
 **Audit date:** 2026-08-24
 **Re-audited (Phase 2):** `main` @ `fd0907235580255d68a564f3ec277a6c572f602b` — see `/tmp/second-audit-WebDev.md` and `/tmp/baseline-WebDev.md`.
