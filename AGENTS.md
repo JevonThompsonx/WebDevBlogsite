@@ -1,5 +1,14 @@
 # AGENTS.md — WebDevBlogsite Living Hub
 
+> **Cloudflare hosting (2026-10-30).** Runs on Worker `webdevblog` —
+> https://webdevblog.servicesorsubscriptions-natural894.workers.dev. Vercel is
+> suspended (HTTP 402) and is not a fallback. Deploy with `bun run deploy:cf`.
+> Detail: [`CLOUDFLARE.md`](./CLOUDFLARE.md).
+>
+> **Pending:** the GitHub OAuth app callback still points at the retired Vercel
+> URL — repoint it to the Worker's `/api/auth/callback/github`, or move the app
+> behind Cloudflare Access.
+
 **Project:** WebDevBlogsite — `/home/hermes/Projects/WebDevBlogsite` · Next.js 16.3.4 · Bun 1.3.10 · Drizzle 0.45.2 · LibSQL 0.18.0/Turso · NextAuth 4.24.15 · Vitest 5.0.0
 **Branch contract:** `main` is the modernized line (stale `feature/phase1-baseline`/`safety/phase1-baseline` deleted 2026-08-28, worktree `.worktrees/t_bf5e500e` removed). Work on new branches off `main`.
 **Last verified:** 2026-10-15 (docs audit) on branch `chore/deps-wave2-webdev` — gates `tsc 0` `eslint 0` `prettier pass` `vitest 89/89`. `next build` NOT run during this audit (out of scope); CI runs it on `bun run build`.
