@@ -4,8 +4,23 @@ import { cache } from "react";
 import type { Session } from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
+import GitHubProviderModule from "next-auth/providers/github";
 import { serverEnv } from "@/lib/env";
+
+// CJS/ESM interop: under Vite/vinext the provider can arrive wrapped in one or
+// two `.default` layers. Resolve all shapes so Next.js and vinext agree.
+const githubProviderCandidate = GitHubProviderModule as unknown as {
+  default?: { default?: unknown } & unknown;
+};
+const GitHubProvider: typeof GitHubProviderModule =
+  typeof GitHubProviderModule === "function"
+    ? GitHubProviderModule
+    : typeof githubProviderCandidate?.default === "function"
+      ? (githubProviderCandidate.default as typeof GitHubProviderModule)
+      : typeof githubProviderCandidate?.default?.default === "function"
+        ? (githubProviderCandidate.default
+            .default as typeof GitHubProviderModule)
+        : GitHubProviderModule;
 
 const sessionLifetimeSeconds = 60 * 60 * 12;
 
