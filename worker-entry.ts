@@ -62,12 +62,19 @@ async function invoke(
   ctx: unknown,
 ): Promise<Response> {
   const mod = await loadHandler();
-  const handler = typeof mod === "function" ? mod : (mod.default ?? mod.fetch);
+  // vinext's fetch handler can arrive as the module itself, as `default`, or as
+  // an object exposing `fetch`; resolve all three shapes.
+  const candidate: unknown =
+    typeof mod === "function" ? mod : (mod.default ?? mod);
+  const handler: unknown =
+    typeof candidate === "function"
+      ? candidate
+      : (candidate as { fetch?: unknown } | undefined)?.fetch;
 
-  if (!handler) {
+  if (typeof handler !== "function") {
     return new Response("Worker handler not found", { status: 500 });
   }
-  return handler(request, env, ctx);
+  return (handler as FetchHandler)(request, env, ctx);
 }
 
 const worker = {
